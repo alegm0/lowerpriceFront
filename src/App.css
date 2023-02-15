@@ -1,0 +1,426 @@
+@font-face {
+  font-family: "OpenSans-regular";
+  src: url(assets/font/OpenSans/OpenSans-Regular.ttf);
+}
+@font-face {
+  font-family: "OpenSans-light";
+  src: url(assets/font/OpenSans/OpenSans-Light.ttf);
+}
+@font-face {
+  font-family: "OpenSansCondensed-bold";
+  src: url(assets/font/OpenSans_Condensed/OpenSans_Condensed-Bold.ttf);
+}
+@font-face {
+  font-family: "OpenSansCondensed-light";
+  src: url(assets/font/OpenSans_Condensed/OpenSans_Condensed-Light.ttf);
+}
+@font-face {
+  font-family: "TimeNewRoman-bold";
+  src: url(assets/font/Times_New_Roman/times_new_roman.ttf);
+}
+
+:root {
+  --blue-extra-light-color: #c2e8fe;
+  --background-color: #ddf1fc;
+  --red-light-color: #a6d2eb;
+  --blue-color: #61dafb;
+  --second-red-color: #137eba;
+  --blue-dark-2-color: #055f92;
+  --green-button: #5dd7c8;
+  --red-button: #ac2727;
+  /* NEW COLORS */
+  --bg-red: #ce3030;
+  --red-color: #e0061f;
+  --red-light-color: #ff929e;
+  --second-red-color: #de0b0b;
+  --red-dark-color: #660606;
+  --green-color: #03A426;
+  --yellow-color: #DA940C;
+}
+
+body {
+  font-family: "OpenSans-regular";
+}
+
+.background-red {
+  background-color: var(--bg-red);
+}
+
+.full-width {
+  max-width: 100%;
+}
+
+.col-height {
+  height: 100vh;
+  padding: 0px 100px;
+}
+
+.header {
+  background-color: white;
+  position: fixed;
+  z-index: 10;
+  width: 100%;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+/* Inicio de Estilos para HomeIn */
+.titleHomeIn {
+  font-family: "OpenSansCondensed-bold";
+  font-size: 45px;
+  text-align: initial;
+}
+.subtitleHomeIn {
+  font-family: "OpenSansCondensed-light";
+  font-size: 25px;
+  text-align: initial;
+}
+.styleImgCardHomeIn {
+  width: 36%;
+  margin: auto;
+}
+.styleImgSecondCardHomeIn {
+  width: 68%;
+  margin: auto;
+}
+.styleTitleCard {
+  font-size: 25px;
+  font-family: "OpenSansCondensed-bold";
+  text-align: initial;
+}
+.styleSubTitleCard {
+  text-align: initial;
+  font-family: OpenSans-light;
+  font-size: 15px;
+}
+.borderRadiusCardHeader {
+  border-top-left-radius: 20px !important;
+  border-top-right-radius: 20px !important;
+  background: var(--bg-red);
+}
+/* Fin de Estilos para HomeIn */
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* LOGIN, REGISTER AND RECOVER PASSWORD COMMON STYLES */
+.image-size {
+  width: 24rem;
+}
+
+.main__title,
+.main__description {
+  font-family: "Times New Roman", Times, serif;
+  color: black;
+}
+
+.main__title {
+  font-size: 48px;
+  font-weight: bold;
+  margin: 70px 0px;
+}
+
+.main__description {
+  font-size: 24px;
+  line-height: 24px;
+  margin-bottom: 100px;
+}
+
+.main__image {
+  margin-top: 100px;
+}
+
+.main__text {
+  font-size: 13px;
+  margin-top: 16px;
+  margin-bottom: 90px;
+}
+
+.last-input-margin {
+  margin-top: 20px;
+}
+
+.login__recover-password-link {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: bold;
+  margin: 30px 0px;
+}
+
+.login__without-account {
+  margin-top: 20px;
+  font-size: 20px;
+  color: black;
+}
+
+.recover-password__text {
+  font-size: 21px;
+  margin-top: 40px;
+  margin-bottom: 70px;
+  line-height: 22px;
+}
+
+.recover-password__button-margin {
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+/* COMMON STYLES */
+a {
+  display: inline-block;
+  color: var(--red-color);
+  font-weight: bold;
+}
+
+a:hover {
+  color: var(--red-dark-color);
+  transition: 0.2s;
+}
+
+.box-green {
+  border: 1px solid var(--green-color);
+  border-radius: 16px;
+}
+
+.box-green > p {
+  margin: 30px 20px;
+}
+
+.box-green .link-green {
+  color: var(--green-color);
+  text-decoration: underline;
+  font-weight: lighter;
+}
+
+.label-input {
+  font-size: 14px;
+  text-align: left;
+}
+
+.input {
+  font-size: 16px;
+  padding: 0.5rem 0.5rem 0.5rem 0.8rem;
+  background-color: var(--red-light-color);
+  border: 1px solid var(--second-red-color);
+  border-radius: 4px;
+}
+
+.input {
+  transition: 180ms box-shadow ease-in-out;
+}
+
+.input:focus {
+  border-color: var(--red-color);
+  outline: 3px solid transparent;
+  background-color: white;
+  transition: 0.2s;
+}
+
+.flex-inputs {
+  display: flex;
+  flex-direction: column;
+}
+
+.input::placeholder {
+  color: var(--second-red-color);
+}
+
+.button-red {
+  background-color: var(--red-color);
+  color: white;
+  border: none;
+  padding: 0.5rem;
+  width: 15rem;
+  font-weight: bold;
+  transition: 350ms;
+  border: 1px solid var(--red-color);
+}
+
+.button-red:hover {
+  background-color: white;
+  color: var(--red-color);
+  border: 1px solid var(--red-color);
+}
+
+.button-green {
+  background-color: var(--green-button);
+  color: white;
+  border: none;
+  padding: 0.5rem;
+  width: 15rem;
+  font-weight: bold;
+  transition: 350ms;
+  border: 1px solid var(--green-button);
+}
+
+.button-green:hover {
+  background-color: white;
+  color: var(--green-button);
+  border: 1px solid var(--green-button);
+}
+
+.button-white {
+  background-color: white;
+  color: var(--red-color);
+  border: none;
+  padding: 0.5rem;
+  width: 15rem;
+  font-weight: bold;
+  transition: 350ms;
+  border: 1px solid var(--red-color);
+}
+
+.button-white:hover {
+  background-color: var(--red-color);
+  color: white;
+  border: 1px solid white;
+}
+
+.container-lists {
+  background-color: var(--red-light-color);
+  border-radius: 1rem;
+  border: 1px solid var(--second-red-color);
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.element {
+  margin: 2rem 1.7rem;
+  background-color: var(--blue-extra-light-color);
+  border-radius: 1rem;
+  border: 1px solid var(--second-red-color);
+}
+
+.element-title {
+  font-family: "OpenSansCondensed-bold";
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  margin-bottom: 0.1rem;
+}
+
+.element-subtitle:last-child {
+  margin-bottom: 1rem;
+}
+
+.button-edit {
+  display: block;
+  margin: auto;
+  width: 8rem;
+  border-radius: 1rem;
+  border: 2px solid var(--green-button);
+  color: var(--green-button);
+  font-weight: bold;
+  transition: 350ms;
+  padding: 0.2rem 0;
+}
+
+.button-edit:hover {
+  background-color: var(--green-button);
+  border: 2px solid var(--green-button);
+  color: white;
+}
+
+.button-edit-yellow {
+  display: block;
+  margin: auto;
+  width: 8rem;
+  border-radius: 1rem;
+  border: 2px solid var(--yellow-color);
+  color: var(--yellow-color);
+  font-weight: bold;
+  transition: 350ms;
+  padding: 0.2rem 0;
+}
+
+.button-edit-yellow:hover {
+  background-color: var(--yellow-color);
+  border: 2px solid var(--yellow-color);
+  color: white;
+}
+
+.button-delete {
+  display: block;
+  margin: auto;
+  width: 8rem;
+  border-radius: 1rem;
+  border: 2px solid var(--red-button);
+  color: var(--red-button);
+  font-weight: bold;
+  transition: 350ms;
+  padding: 0.2rem 0;
+}
+
+.button-delete:hover {
+  background-color: var(--red-button);
+  border: 2px solid var(--red-button);
+  color: white;
+}
+
+.horizontal-list {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 3rem;
+  align-items: center;
+}
+
+.horizontal-list > div > p {
+  text-align: left;
+}
+
+.without-margin {
+  margin: 0 !important;
+}
+
+.margin-top-for-all {
+  margin-top: 3rem;
+}
+
+.btn-finish {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.btn-create-branding > .margin-btn {
+  margin-top: 1.7rem;
+}
+
+.text-validate {
+  color: red;
+  text-align: initial;
+  font-size: 13px;
+}
