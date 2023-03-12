@@ -2,13 +2,16 @@ import React, { useState } from "react";
 import { useHistory } from "react-router";
 import { Col, Container, Row } from "react-bootstrap";
 import Button from "@restart/ui/esm/Button";
-import loginImg from "../../assets/img/loginImg.svg";
-import logo from "../../assets/img/logo.svg";
+import loginImg from "../../assets/img/Imagen2.svg";
+import logo from "../../assets/img/Imagen3.svg";
+import axios from "axios";
+import { urlRequest } from "../../urlRequest";
+import Swal from "sweetalert2";
 
 function Login() {
   const history = useHistory();
 
-  const [userInfo, setUserInfo] = useState({ student_code: "", password: "" });
+  const [userInfo, setUserInfo] = useState({ email: "", password: "" });
   const [validate, setValidate] = useState(false);
 
   const handleChangeInfo = (e) => {
@@ -17,30 +20,36 @@ function Login() {
     setUserInfo({ ...userInfo, [name]: value });
   };
 
+  
   const login = () => {
-    if (
-      (userInfo.student_code === "RogerUMB" &&
-        userInfo.password === "Test1234") ||
-      (userInfo.student_code === "JulianUMB" &&
-        userInfo.password === "Test1234") ||
-      (userInfo.student_code === "BrayanUMB" && userInfo.password === "Test1234")
-    ) {
-      setValidate(false);
-      history.push("/home");
-    } else {
-      setValidate(true);
-    }
+    //if(!validate()) {
+      axios.post(`${urlRequest}/login`, userInfo)
+        .then(function (response) {
+          if (response.status === 200) {
+              history.push('/home');
+          } else {
+            Swal.fire({
+              title: '¡Error!',
+              text: 'Se ha generado un error al iniciar sesion.',
+              icon: 'error',
+              confirmButtonText: "Continuar", 
+              confirmButtonColor: 'rgb(255, 146, 158)',
+            });
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    //}
   };
 
   return (
     <Container className="full-width">
       <Row>
         <Col className="background-red col-height">
-          <h1 className="main__title">¡Ingresa ya!</h1>
+          <h1 className="main__title">¡Suscribete ya!</h1>
           <p className="main__description">
-            Te brindamos el servicio para mejorar tu organización en cada una de
-            tus compras, es importante para nosotros hacer tu vida mucho mas
-            sencilla.
+           La mejor app para comparar precios
           </p>
           <img src={loginImg} alt="Imagen ingreso" className="image-size" />
         </Col>
@@ -49,14 +58,14 @@ function Login() {
           <p className="main__text">Ingrese los siguientes datos</p>
 
           <div className="flex-inputs">
-            <label className="label-input">Código estudiantil:</label>
+            <label className="label-input">Ingrese su correo electronico</label>
             <input
               className="input"
               type="text"
-              placeholder="Ingrese su código"
-              name="student_code"
+              placeholder="Ingrese su correo electronico"
+              name="email"
               onChange={(e) => handleChangeInfo(e)}
-              value={userInfo?.student_code || ""}
+              value={userInfo?.email || ""}
             />
           </div>
           <div className="flex-inputs last-input-margin">

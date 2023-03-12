@@ -24,17 +24,14 @@
   --background-color: #ddf1fc;
   --red-light-color: #a6d2eb;
   --blue-color: #61dafb;
-  --second-red-color: #137eba;
+  --second-red-color: #0DA0F2;
   --blue-dark-2-color: #055f92;
   --green-button: #5dd7c8;
   --red-button: #ac2727;
   /* NEW COLORS */
-  --bg-red: #ce3030;
-  --red-color: #e0061f;
-  --red-light-color: #ff929e;
-  --second-red-color: #de0b0b;
-  --red-dark-color: #660606;
-  --green-color: #03A426;
+  --bg-red: #A6D2EB;
+  --red-color: #2888FF;
+  --red-dark-color: #0764d7;
   --yellow-color: #DA940C;
 }
 
@@ -51,7 +48,6 @@ body {
 }
 
 .col-height {
-  height: 100vh;
   padding: 0px 100px;
 }
 
@@ -178,6 +174,7 @@ body {
   font-size: 14px;
   font-weight: bold;
   margin: 30px 0px;
+  color: #000000 !important;
 }
 
 .login__without-account {

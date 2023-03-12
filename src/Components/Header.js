@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
-import logo from "../assets/img/logo.svg";
+import logo from "../assets/img/Imagen6.svg";
 import ImgUser from "../assets/img/user-circle.svg";
 //import Context from '../context/context';
 
