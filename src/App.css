@@ -25,30 +25,88 @@
   --red-light-color: #a6d2eb;
   --blue-color: #61dafb;
   --second-red-color: #137eba;
-  --blue-dark-2-color: #055f92;
-  --green-button: #5dd7c8;
-  --red-button: #ac2727;
+  --blue-dark-2-color: #adcfe2;
+  --green-button: #2888FF;
+  --red-button: #2888FF;
   /* NEW COLORS */
-  --bg-red: #ce3030;
-  --red-color: #e0061f;
-  --red-light-color: #ff929e;
-  --second-red-color: #de0b0b;
-  --red-dark-color: #660606;
-  --green-color: #03A426;
-  --yellow-color: #DA940C;
+  --bg-red: #A6D2EB;
+  --red-color: #2888FF;
+  --red-light-color: #A6D2EB;
+  --second-red-color: #2888FF;
+  --red-dark-color: #000000;
+  --green-color: #52f500;
+  --yellow-color: #28ff28;
+
+  /* colores */
+  --lila:#9DA0DF;
+  --azul:#A6D2EB;
+  --azul-oscuro: #2888FF;
+  --blanco: #ffffff;
+
 }
 
 body {
-  font-family: "OpenSans-regular";
+  /* font-family: "OpenSans-regular"; */
+  font-family: 'Inter';
 }
 
-.background-red {
+/* .background-red {
   background-color: var(--bg-red);
-}
+} */
+
 
 .full-width {
   max-width: 100%;
+  background: linear-gradient(to right,
+  var(--azul) 0%,
+  var(--azul)75%,
+  var(--lila) 75%,
+  var(--lila) 100%);
+
 }
+.image-size {
+ 
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  left: 350px;
+  top: 178px;
+
+}
+.panel-white {
+  position: absolute;
+  width: 556px;
+  height: 636px;
+  left: 100px;
+  top: 152px;
+  background: #FFFFFF;
+}
+h1 {
+  padding-top: 50px;
+  position: static;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 48px;
+
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.1em;
+
+  color: #000000;
+
+}
+.input-icon {
+   
+  width: 44px;
+  height: 53px;
+  margin-right: 8px;
+  display: inline-flex;
+}
+
+
+
 
 .col-height {
   height: 100vh;
@@ -137,9 +195,7 @@ body {
 }
 
 /* LOGIN, REGISTER AND RECOVER PASSWORD COMMON STYLES */
-.image-size {
-  width: 24rem;
-}
+
 
 .main__title,
 .main__description {
@@ -166,7 +222,7 @@ body {
 .main__text {
   font-size: 13px;
   margin-top: 16px;
-  margin-bottom: 90px;
+  margin-bottom: 50px;
 }
 
 .last-input-margin {
@@ -175,9 +231,11 @@ body {
 
 .login__recover-password-link {
   display: inline-block;
-  font-size: 14px;
+  font-size: 20px;
   font-weight: bold;
-  margin: 30px 0px;
+  margin:10px 0px;
+  padding-top: 40px;
+
 }
 
 .login__without-account {
@@ -203,6 +261,8 @@ a {
   display: inline-block;
   color: var(--red-color);
   font-weight: bold;
+
+
 }
 
 a:hover {
@@ -233,9 +293,13 @@ a:hover {
 .input {
   font-size: 16px;
   padding: 0.5rem 0.5rem 0.5rem 0.8rem;
-  background-color: var(--red-light-color);
-  border: 1px solid var(--second-red-color);
-  border-radius: 4px;
+  border:  1px solid var(--azul-oscuro);
+  background-color: var(--blanco);
+  border-radius: 30px;
+  outline: none;
+  width: 400px;
+  height: 50px;
+  flex: 1;
 }
 
 .input {
@@ -250,7 +314,7 @@ a:hover {
 }
 
 .flex-inputs {
-  display: flex;
+  display: block;
   flex-direction: column;
 }
 
@@ -259,14 +323,18 @@ a:hover {
 }
 
 .button-red {
-  background-color: var(--red-color);
-  color: white;
+
+
+  background-color: var(--lila);
+  color: var(--blanco);
   border: none;
   padding: 0.5rem;
-  width: 15rem;
+  margin-top: 60px;
+  width: 10rem;
   font-weight: bold;
   transition: 350ms;
-  border: 1px solid var(--red-color);
+  border: 1px solid var(--lila);
+  font-family: 'Inter';
 }
 
 .button-red:hover {
@@ -420,7 +488,7 @@ a:hover {
 }
 
 .text-validate {
-  color: red;
+  color: #006ef5;
   text-align: initial;
   font-size: 13px;
 }
