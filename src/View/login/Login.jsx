@@ -7,7 +7,7 @@ import loginImgI from "../../assets/img/loginIcon.png";
 import logo from "../../assets/img/logo.svg";
 import user from "../../assets/img/email.png";
 import password from "../../assets/img/forgot.png";
-
+import './login.css';
 
 
 function Login() {

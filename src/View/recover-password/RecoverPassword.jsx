@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useHistory } from "react-router";
 import Button from "@restart/ui/esm/Button";
 import { Col, Container, Row } from "react-bootstrap";
-import recoverImg from "../../assets/img/recuperarCimg.svg";
-import logo from "../../assets/img/logo.svg";
+import recoverImg from "../../assets/img/Imagen4.svg";
+import logo from "../../assets/img/Imagen3.svg";
 
 function RecoverPassword() {
   const history = useHistory();
@@ -79,12 +79,12 @@ function RecoverPassword() {
           {!validCode && !saveInfo && (
             <div className="flex-inputs">
               <label className="label-input">
-                Código {search ? "verficación" : "estudiantil"}:
+                Numero de documento:
               </label>
               <input
                 className="input"
                 type="text"
-                placeholder={`Ingrese ${search ? "el" : "su"} código`}
+                placeholder={`Ingrese su numero de documento`}
                 onChange={(e) => {
                   handleChange(e);
                 }}
