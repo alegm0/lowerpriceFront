@@ -4,6 +4,8 @@ import Button from "@restart/ui/esm/Button";
 import { Col, Container, Row } from "react-bootstrap";
 import recoverImg from "../../assets/img/Imagen4.svg";
 import logo from "../../assets/img/Imagen3.svg";
+import email from "../../assets/img/email.png";
+import loginImg from "../../assets/img/passwordImage.png";
 
 function RecoverPassword() {
   const history = useHistory();
@@ -30,101 +32,105 @@ function RecoverPassword() {
     if (search)
       return "Ingresa el codigo de verificacion que enviamos a tu correo electronico para cambiar tu contraseña.";
 
-    return "Para recuperar tu contraseña ingresa el correo electrónico con el que te registraste.";
+    return "Ingresa tu correo electrónico para buscar tu cuenta.";
   };
 
   const validateButtonText = () => {
     if (validCode) return "GUARDAR";
     if (search) return "VERIFICAR";
-    return "ENVIAR";
+    return "Enviar";
   };
+
 
   return (
     <Container className="full-width">
       <Row>
         <Col className="background-red col-height">
-          <h1 className="main__title">¡Recupera tu contraseña!</h1>
-          <p className="main__description">
-            Para brindarte un mejor servicio, necesitamos que continues los
-            siguientes pasos, para poder cambiar tu contraseña.
-          </p>
-          <img src={recoverImg} alt="Imagen de recuperar contraseña" className="image-size" />
+          <h1>color</h1>
+          <img src={loginImg} alt="Imagen de recuperar contraseña" className="image-size" />
         </Col>
         <Col className="col-height">
-          <img className="main__image" src={logo} alt="MBShop Logo" />
-          <p className="recover-password__text">{validateText()}</p>
 
-          {validCode && (
-            <>
+
+          <div className="panel-white">
+            <h1>Recupera tu cuenta!</h1>
+
+            <p className="recover-password__text">{validateText()}</p>
+
+            {validCode && (
+              <>
+                <div className="flex-inputs">
+                  <label className="label-input">Contraseña nueva:</label>
+                  <input
+                    className="input"
+                    type="text"
+                    placeholder="Ingrese su contraseña nueva"
+                  />
+                </div>
+
+                <div className="flex-inputs last-input-margin">
+                  <label className="label-input">Verificar contraseña:</label>
+                  <input
+                    className="input"
+                    type="text"
+                    placeholder="Ingrse de nuevo la contraseña nueva"
+                  />
+                </div>
+              </>
+            )}
+
+            {!validCode && !saveInfo && (
               <div className="flex-inputs">
-                <label className="label-input">Contraseña nueva:</label>
+                <img src={email} alt="Imagen ingreso" className="input-icon" />
                 <input
                   className="input"
                   type="text"
-                  placeholder="Ingrese su contraseña nueva"
+                  placeholder={`Ingrese su correo`}
+                  onChange={(e) => {
+                    handleChange(e);
+                  }}
+                  maxLength={6}
                 />
               </div>
+            )}
 
-              <div className="flex-inputs last-input-margin">
-                <label className="label-input">Verificar contraseña:</label>
-                <input
-                  className="input"
-                  type="text"
-                  placeholder="Ingrse de nuevo la contraseña nueva"
-                />
+            {/* <Button  className="button-red last-input-margin" href="/login">Cancelar</Button> */}
+            <Button className="botonp" href='/'>Cancelar</Button>
+
+            {saveInfo && (
+              <div className="box-green">
+                <p>
+                  Tu contraseña se ha modificado correctamente
+
+                  <a href="/login" className="link-green">
+                    haga click aquí para iniciar sesión
+                  </a>
+                  .
+                </p>
               </div>
-            </>
-          )}
+            )}
 
-          {!validCode && !saveInfo && (
-            <div className="flex-inputs">
-              <label className="label-input">
-                Numero de documento:
-              </label>
-              <input
-                className="input"
-                type="text"
-                placeholder={`Ingrese su numero de documento`}
-                onChange={(e) => {
-                  handleChange(e);
+            {(!search || validCode) && !saveInfo && (
+              <Button
+                className="botonp recover-password__button-margin"
+                onClick={() => {
+                  actionButton();
                 }}
-                maxLength={6}
-              />
-            </div>
-          )}
+              >
+                {validateButtonText()}
+              </Button>
+            )}
 
-          {saveInfo && (
-            <div className="box-green">
-              <p>
-                Tu contraseña se ha modificado correctamente
-                <a href="/login" className="link-green">
-                  haga click aquí para iniciar sesión
+            {!search && (
+              <p className="login__without-account">
+                ¿Quieres volver a &nbsp;
+                <a className="login__without-account--link" href="/login">
+                  iniciar sesión
                 </a>
-                .
+                ?
               </p>
-            </div>
-          )}
-
-          {(!search || validCode) && !saveInfo && (
-            <Button
-              className="button-red recover-password__button-margin"
-              onClick={() => {
-                actionButton();
-              }}
-            >
-              {validateButtonText()}
-            </Button>
-          )}
-
-          {!search && (
-            <p className="login__without-account">
-              ¿Quieres volver a &nbsp;
-              <a className="login__without-account--link" href="/login">
-                iniciar sesión
-              </a>
-              ?
-            </p>
-          )}
+            )}
+          </div>
         </Col>
       </Row>
     </Container>

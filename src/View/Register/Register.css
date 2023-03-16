@@ -1,3 +1,76 @@
+
+
+
+.flex-inputSelect {
+  flex-direction:row;
+  display: flex;
+  padding-left: 50px;
+  margin-top:0px;
+ 
+  
+   
+}
+.text-validate {
+  color: #006ef5;
+  text-align: initial;
+  font-size: 9px;
+  margin-top: 0px;
+  
+}
+
+.last-input-margin {
+  margin-top: 20px;
+}
+.button-red1 {
+  background-color: var(--lila);
+  color: var(--blanco);
+  border: none;
+  padding: 0.5rem;
+  margin-top:0px;
+  width: 253px;
+  height: 63px;
+  transition: 350ms;
+  border: 1px solid var(--lila);
+  font-family: 'Inter', 'Serif';
+  font-size: 24px;
+  font-weight: 700;
+}
+.panel-white-title{
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 75.27px;
+  margin-top: 33px;
+  margin-bottom: 0px;
+}
+.input-iconu{
+  width: 44px;
+  height: 53px;
+  right: 700px;
+  left: 700px;
+  display: block;
+}
+
+.flex-inputs {
+  display: block;
+  flex-direction: column;
+}
+.react-select__menu {
+  width: 1000px;
+}
+/* Cambia el color del borde de los selectores */
+.Select {
+  border-color: rgb(128, 255, 0);
+}
+
+/* Redondea las esquinas de los selectores */
+.Select-control {
+  border-radius: 200px;
+}
+
+/* Redondea las esquinas de los elementos del menú desplegable */
+.Select-menu-outer {
+  border-radius: 10px;
+}
 .styleTitle{
     position: absolute;
     width: 365px;
@@ -11,7 +84,7 @@
     font-size: 48px;
     line-height: 55px;
     
-    color: rgba(0, 0, 0, 0.99);
+    color: rgba(255, 0, 0, 0.99);
   }
   .styleSubtitle{
     position: absolute;
@@ -59,7 +132,7 @@
     /* identical to box height */
     
     
-    color: #000000;
+    color: #ff0000;
     
   }
 .styleReInput {
@@ -223,7 +296,7 @@
     left: 350px;
     top: 670px;
 
-    background: #0DA0F2;
+    background: #ff008c;
     border: #0DA0F2;
   }
   

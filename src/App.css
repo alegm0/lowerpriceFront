@@ -4,18 +4,22 @@
   font-family: "OpenSans-regular";
   src: url(assets/font/OpenSans/OpenSans-Regular.ttf);
 }
+
 @font-face {
   font-family: "OpenSans-light";
   src: url(assets/font/OpenSans/OpenSans-Light.ttf);
 }
+
 @font-face {
   font-family: "OpenSansCondensed-bold";
   src: url(assets/font/OpenSans_Condensed/OpenSans_Condensed-Bold.ttf);
 }
+
 @font-face {
   font-family: "OpenSansCondensed-light";
   src: url(assets/font/OpenSans_Condensed/OpenSans_Condensed-Light.ttf);
 }
+
 @font-face {
   font-family: "TimeNewRoman-bold";
   src: url(assets/font/Times_New_Roman/times_new_roman.ttf);
@@ -40,8 +44,8 @@
   --yellow-color: #28ff28;
 
   /* colores */
-  --lila:#9DA0DF;
-  --azul:#A6D2EB;
+  --lila: #9DA0DF;
+  --azul: #A6D2EB;
   --azul-oscuro: #2888FF;
   --blanco: #ffffff;
 
@@ -59,13 +63,16 @@ body {
 
 .full-width {
   max-width: 100%;
+  max-height: 100%;
   background: linear-gradient(to right,
-  var(--azul) 0%,
-  var(--azul)75%,
-  var(--lila) 75%,
-  var(--lila) 100%);
+      var(--azul) 0%,
+      var(--azul)75%,
+      var(--lila) 75%,
+      var(--lila) 100%);
 
 }
+
+
 .image-size {
   width: 565px;
   height: 591px;
@@ -102,8 +109,9 @@ h1 {
   color: #000000;
 
 }
+
 .input-icon {
-   
+
   width: 44px;
   height: 53px;
   margin-right: 8px;
@@ -151,34 +159,41 @@ h1 {
   font-size: 45px;
   text-align: initial;
 }
+
 .subtitleHomeIn {
   font-family: "OpenSansCondensed-light";
   font-size: 25px;
   text-align: initial;
 }
+
 .styleImgCardHomeIn {
   width: 36%;
   margin: auto;
 }
+
 .styleImgSecondCardHomeIn {
   width: 68%;
   margin: auto;
 }
+
 .styleTitleCard {
   font-size: 25px;
   font-family: "OpenSansCondensed-bold";
   text-align: initial;
 }
+
 .styleSubTitleCard {
   text-align: initial;
   font-family: OpenSans-light;
   font-size: 15px;
 }
+
 .borderRadiusCardHeader {
   border-top-left-radius: 20px !important;
   border-top-right-radius: 20px !important;
   background: var(--bg-red);
 }
+
 /* Fin de Estilos para HomeIn */
 
 @media (prefers-reduced-motion: no-preference) {
@@ -186,10 +201,12 @@ h1 {
     animation: App-logo-spin infinite 20s linear;
   }
 }
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -279,7 +296,7 @@ a:hover {
   border-radius: 16px;
 }
 
-.box-green > p {
+.box-green>p {
   margin: 30px 20px;
 }
 
@@ -297,7 +314,7 @@ a:hover {
 .input {
   font-size: 16px;
   padding: 0.5rem 0.5rem 0.5rem 0.8rem;
-  border:  1px solid var(--azul-oscuro);
+  border: 1px solid var(--azul-oscuro);
   background-color: var(--blanco);
   border-radius: 30px;
   outline: none;
@@ -309,6 +326,8 @@ a:hover {
 .input {
   transition: 180ms box-shadow ease-in-out;
 }
+
+
 
 .input:focus {
   border-color: var(--red-color);
@@ -339,6 +358,24 @@ a:hover {
   font-family: 'Inter', 'Serif';
   font-size: 24px;
   font-weight: 700;
+}
+.botonp{
+  margin-right: 30px;
+  margin-left: 30px;
+
+
+  
+  background-color: var(--lila);
+  color: var(--blanco);
+  border: none;
+  padding: 0.5rem;
+  margin-top: 60px;
+  width: 10rem;
+  font-weight: bold;
+  transition: 350ms;
+  border: 1px solid var(--lila);
+  font-family: 'Inter';
+
 }
 
 .button-red:hover {
@@ -382,7 +419,7 @@ a:hover {
 }
 
 .container-lists {
-  background-color: var(--red-light-color);
+  background-color: var(--red--color);
   border-radius: 1rem;
   border: 1px solid var(--second-red-color);
   margin-top: 3rem;
@@ -470,7 +507,7 @@ a:hover {
   align-items: center;
 }
 
-.horizontal-list > div > p {
+.horizontal-list>div>p {
   text-align: left;
 }
 
@@ -487,7 +524,7 @@ a:hover {
   margin-bottom: 3rem;
 }
 
-.btn-create-branding > .margin-btn {
+.btn-create-branding>.margin-btn {
   margin-top: 1.7rem;
 }
 
