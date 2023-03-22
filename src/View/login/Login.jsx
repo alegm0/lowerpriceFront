@@ -1,4 +1,8 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
+import axios from 'axios';
+import { urlRequest } from '../../urlRequest';
 import { useHistory } from "react-router";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import Button from "@restart/ui/esm/Button";
@@ -6,36 +10,91 @@ import Button from "@restart/ui/esm/Button";
 import loginImgI from "../../assets/img/loginIcon.png";
 //import logo from "../../assets/img/logo.svg";
 import user from "../../assets/img/email.png";
-import password from "../../assets/img/forgot.png";
+import passwordu from "../../assets/img/forgot.png";
+import Swal from 'sweetalert2';
 
 
 
 function Login() {
   const history = useHistory();
 
-  const [userInfo, setUserInfo] = useState({ student_code: "", password: "" });
-  const [validate, setValidate] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState("");
+  const [error2, setError2] = useState("");
 
-  const handleChangeInfo = (e) => {
-    const { name, value } = e?.target;
-    setValidate(false);
-    setUserInfo({ ...userInfo, [name]: value });
+
+
+
+
+  const handleEmailChange = (e) => {
+    const newEmail = e.target.value;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(newEmail)) {
+      setError("*Correo no valido");
+
+    } else {
+      setError("");
+    }
+    setEmail(newEmail);
   };
 
-  const login = () => {
-    if (
-      (userInfo.student_code === "test@test.com" &&
-        userInfo.password === "Test1!") ||
-      (userInfo.student_code === "JulianUMB" &&
-        userInfo.password === "Test1234") ||
-      (userInfo.student_code === "BrayanUMB" && userInfo.password === "Test1234")
-    ) {
-      setValidate(false);
-      history.push("/home");
+
+  const handlePasswordChange = (e) => {
+    const newPassword = e.target.value;
+    if (password.length < 7) {
+      setError2("*Contraseña no valida");
+
     } else {
-      setValidate(true);
+      setError2("");
+
+    }
+    setPassword(newPassword);;
+
+  };
+
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = {
+      email: email,
+      password: password,
+    };
+    if (email && password && error === "" && error2 === "") {
+      axios.post(`${urlRequest}/login`, data)
+      .then(response => {
+        console.log(response);
+        if (response.status === 200) {
+          history.push('/home');
+        }
+      
+      })
+      .catch(error => {
+        console.log(error);
+        setError2("Correo o contraseña incorrecta");
+      });
+      
+      
+      // try {
+      //   const responseU = axios.post("/login", {data});
+
+      //   if (responseU.status === 201) {
+      //     window.open("/home");
+      //   }
+      // } catch (error) {
+  
+      //   console.error(error);
+      // }
+      
+
+ } else {
+ setError2("Error ejecutamiento");
+  
     }
   };
+
+
+
 
   return (
     <Container className="full-width">
@@ -47,57 +106,59 @@ function Login() {
           <Card className="panel-white">
             <Card.Body>
               <Card.Title className="panel-white-title">Iniciar Sesion</Card.Title>
-              <div className="flex-inputs container-inputs-login">
-                <img src={user} alt="Imagen ingreso" className="input-icon" />
-                <input
-                  className="input"
-                  type="text"
-                  placeholder="Ingrese su correo"
-                  name="student_code"
-                  onChange={(e) => handleChangeInfo(e)}
-                  value={userInfo?.student_code || ""}
-                />
-              </div>
-              <div className="flex-inputs last-input-margin container-inputs-login">
-                <img src={password} alt="Imagen ingreso" className="input-icon" />
-                <input
-                  className="input"
-                  type="password"
-                  placeholder="Ingrese su contraseña"
-                  name="password"
-                  onChange={(e) => handleChangeInfo(e)}
-                  value={userInfo?.password || ""}
-                />
-              </div>
-              {validate && (
-                <div>
-                  <p>*Usuario o contraseña incorrecta</p>
+              <form onSubmit={handleSubmit}>
+                <div className="flex-inputs container-inputs-login">
+                  <img src={user} alt="Imagen ingreso" className="input-icon" />
+                  <input
+                    className="input"
+                    type="text"
+                    placeholder="Ingrese su correo electronico"
+                    name="email"
+                    value={email}
+                    onChange={handleEmailChange}
+                  />
                 </div>
-              )}
-              <Button
-                variant="INICIAR SESIÓN"
-                className="button-red"
-                onClick={() => login()}
-              >
-                INICIAR SESIÓN
-              </Button>
-              <div>
-                <a
-                  href="/recover-password"
-                  className="login__recover-password-link"
+                {error && <span className="text-validate">{error}</span>}
+                <div className="flex-inputs last-input-margin container-inputs-login">
+                  <img src={passwordu} alt="Imagen ingreso" className="input-icon" />
+                  <input
+                    className="input"
+                    type="password"
+                    placeholder="Ingrese su contraseña"
+                    name="password"
+                    value={password}
+                    onChange={handlePasswordChange}
+                  />
+                </div>
+                {error2 && <span className="text-validate">{error2}</span>}
+
+                <Button
+                  type="submit"
+                  variant="INICIAR SESIÓN"
+                  className="button-red"
+                  onClick={handleSubmit}
+                  
                 >
-                  ¿Olvidaste tu contraseña?
-                </a>
-              </div>
-              <p className="login__without-account">
-                ¿No tienes una cuenta? <a href="/register" className="">Registrate aquí</a>
-              </p>
+                  INICIAR SESIÓN
+                </Button>
+                <div>
+                  <a
+                    href="/recover-password"
+                    className="login__recover-password-link"
+                  >
+                    ¿Olvidaste tu contraseña?
+                  </a>
+                </div>
+                <p className="login__without-account">
+                  ¿No tienes una cuenta? <a href="/register" className="">Registrate aquí</a>
+                </p>
+              </form>
             </Card.Body>
           </Card>
         </Col>
       </Row>
     </Container>
-    
+
   );
 }
 
