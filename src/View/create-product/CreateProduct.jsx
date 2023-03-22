@@ -1,27 +1,31 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import { useHistory } from "react-router";
 import { urlRequest } from "../../urlRequest";
 import Swal from "sweetalert2";
 import { useLocation } from "react-router-dom";
+import iconoAtras from '../../assets/img/icono-atras.svg';
 
 function CreateProduct() {
   const history = useHistory();
   const validateInputs = {
-    price: false,
+    unit_cost: false,
     quantity: false,
-    name_mark: false
+    name: false
   }
   const [errorsInputs, setErrorsInputs] = useState({...validateInputs});
   const [submit, setSubmit] = useState(false) 
   const [products, setProducts] = useState({
-    price: 0,
-    quantity: 0,
-    name_mark: '',
-    description: ''
+    unit_cost: '',
+    quantity: '',
+    name: '',
+    description: '',
+    category_id: 1,
+    user_id: 1
   });
   const { state }  = useLocation();
+  const { search } = useLocation();
 
 
   useEffect(() => {
@@ -30,6 +34,7 @@ function CreateProduct() {
   },[products, submit]);
 
   useEffect(() => {
+    console.log(search);
     if (state?.id) getProduct(state.id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state]);
@@ -42,10 +47,12 @@ function CreateProduct() {
     axios.get(`${urlRequest}/product/${id}`, products)
       .then(function (response) {
         setProducts({
-          price: response.data.data.price,
+          unit_cost: response.data.data.unit_cost,
           quantity: response.data.data.quantity,
-          name_mark: response.data.data.name_mark,
-          description: response.data.data.description
+          name: response.data.data.name,
+          description: response.data.data.description,
+          category_id: 1,
+          user_id: 1
         });
       })
       .catch(function (error) {
@@ -56,8 +63,8 @@ function CreateProduct() {
   const validate = () => {
     const errors = {...validateInputs};
     Object.keys(errors).forEach((e) => {
-      if (!products[e] && e !== 'price' && e !== 'quantity') errors[e] = true;
-      if (!products[e] > 0 && e !== 'name_mark') errors[e] = true;
+      if (!products[e] && e !== 'unit_cost' && e !== 'quantity') errors[e] = true;
+      if (!products[e] > 0 && e !== 'name') errors[e] = true;
     });
     setErrorsInputs(errors);
     return Object.values(errors).some( x => String(x).includes(true));
@@ -75,9 +82,9 @@ function CreateProduct() {
               text: 'Se ha actualizado un producto.',
               icon: 'success',
               confirmButtonText: "Continuar", 
-              confirmButtonColor: 'rgb(255, 146, 158)',
+              confirmButtonColor: 'rgb(157 160 223)',
             }).then(resultado => {
-                history.push('/shopping-list#');
+                history.push('/my-products');
             });
           } else {
             Swal.fire({
@@ -85,7 +92,7 @@ function CreateProduct() {
               text: 'Se ha generado un erro al actualizar un producto.',
               icon: 'error',
               confirmButtonText: "Continuar", 
-              confirmButtonColor: 'rgb(255, 146, 158)',
+              confirmButtonColor: 'rgb(157 160 223)',
             });
           }
         })
@@ -101,9 +108,9 @@ function CreateProduct() {
               text: 'Se ha creado un nuevo producto.',
               icon: 'success',
               confirmButtonText: "Continuar", 
-              confirmButtonColor: 'rgb(255, 146, 158)',
+              confirmButtonColor: 'rgb(157 160 223)',
             }).then(resultado => {
-                history.push('/shopping-list#');
+              history.push('/my-products');
             });
           } else {
             Swal.fire({
@@ -111,7 +118,7 @@ function CreateProduct() {
               text: 'Se ha generado un error al crear un nuevo producto.',
               icon: 'error',
               confirmButtonText: "Continuar", 
-              confirmButtonColor: 'rgb(255, 146, 158)',
+              confirmButtonColor: 'rgb(157 160 223)',
             });
           }
         })
@@ -123,117 +130,88 @@ function CreateProduct() {
   }
 
   return (
-    <div className="pt-5 ml-5" style={{ height: "91vh" }}>
-      <Container className="margin-top-for-all">
+    <div className="body-view">
+      <Container>
         <Row>
-          <Col lg={12}>
-            <h1 className="titleHomeIn">Ingresa los datos</h1>
+          <Col lg={2}>
+            <img onClick={() => history.goBack()} src={iconoAtras} alt="Icono de atras" style={{width:"3rem", marginTop:"3rem", marginLeft:"-3rem"}}/>
           </Col>
         </Row>
-        <div className="container-inputs">
-          <div className="first flex-inputs">
-            <label className="label-input">Nombre de la marca</label>
-            <input
-              className="input"
-              name="name_mark"
-              type="text"
-              value={products.name_mark}
-              placeholder="Ingrese nombre de la marca"
-              onChange={(e) => onChange(e)}
-            />
-            {errorsInputs.name_mark && <span className="text-validate">*Campo requrido</span>}
-          </div>
-          <div className="second flex-inputs">
-            <label className="label-input">Precio</label>
-            <input
-              className="input"
-              name="price"
-              type="number"
-              value={products.price}
-              placeholder="Ingrese el precio"
-              onChange={(e) => onChange(e)}
-            />
-            {errorsInputs.price && <span className="text-validate">*Campo requrido</span>}
-          </div>
-          <div className="third flex-inputs">
-            <label className="label-input">Cantidad</label>
-            <input
-              className="input"
-              name="quantity"
-              type="number"
-              value={products.quantity}
-              placeholder="Ingrese la cantidad"
-              onChange={(e) => onChange(e)}
-            />
-            {errorsInputs.quantity && <span className="text-validate">*Campo requrido</span>}
-          </div>
-        </div>
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <p
-            style={{ fontWeight: "bold", fontSize: "20px", textAlign: "left" }}
-          >
-            Descripción
-          </p>
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <textarea
-              name="description"
-              cols="30"
-              rows="10"
-              onChange={(e) => onChange(e)}
-              value={products.description}
-              style={{ width: "85%", borderRadius: "1rem", backgroundColor: "#FF929E", borderColor: "#DE0B0B", padding:"1rem" }}
-            ></textarea>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-              }}
-            >
-              <button
-                style={{
-                  borderColor: "#E01A79",
-                  backgroundColor: "white",
-                  fontWeight: "bold",
-                  color: "#E01A79",
-                  borderRadius: "1rem",
-                  height: " 3rem",
-                }}
-              >
-                Subir foto
-              </button>
-              <button
-                style={{
-                  borderColor: "#E01A79",
-                  backgroundColor: "white",
-                  fontWeight: "bold",
-                  color: "#E01A79",
-                  borderRadius: "1rem",
-                  height: " 3rem",
-                }}
-              >
-                Eliminar foto
-              </button>
+        <Row>
+          <Col lg={9} className="content-home">
+           
+            <h1 className="title-home m-0">Ingrese el producto</h1>
+            <div className="container-inputs">
+              <div className="first flex-inputs">
+                <p className="subtitle-product mt-4 ml-2">Ingrese el nombre del producto</p>
+                <input
+                  className="input"
+                  name="name"
+                  type="text"
+                  value={products.name}
+                  placeholder="Ingrese nombre del producto"
+                  onChange={(e) => onChange(e)}
+                />
+                {errorsInputs.name && <span className="text-validate">*Campo requrido</span>}
+              </div>
+              <div className="second flex-inputs">
+                <p className="subtitle-product mt-4 ml-2">Ingrese el costo unitario</p>
+                <input
+                  className="input"
+                  name="unit_cost"
+                  type="number"
+                  value={products.unit_cost}
+                  placeholder="Ingrese el costo unitario"
+                  onChange={(e) => onChange(e)}
+                />
+                {errorsInputs.unit_cost && <span className="text-validate">*Campo requrido</span>}
+              </div>
+              <div className="third flex-inputs">
+              <p className="subtitle-product mt-4 ml-2">Ingrese el cantidad</p>
+                <input
+                  className="input"
+                  name="quantity"
+                  type="number"
+                  value={products.quantity}
+                  onChange={(e) => onChange(e)}
+                />
+                {errorsInputs.quantity && <span className="text-validate">*Campo requrido</span>}
+              </div>
+              <div className="third flex-inputs">
+              <p className="subtitle-product mt-4 ml-2">Ingrese la categoria</p>
+              <select className="select-product">
+                <option value="option1">Seleccione la categoria</option>
+                <option value="1">Tecnologia</option>
+                <option value="2">Salud</option>
+                <option value="3">Tecnologia</option>
+                <option value="4">Aseo</option>
+                <option value="4">Comida</option>
+              </select>
+              </div>
             </div>
-          </div>
-        </div>
+            <div style={{ display: "flex", flexDirection: "column" }}>
+            <p className="subtitle-product mt-4 ml-2">Ingrese una descripcion</p>
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <textarea
+                  name="description"
+                  cols="30"
+                  rows="10"
+                  onChange={(e) => onChange(e)}
+                  value={products.description}
+                  placeholder="Ingrese una descripcion"
+                  className="textarea-product"
+                  style={{ width: "100%"}}
+                ></textarea>
+              </div>
+            </div>
+          </Col>
+          <Col lg={12} className="content-product content-body-home mt-5">
+              <Button className="button-purple-home" onClick={(e) => (onSubmit(e))}>
+                  Guardar
+              </Button>
+          </Col>
+        </Row>
       </Container>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          width: "40%",
-          margin: "auto",
-        }}
-      >
-        <button
-          className="button-red btn-finish"
-          onClick={() => history.goBack()}
-        >
-          ATRÁS
-        </button>
-        <button className="button-green btn-finish" onClick={() => onSubmit()}>GUARDAR</button>
-      </div>
     </div>
   );
 }

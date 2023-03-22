@@ -26,6 +26,7 @@
 }
 
 :root {
+  --background-page: #A6D2EB;
   --blue-extra-light-color: #c2e8fe;
   --background-color: #ddf1fc;
   --red-light-color: #a6d2eb;
@@ -56,10 +57,14 @@ body {
   font-family: 'Inter';
 }
 
-/* .background-red {
-  background-color: var(--bg-red);
-} */
+.App {
+  background: var(--background-page);
+  min-height: 100vh;
+}
 
+.body-view {
+  width: 100%;
+}
 
 .full-width {
   max-width: 100%;
@@ -130,6 +135,7 @@ h1 {
 }
 
 .App {
+  display: flex;
   text-align: center;
 }
 
@@ -345,11 +351,16 @@ a:hover {
   color: var(--second-red-color);
 }
 
+.textarea-product::placeholder {
+  color: var(--second-red-color);
+  margin-top: 2%;
+}
+
 .button-red {
   background-color: var(--lila);
   color: var(--blanco);
   border: none;
-  padding: 0.5rem;
+  padding: 12.5px;
   margin-top: 60px;
   width: 253px;
   height: 63px;
@@ -538,6 +549,49 @@ a:hover {
   height: 100vh;
 }
 
+/*Scroll custom*/
+
+.scroll-custom::-webkit-scrollbar {
+  width: 5px;
+}
+
+.scroll-custom::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+
+.scroll-custom::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+.scroll-custom::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+.textarea-product {
+  padding: 0.5rem 0.5rem 0.5rem 0.8rem;
+  border: 1px solid var(--azul-oscuro);
+  background-color: var(--blanco);
+  border-radius: 30px;
+}
+
+.subtitle-product {
+  font-size: 18px;
+  text-align: left;
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+}
+
+.select-product {
+  font-size: 16px;
+  padding: 0.5rem 0.5rem 0.5rem 0.8rem;
+  border: 1px solid var(--azul-oscuro);
+  background-color: var(--blanco);
+  border-radius: 30px;
+  outline: none;
+  width: 400px;
+  height: 50px;
+}
+
 /*Mobile*/
 @media screen and (min-width:3.125rem) and (max-width:47.938rem) {
   .d-none-mobile {
@@ -588,9 +642,9 @@ a:hover {
 
   .button-red {
     width: 100%;
-    height: 40px;
     font-size: 20px;
     margin-top: 20px;
+    margin: 15px auto;
   }
 
   .login__recover-password-link {

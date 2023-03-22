@@ -1,73 +1,27 @@
-import React from "react";
-import { Card, Col, Container, Row } from "react-bootstrap";
-import "../App.css";
-import ImgLista from "../assets/img/home-ico-lista.svg";
-import ImgShop from "../assets/img/img-shop.svg";
-import ImgSales from "../assets/img/img-sales.svg";
+import React from 'react';
+import {Button, Col, Container, Row } from 'react-bootstrap';
+import ImgHome from '../assets/img/navbar/Img-home.svg';
+import '../App.css';
+import './Home.css';
 
 function HomeIn() {
-  const informationCards = [
-    {
-      img: ImgLista,
-      title: "Wishlist",
-      text: "Te redirigiremos la visual donde esta tu wishlist ",
-      url: "/wishlist",
-    },
-    {
-      img: ImgShop,
-      title: "Tienda",
-      text: "Te redirigiremos la visual donde podras explorar los diferentes productos para ti",
-      url: "#",
-    },
-    {
-      img: ImgSales,
-      title: "Ventas",
-      text: "Te redirigiremos la visual donde podras agregar productos para la venta y consultarlos",
-      url: "/shopping-list",
-    },
-  ];
-
   return (
-    <div className="pt-5 ml-5" style={{ height: "91vh" }}>
-      <Container className="margin-top-for-all">
+    <div className="body-view">
+      <Container>
         <Row>
-          <Col lg={12}>
-            <h1 className="titleHomeIn ">¡Bienvenido!</h1>
-            <p className="subtitleHomeIn ">
-              MBShop, tiene diferentes opciones, las cuales son:{" "}
+          <Col lg={9} className="content-home">
+            <h1 className="title-home m-0">BIENVENID@,</h1>
+            <h1 className="title-home pt-0 m-0">La solucion para que ahorres!</h1>
+            <p className="sub-title-home mt-5">
+              Lower price compara precios de diferntes cadenas
             </p>
           </Col>
-          {informationCards.map((event, index) => {
-            return (
-              <Col lg={4} className="mt-4 d-flex" key={index}>
-                <Card style={{ width: "18rem", borderRadius: "20px" }}>
-                  <Card.Header className="borderRadiusCardHeader">
-                    <Card.Img
-                      variant="top"
-                      className={`mt-3 mb-3 ${index === 1 ? 'styleImgSecondCardHomeIn' : 'styleImgCardHomeIn'}`}
-                      src={event.img}
-                    />
-                  </Card.Header>
-                  <Card.Body>
-                    <Card.Title className="styleTitleCard">
-                      {event.title}
-                    </Card.Title>
-                    <Card.Text className="styleSubTitleCard">
-                      {event.text}
-                    </Card.Text>
-                  </Card.Body>
-                  <Card.Body>
-                    <Card.Link
-                      href={event.url}
-                      style={{ textAlign: "initial" }}
-                    >
-                      Comienza aqui
-                    </Card.Link>
-                  </Card.Body>
-                </Card>
-              </Col>
-            );
-          })}
+          <Col lg={12} className="content-home content-body-home">
+              <Button className="button-purple-home">
+                  Explorar ahora!
+              </Button>
+              <img src={ImgHome} alt='Imagen Home' className="logo-body-home"/>
+          </Col>
         </Row>
       </Container>
     </div>

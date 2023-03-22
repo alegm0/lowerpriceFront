@@ -24,8 +24,8 @@ function Login() {
 
   const login = () => {
     if (
-      (userInfo.student_code === "RogerUMB" &&
-        userInfo.password === "Test1234") ||
+      (userInfo.student_code === "test@test.com" &&
+        userInfo.password === "Test1!") ||
       (userInfo.student_code === "JulianUMB" &&
         userInfo.password === "Test1234") ||
       (userInfo.student_code === "BrayanUMB" && userInfo.password === "Test1234")

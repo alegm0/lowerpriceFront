@@ -1,31 +1,45 @@
-import React from "react";
-import Example from "../../assets/img/example.png";
-import "../../App.css";
-import { useHistory } from "react-router";
-import axios from "axios";
-import { urlRequest } from "../../urlRequest";
-import { useEffect } from "react";
-import { useState } from "react";
-import Swal from "sweetalert2";
+import React, { useEffect, useState } from 'react';
+import { Button, Card, Col, Container, Row } from 'react-bootstrap';
+import { useHistory } from 'react-router';
+import Swal from 'sweetalert2';
+import axios from 'axios';
+import Example from '../../assets/img/example.png';
+import iconEdit from '../../assets/img/navbar/icono-editar.svg';
+import iconDelete from '../../assets/img/navbar/icono-eliminar.svg';
+import Carousel from '../../Components/carousel/Carousel';
+import { urlRequest } from '../../urlRequest';
+import './MyProducts.css';
+import { Link } from 'react-router-dom';
 
 function MyProducts() {
   const history = useHistory();
-  const [listProducts, setLisrProducts] = useState([]);
+  const [listProducts, setListProducts] = useState([]);
+  const [listMark, setListMark] = useState([]);
+
+  useEffect(() => {
+    getListProducts();
+    getListMark();
+  },[]);
 
   const getListProducts = () => {
     axios.get(`${urlRequest}/product/list`, [])
       .then(function (response) {
-        setLisrProducts(response.data.data);
+        setListProducts(response.data.data);
       })
       .catch(function (error) {
         console.log(error);
       });      
   }
 
-  useEffect(() => {
-    getListProducts();
-  },[]);
-
+  const getListMark = () => {
+    axios.get(`${urlRequest}/mark`, [])
+      .then(function (response) {
+        setListMark(response.data.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });  
+  }
   const deleteProduct = (id) => {
     axios.delete(`${urlRequest}/product/delete/${id}`, [])
       .then(function (response) {
@@ -35,16 +49,16 @@ function MyProducts() {
             title: '¡Eliminacion exitosa!',
             text: 'Se ha eliminado un producto.',
             icon: 'success',
-            confirmButtonText: "Continuar", 
-            confirmButtonColor: 'rgb(255, 146, 158)',
+            confirmButtonText: 'Continuar', 
+            confirmButtonColor: 'rgb(157 160 223)',
           })
         } else {
           Swal.fire({
             title: '¡Error!',
             text: 'Se ha generado un error al eliminar un producto.',
             icon: 'error',
-            confirmButtonText: "Continuar", 
-            confirmButtonColor: 'rgb(255, 146, 158)',
+            confirmButtonText: 'Continuar', 
+            confirmButtonColor: 'rgb(157 160 223)',
           });
         }
       })
@@ -54,131 +68,44 @@ function MyProducts() {
   }
 
   return (
-    <div className="pt-5 ml-5" style={{ height: "91vh" }}>
-      <div>
-        <h2 style={{ fontWeight: "bold", marginTop: "3rem" }}>Mis productos</h2>
+    <div className="body-view">
+      <div className="banner-my-product">
+        <h1 className="title-marks-my-products">Marcas</h1>
+        <Carousel list={listMark} />
       </div>
-      <div
-        style={{
-          backgroundColor: "#CE3030",
-          width: "90%",
-          height: "70%",
-          margin: "2rem auto",
-          padding: "1rem 0 ",
-        }}
-      >
-        <div
-          style={{
-            backgroundColor: "white",
-            width: "98%",
-            height: "3rem",
-            margin: "auto",
-            borderBottom: "1px solid #CE3030",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <div
-            className="d-flex col-4 justify-content-center"
-            style={{
-              fontWeight: "bold"
-            }}
-          >
-            Producto
-          </div>
-          <div 
-            className="d-flex col-4 justify-content-center"
-            style={{ fontWeight: "bold" }}>Cantidad</div>
-          <div
-            className="d-flex col-4 justify-content-center"
-            style={{
-              fontWeight: "bold"
-            }}
-          >
-            Estado
-          </div>
-        </div>
-        <div
-          style={{
-            width: "98%",
-            height: "91%",
-            margin: "auto",
-            overflowY:"auto"
-          }}
-        >
-          {listProducts.length > 0 &&
-          listProducts.map((product) => {
-            return (
-              <div className="row justify-content-center m-auto" style={{ width:'100%', backgroundColor: "white" }}>
-                <div className="col-4">
-                  <img src={Example} alt="arduino" />
-                  <p
-                    style={{
-                      fontWeight: "bold",
-                      textAlign: "center",
-                    }}
-                  >
-                    {product.name_mark}
-                  </p>
-                </div>
-                <div className="col-4">
-                  <p
-                    style={{
-                      fontWeight: "bold"
-                    }}
-                  >
-                    {product.quantity}
-                  </p>
-                </div>
-                <div className="col-4">
-                  <p
-                    style={{
-                      fontWeight: "bold"
-                    }}
-                  >
-                    Disponible
-                  </p>
-                </div>
-                <div className="col-12 d-flex justify-content-center aling-item-center" style={{ height: "3rem" }}>
-                    <button className="button-edit">
-                      Ver
-                    </button>
-                    <button
-                      className="button-delete"
-                      onClick={() => deleteProduct(product.id)}
-                    >
-                      Eliminar
-                    </button>
-                    <button
-                      className="button-edit-yellow"
-                      onClick={() => history.push("/create-product", {id: product.id})}
-                    >
-                      Editar
-                    </button>
+      <Container>
+        <Row>
+        {listProducts.length > 0 &&
+          listProducts.map((product, index) => (
+            <Col lg={4} md={4} sm={2} key={index}>
+                <Card className="card-my-product">
+                  <div className="card-header-my-product">
+                    <Card.Img src={Example}></Card.Img>
+                    <span>{product.quantity}</span>
                   </div>
-              </div>
-            );
-          })
-        }
+                  <Card.Body className="card-footer-my-product">
+                    <div className="card-info-my-product">
+                      <span>{product.name}</span>
+                      <span>{product.unit_cost}</span>
+                    </div>
+                    <div>
+                      <div>
+                        <img src={iconEdit} className="button-edit-product" onClick={() => history.push("/create-product", {id: product.id})}/>
+                      </div>
+                      <div>
+                        <Card.Img src={iconDelete} className="button-delete-product" onClick={() => deleteProduct(product.id)}></Card.Img>
+                      </div>
+                    </div>
+                  </Card.Body>
+                </Card>
+            </Col>
+          ))}
           
-        </div>
-      </div>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          width: "40%",
-          margin: "auto",
-        }}
-      >
-        <button
-          className="button-red btn-finish"
-          onClick={() => history.goBack()}
-        >
-          ATRÁS
-        </button>
-      </div>
+          <Col lg={12} md={4} sm={4}>
+            <Link to="/create-products" className='button-red'>Crear producto</Link>
+          </Col> 
+        </Row>
+      </Container>
     </div>
   );
 }

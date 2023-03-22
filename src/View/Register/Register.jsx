@@ -41,20 +41,19 @@ function Register() {
     { value: "opcion3", label: "Compañia" }
   ];
 
-
-
   const history = useHistory();
   const validateInputs = {
     name: false,
     email: false,
     password: false,
-    user: false
+    document_number: false
   };
 
   const handleNameChange = (e) => {
     const newName = e.target.value;
     setName(newName);
   };
+
   const handleEmailChange = (e) => {
     const newEmail = e.target.value;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -102,9 +101,9 @@ function Register() {
   const [submit, setSubmit] = useState(false)
   const [register, setRegister] = useState({
     name: '',
+    document_number: 0,
     email: '',
-    password: '',
-    user: ''
+    password: ''
   });
   
 
@@ -186,6 +185,7 @@ function Register() {
       ...register, [e.target.name]: e.target.value
     });
   }
+
   //mensajes de error condiciones
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -223,8 +223,6 @@ function Register() {
     } else {
       setError5("");
     }
-
-
 
   };
 
@@ -280,6 +278,19 @@ function Register() {
                     type="text"
                     placeholder="Ingrese su nombre"
                     name="name"
+                    value={name}
+                    onChange={handleNameChange}
+                  />
+                  {error3 && <span className="text-validate">{error3}</span>}
+                </div>
+
+                <div className="flex-inputs">
+                  <img src={useru} alt="Imagen ingreso" className="input-icon" />
+                  <input
+                    className="input"
+                    type="text"
+                    placeholder="Ingrese su numero de documento"
+                    name="document_number"
                     value={name}
                     onChange={handleNameChange}
                   />

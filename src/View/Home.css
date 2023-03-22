@@ -1,0 +1,95 @@
+:root {
+  --background-button-purple: #9DA0DF;
+  --color-font-button-purple: #fff;
+}
+
+.content-home {
+  padding-left: 3rem;
+}
+
+.title-home {
+  font-family: "OpenSansCondensed-bold";
+  font-size: 70px;
+  color: #ffffff;
+  text-align: initial;
+  line-height: 90px;
+}
+
+.sub-title-home {
+  font-family: "OpenSansCondensed-light";
+  font-size: 30px;
+  text-align: initial;
+  color: #ffffff;
+}
+
+.content-body-home {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.content-product {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-body-home {
+  width: 50%;
+}
+
+.button-purple-home {
+  border: none !important;
+  width: 254px;
+  height: 62px;
+  background: var(--background-button-purple);
+  color: var(--color-font-button-purple);
+  font-family: 'Inter', serif;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 29px;
+}
+
+.button-create{
+  border: none !important;
+  width: 254px;
+  height: 62px;
+  background: var(--background-button-purple);
+  color: var(--color-font-button-purple);
+  font-family: 'Inter', serif;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 29px;
+}
+
+.button-purple-home:hover, .button-purple-home:focus, .button-create:hover, .button-create:focus {
+  box-shadow: none;
+  background: var(--color-font-button-purple);
+  color: var(--background-button-purple);
+}
+
+@media screen and (min-width:3.125rem) and (max-width:47.938rem) {
+  .content-home {
+    font-size: 30px;
+    line-height: 40px;
+    padding: 15px;
+  }
+
+  .title-home {
+    font-size: 30px;
+    line-height: 40px;
+    padding: 0;
+  }
+
+  .logo-body-home {
+    display: none;
+  }
+
+  .content-body-home {
+    justify-content: center;
+  }
+
+  .button-purple-home, .button-create {
+    width: 80%;
+  }
+}
