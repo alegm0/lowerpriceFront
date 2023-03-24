@@ -16,7 +16,7 @@ import uc from "../../assets/img/userchange.png";
 import idc from "../../assets/img/id.png";
 
 //new
-import Select from "react-select";
+// import Select from "react-select";
 
 
 function Register() {
@@ -62,7 +62,7 @@ function Register() {
       setError3("*Campo no vacio");
     } else {
       setError3("");
-      
+
     }
     setName(newName);
   };
@@ -92,7 +92,7 @@ function Register() {
     } else {
       setError6("");
     }
-  
+
     setPassword(newPassword);;
 
   };
@@ -102,8 +102,8 @@ function Register() {
     const newvalidationPassword = e.target.value;
     if (password !== newvalidationPassword) {
       setError5('*Contraseñas no coinciden');
-      
-    }else {
+
+    } else {
       setError5("");
     }
     setValidationPassword(newvalidationPassword);
@@ -112,7 +112,7 @@ function Register() {
 
 
   function handleInputChange(selectedOption) {
-    
+
     setSelectedOption(selectedOption);
 
   }
@@ -120,7 +120,7 @@ function Register() {
 
 
 
- const customStyles = {
+  const customStyles = {
     control: (base) => ({
       ...base,
 
@@ -173,13 +173,13 @@ function Register() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = {
-      name:name,
-      document_number:document_number,
+      name: name,
+      document_number: document_number,
       email: email,
       password: password,
-    
+
     };
-    if (name &&document_number&& email && password ) {
+    if (name && document_number && email && password) {
       axios.post(`${urlRequest}/register`, data)
         .then(response => {
           console.log(response);
@@ -192,12 +192,12 @@ function Register() {
           console.log(error);
         });
 
-   } else {
+    } else {
       setError2("Error ejecutamiento");
 
     }
   };
-  
+
   // const onSubmit = () => {
   //   setSubmit(true);
   //   if (!validate()) {
@@ -228,7 +228,7 @@ function Register() {
   //       });
 
   //   }
-  
+
   return (
     <Container className="full-width">
 
@@ -243,7 +243,7 @@ function Register() {
               <Card.Title className="panel-white-title">Registrate</Card.Title>
 
               <form onSubmit={handleSubmit}>
-                <div className="flex-inputs">
+                <div className="flex-inputs last-input-marginRegister">
                   <img src={useru} alt="Imagen ingreso" className="input-icon" />
                   <input
                     className="input"
@@ -256,7 +256,7 @@ function Register() {
                   {error3 && <span className="text-validate">{error3}</span>}
                 </div>
 
-                <div className="flex-inputs">
+                <div className="flex-inputs last-input-marginRegister">
                   <img src={idc} alt="Imagen ingreso" className="input-icon" />
                   <input
                     className="input"
@@ -266,10 +266,10 @@ function Register() {
                     value={document_number}
                     onChange={handleIdChange}
                   />
-                  
+
                 </div>
 
-                <div className="flex-inputs last-input-margin">
+                <div className="flex-inputs last-input-marginRegister">
                   <img src={emailu} alt="Imagen ingreso" className="input-icon" />
                   <input
                     className="input"
@@ -282,7 +282,7 @@ function Register() {
                   {error && <span className="text-validate">{error}</span>}
                 </div>
 
-                <div className="flex-inputs last-input-margin">
+                <div className="flex-inputs last-input-marginRegister">
                   <img src={passwordu} alt="Imagen ingreso" className="input-icon" />
                   <input
                     className="input"
@@ -295,7 +295,7 @@ function Register() {
                   {error6 && <span className="text-validate">{error6}</span>}
                 </div>
 
-                <div className="flex-inputs last-input-margin">
+                <div className="flex-inputs last-input-marginRegister">
                   <img src={repeat} alt="Imagen ingreso" className="input-icon" />
                   <input
                     className="input"
@@ -308,19 +308,26 @@ function Register() {
                   {error5 && <span className="text-validate">{error5}</span>}
                 </div>
 
-                <div className="flex-inputSelect last-input-margin" >
-                  <img src={uc} alt="Imagen ingreso" className="input-iconu" />
-                  <Select
+                <div className="flex-inputSelect4 last-input-marginRegister" >
+                  <img src={useru} alt="Imagen ingreso" className="input-iconu" />
+
+                  <select className="inputSelect">
+                    <option value="option1">Seleccione la categoria</option>
+                    <option value="1">Natural</option>
+                    <option value="2">Empresa</option>
+                    {/* onChange={handleInputChange} */}
+                  </select>
+                  {/* <Select
                     value={selectedOption}
                     onChange={handleInputChange}
                     options={options}
                     styles={customStyles}
-                  />
+                  /> */}
                   {error4 && <span className="text-validate">{error4}</span>}
                 </div>
 
-                <Button type="submit" variant="REGISTRARSE" className="button-red1 last-input-margin" onClick={handleSubmit}>REGISTRARSE</Button>
-                <p className="login__without-account" >Si tienes una cuenta <a href='/'>inicia sesión aquí</a>.</p>
+                <Button type="submit" variant="REGISTRARSE" className="button-red1 last-input-marginRegister" onClick={handleSubmit}>REGISTRARSE</Button>
+                <p className="login__without-account" >Si tienes una cuenta <a href='/'>inicia sesión aquí</a></p>
 
               </form>
             </Card.Body>

@@ -9,7 +9,7 @@ import Button from "@restart/ui/esm/Button";
 //import loginImg from "../../assets/img/loginImg.svg";
 import loginImgI from "../../assets/img/loginIcon.png";
 //import logo from "../../assets/img/logo.svg";
-import user from "../../assets/img/email.png";
+import userU from "../../assets/img/email.png";
 import passwordu from "../../assets/img/forgot.png";
 import Swal from 'sweetalert2';
 
@@ -62,40 +62,22 @@ function Login() {
     };
     if (email && password && error === "" && error2 === "") {
       axios.post(`${urlRequest}/login`, data)
-      .then(response => {
-        console.log(response);
-        if (response.status === 200) {
-          history.push('/home');
-        }
-      
-      })
-      .catch(error => {
-        console.log(error);
-        setError2("Correo o contraseña incorrecta");
-      });
-      
-      
-      // try {
-      //   const responseU = axios.post("/login", {data});
+        .then(response => {
+          console.log(response);
+          if (response.status === 200) {
+            history.push('/home');
+          }
 
-      //   if (responseU.status === 201) {
-      //     window.open("/home");
-      //   }
-      // } catch (error) {
-  
-      //   console.error(error);
-      // }
-      
+        })
+        .catch(error => {
+          console.log(error);
+          setError2("Correo o contraseña incorrecta");
+        });
 
- } else {
- setError2("Error ejecutamiento");
-  
+    } else {
+      setError2("Error ejecutamiento");
     }
   };
-
-
-
-
   return (
     <Container className="full-width">
       <Row className="h-100-vh align-items-center">
@@ -108,7 +90,7 @@ function Login() {
               <Card.Title className="panel-white-title">Iniciar Sesion</Card.Title>
               <form onSubmit={handleSubmit}>
                 <div className="flex-inputs container-inputs-login">
-                  <img src={user} alt="Imagen ingreso" className="input-icon" />
+                  <img src={userU} alt="Imagen ingreso" className="input-icon" />
                   <input
                     className="input"
                     type="text"
@@ -129,15 +111,13 @@ function Login() {
                     value={password}
                     onChange={handlePasswordChange}
                   />
+                  {error2 && <span className="text-validate">{error2}</span>}
                 </div>
-                {error2 && <span className="text-validate">{error2}</span>}
-
                 <Button
                   type="submit"
                   variant="INICIAR SESIÓN"
                   className="button-red"
                   onClick={handleSubmit}
-                  
                 >
                   INICIAR SESIÓN
                 </Button>

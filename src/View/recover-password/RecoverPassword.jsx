@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
 import Button from "@restart/ui/esm/Button";
-import { Col, Container, Row } from "react-bootstrap";
+import { Card, Col, Container, Row } from "react-bootstrap";
 import recoverImg from "../../assets/img/Imagen4.svg";
 import logo from "../../assets/img/Imagen3.svg";
 import email from "../../assets/img/email.png";
@@ -44,16 +44,16 @@ function RecoverPassword() {
 
   return (
     <Container className="full-width">
-      <Row>
+      <Row className="h-100-vh align-items-center">
         <Col className="background-red col-height">
-          <h1>color</h1>
           <img src={loginImg} alt="Imagen de recuperar contraseña" className="image-size" />
         </Col>
         <Col className="col-height">
 
-
-          <div className="panel-white">
-            <h1>Recupera tu cuenta!</h1>
+        <Card className="panel-white">
+        <Card.Body>
+        <Card.Title className="panel-white-title">Recupera tu cuenta!</Card.Title>
+      
 
             <p className="recover-password__text">{validateText()}</p>
 
@@ -124,13 +124,14 @@ function RecoverPassword() {
             {!search && (
               <p className="login__without-account">
                 ¿Quieres volver a &nbsp;
-                <a className="login__without-account--link" href="/login">
+                <a className="login__without-account--link" href="/">
                   iniciar sesión
                 </a>
                 ?
               </p>
             )}
-          </div>
+            </Card.Body>
+          </Card>
         </Col>
       </Row>
     </Container>

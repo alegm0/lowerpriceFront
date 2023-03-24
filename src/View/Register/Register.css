@@ -7,8 +7,13 @@
   padding-left: 50px;
   margin-top:0px;
  
-  
-   
+}
+.flex-inputSelect4 {
+  flex-direction:row;
+  display: flex;
+  padding-left: 30px;
+  margin-top:0px;
+ 
 }
 .text-validate {
   color: #006ef5;
@@ -17,15 +22,28 @@
   margin-top: 0px;
   
 }
+.inputSelect{
+  font-size: 16px;
+  padding: 0.5rem 0.5rem 0.5rem 0.8rem;
+  border: 1px solid var(--azul-oscuro);
+  background-color: var(--blanco);
+  border-radius: 30px;
+  outline: none;
+  width: 400px;
+  height: 50px;
+  display:grid;
+  color: var(--azul-oscuro);
+}
 
-.last-input-margin {
-  margin-top: 20px;
+
+.last-input-marginRegister {
+  margin-top: 4px;
 }
 .button-red1 {
   background-color: var(--lila);
   color: var(--blanco);
   border: none;
-  padding: 0.5rem;
+  padding: text-v0.5rem;
   margin-top:0px;
   width: 253px;
   height: 63px;
@@ -39,7 +57,7 @@
   font-size: 40px;
   font-weight: 700;
   line-height: 75.27px;
-  margin-top: 33px;
+  margin-top: 1px;
   margin-bottom: 0px;
 }
 .input-iconu{
@@ -47,30 +65,25 @@
   height: 53px;
   right: 700px;
   left: 700px;
-  display: block;
+  display: flex;
+  margin-right: 5px;
+
+}
+.text-validate {
+  color: #006ef5;
+  text-align: initial;
+  font-size: 13px;
+  padding-left: 50px;
+  padding-bottom: 0px;
 }
 
 .flex-inputs {
   display: block;
   flex-direction: column;
 }
-.react-select__menu {
-  width: 1000px;
-}
-/* Cambia el color del borde de los selectores */
-.Select {
-  border-color: rgb(128, 255, 0);
-}
 
-/* Redondea las esquinas de los selectores */
-.Select-control {
-  border-radius: 200px;
-}
 
-/* Redondea las esquinas de los elementos del menú desplegable */
-.Select-menu-outer {
-  border-radius: 10px;
-}
+
 .styleTitle{
     position: absolute;
     width: 365px;
@@ -300,3 +313,48 @@
     border: #0DA0F2;
   }
   
+@media screen and (min-width:3.125rem) and (max-width:47.938rem) {
+
+
+  .panel-white {
+    width: 100%;
+    height: 70vh;
+  }
+
+
+  .input-iconu {
+    width: 30px;
+    height: 30px;
+   
+    display: 'flex';
+    align-items: center;
+    justify-content: center;
+  }
+
+
+.last-input-marginRegister{
+  
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+ 
+
+}
+  .inputSelect {
+    width: 100%;
+    height: 40px;
+  }
+  .flex-inputSelect4{
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+    padding-bottom: 20px;
+  }
+  .col-height{
+    padding:1.25rem;
+
+
+  }
+
+}
