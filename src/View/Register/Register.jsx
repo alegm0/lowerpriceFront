@@ -89,10 +89,12 @@ function Register() {
 
   const handlePasswordChange = (e) => {
     const newPassword = e.target.value;
-    if (password.length < 7) {
-      setError6("*Campo > de 8 caracteres");
-    } else {
+    const regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    // if (password.length < 7) {
+      if (regex.test(password)) {
       setError6("");
+    } else {
+      setError6("*Campo Mayus,Letras,Numeros");
     }
 
     setPassword(newPassword);;
