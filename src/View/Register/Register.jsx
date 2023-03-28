@@ -58,14 +58,16 @@ function Register() {
 
   const handleNameChange = (e) => {
     const newName = e.target.value;
-    if (name === "") {
-      setError3("*Campo no vacio");
-    } else {
+    // if (name === "") {
+      if (name && /^[A-Za-z]+$/.test(name)){
       setError3("");
+    } else {
+      setError3("*Campo de nombre");
 
     }
     setName(newName);
   };
+
   const handleIdChange = (e) => {
     const newID = e.target.value;
     setIdValue(newID);
