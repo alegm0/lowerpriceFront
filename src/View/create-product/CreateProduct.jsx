@@ -11,21 +11,38 @@ function CreateProduct() {
   const history = useHistory();
   const validateInputs = {
     unit_cost: false,
-    quantity: false,
-    name: false
+    name: false,
+    description: false,
+    category: {
+      name: false
+    },
+    brand: {
+      name: false
+    }
   }
   const [errorsInputs, setErrorsInputs] = useState({...validateInputs});
-  const [submit, setSubmit] = useState(false) 
+  const [submit, setSubmit] = useState(false) ;
+  const [category, setCategory] = useState([]);
+
+  const [brand, setBrand] = useState([]); 
+
   const [products, setProducts] = useState({
-    unit_cost: '',
-    quantity: '',
+    unit_cost: false,
     name: '',
     description: '',
-    category_id: 1,
-    user_id: 1
+    category: {
+      id: null,
+      name: 'Category',
+      description: ''
+    },
+    brand: {
+      id: null,
+      name: 'Marca',
+      state: true,
+      description: ''
+    }
   });
   const { state }  = useLocation();
-  const { search } = useLocation();
 
 
   useEffect(() => {
@@ -34,7 +51,33 @@ function CreateProduct() {
   },[products, submit]);
 
   useEffect(() => {
-    console.log(search);
+      getCategory();
+      getBrand();
+  }, []);
+
+  const getCategory = () => {
+    axios.get(`${urlRequest}/category/list`)
+    .then(function (response) {
+      console.log(response);
+      setCategory(response.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
+  const getBrand = () => {
+    axios.get(`${urlRequest}/category/list`)
+    .then(function (response) {
+      console.log(response.data);
+      setBrand(response.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  };
+
+  useEffect(() => {
     if (state?.id) getProduct(state.id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state]);
@@ -43,12 +86,21 @@ function CreateProduct() {
     setProducts({...products, [e.target.name]: e.target.value});
   }
 
+  const onChangeMulti = (e, fatherKey) => {
+    setProducts({
+      ...products,
+      [fatherKey]: {
+        ...products[fatherKey],
+        [e.target.name]: e.target.value
+      }
+    });
+  }
+
   const getProduct = (id) => {
     axios.get(`${urlRequest}/product/${id}`, products)
       .then(function (response) {
         setProducts({
           unit_cost: response.data.data.unit_cost,
-          quantity: response.data.data.quantity,
           name: response.data.data.name,
           description: response.data.data.description,
           category_id: 1,
@@ -59,15 +111,17 @@ function CreateProduct() {
         console.log(error);
       });
   }
-
   const validate = () => {
     const errors = {...validateInputs};
     Object.keys(errors).forEach((e) => {
-      if (!products[e] && e !== 'unit_cost' && e !== 'quantity') errors[e] = true;
-      if (!products[e] > 0 && e !== 'name') errors[e] = true;
+    if (['category', 'brand'].includes(e)) {
+            errors[e].name = !products[e].id ? 'campo obligatirio' : '';
+            return;
+        }
+      errors[e] = !products[e] ? '*Campo es obligatorio' : '';
     });
     setErrorsInputs(errors);
-    return Object.values(errors).some( x => String(x).includes(true));
+    return Object.values(errors).some(x => typeof x === 'string' ? !!x : !!x.name );
   } 
 
   const onSubmit = () => {
@@ -167,35 +221,96 @@ function CreateProduct() {
                 {errorsInputs.unit_cost && <span className="text-validate">*Campo requrido</span>}
               </div>
               <div className="third flex-inputs">
-              <p className="subtitle-product mt-4 ml-2">Ingrese el cantidad</p>
-                <input
-                  className="input"
-                  name="quantity"
-                  type="number"
-                  value={products.quantity}
-                  onChange={(e) => onChange(e)}
-                />
-                {errorsInputs.quantity && <span className="text-validate">*Campo requrido</span>}
-              </div>
-              <div className="third flex-inputs">
               <p className="subtitle-product mt-4 ml-2">Ingrese la categoria</p>
-              <select className="select-product">
+              <select className="select-product" name="id" onChange={(e) => onChangeMulti(e, 'category')} value={products.category.id}>
                 <option value="option1">Seleccione la categoria</option>
-                <option value="1">Tecnologia</option>
-                <option value="2">Salud</option>
-                <option value="3">Tecnologia</option>
-                <option value="4">Aseo</option>
-                <option value="4">Comida</option>
+                {category.map(({id, name}) => (
+                  <option value={id}>{name}</option>
+                ))}
+                <option value="0">Otros</option>
               </select>
               </div>
+              {products.category.id === "0" && (
+              <>
+              <div className="first flex-inputs">
+                  <p className="subtitle-product mt-4 ml-2">Ingrese el nombre de la categoria</p>
+                  <input
+                    className="input"
+                    name="name"
+                    type="text"
+                    value={products.category.name}
+                    placeholder="Ingrese nombre del producto"
+                    onChange={(e) => onChangeMulti(e, 'category')}
+                  />
+                  {errorsInputs.category.name && <span className="text-validate">*Campo requrido</span>}
+              </div>
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <p className="subtitle-product mt-4 ml-2">Ingrese una descripcion de la categoria</p>
+                  <div style={{ display: "flex", justifyContent: "space-between" }}>
+                    <textarea
+                      name="description"
+                      cols="80"
+                      rows="5"
+                      onChange={(e) => onChangeMulti(e, 'category')}
+                      value={products.category.description}
+                      placeholder="Ingrese una descripcion"
+                      className="textarea-product"
+                      style={{ width: "100%"}}
+                    ></textarea>
+                  </div>
+                </div>
+              </>
+              )}
+              <div className="third flex-inputs">
+              <p className="subtitle-product mt-4 ml-2">Ingrese la marca</p>
+              <select className="select-product" name="id" onChange={(e) => onChangeMulti(e, 'brand')} value={products.brand.id}>
+                <option value="option1">Seleccione la marca</option>
+                {brand.map(({id, name}, index) => (
+                  <option value={id}>{name}</option>
+                ))}
+                <option value="">Otros</option>
+              </select>
+              </div>
+              {products.brand.id === "" && (
+              <>
+                <div className="first flex-inputs">
+                  <p className="subtitle-product mt-4 ml-2">Ingrese el nombre de la marca</p>
+                  <input
+                    className="input"
+                    name="name"
+                    type="text"
+                    value={products.brand.name}
+                    placeholder="Ingrese nombre del producto"
+                    onChange={(e) => onChangeMulti(e, 'brand')}
+                  />
+                  {errorsInputs.brand.name && <span className="text-validate">*Campo requrido</span>}
+                </div>
+
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                <p className="subtitle-product mt-4 ml-2">Ingrese una descripcion de la marca</p>
+                  <div style={{ display: "flex", justifyContent: "space-between" }}>
+                    <textarea
+                      name="description"
+                      cols="80"
+                      rows="5"
+                      onChange={(e) => onChangeMulti(e, 'brand')}
+                      value={products.brand.description}
+                      placeholder="Ingrese una descripcion"
+                      className="textarea-product"
+                      style={{ width: "100%"}}
+                    ></textarea>
+                  </div>
+                </div>
+              </>
+            )}
             </div>
             <div style={{ display: "flex", flexDirection: "column" }}>
-            <p className="subtitle-product mt-4 ml-2">Ingrese una descripcion</p>
+            <p className="subtitle-product mt-4 ml-2">Ingrese una descripcion del producto</p>
               <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <textarea
                   name="description"
-                  cols="30"
-                  rows="10"
+                  cols="80"
+                  rows="5"
                   onChange={(e) => onChange(e)}
                   value={products.description}
                   placeholder="Ingrese una descripcion"
@@ -204,6 +319,8 @@ function CreateProduct() {
                 ></textarea>
               </div>
             </div>
+            
+            
           </Col>
           <Col lg={12} className="content-product content-body-home mt-5">
               <Button className="button-purple-home" onClick={(e) => (onSubmit(e))}>

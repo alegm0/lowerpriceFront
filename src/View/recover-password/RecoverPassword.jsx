@@ -1,141 +1,213 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import { useHistory } from "react-router";
 import Button from "@restart/ui/esm/Button";
 import { Card, Col, Container, Row } from "react-bootstrap";
-import recoverImg from "../../assets/img/Imagen4.svg";
-import logo from "../../assets/img/Imagen3.svg";
-import email from "../../assets/img/email.png";
+import emailu from "../../assets/img/email.png";
+import { urlRequest } from "../../urlRequest";
 import loginImg from "../../assets/img/passwordImage.png";
+import axios from "axios";
+import Swal from "sweetalert2";
+import passwordu from "../../assets/img/forgot.png";
+import repeat from "../../assets/img/repeat.png";
+import { useLocation } from "react-router-dom";
 
 function RecoverPassword() {
   const history = useHistory();
-  const { search } = window.location;
-  const validCode = search === "?valid-code";
-  const saveInfo = search === "?save-new-password";
+  const { search }  = useLocation();
+  const [step, setStep] = useState(1);
+  const [error, setError] = useState('');
+  const [email, setEmail] = useState('');
 
-  const [codeVerification, setCodeVerification] = useState("");
+  useEffect(() => {
+    if (search) {
+      const [,token] = search.split('token=');
+      setStep(2);
+      setSavePassword({...savePassword, token});
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [search]);
+  //Step == 2
+  const validateInputs = {
+    password: '',
+    passwordRepeat: ''
+  }
 
-  const handleChange = (e) => setCodeVerification(e.target.value);
+  const [errorsInputs, setErrorsInputs] = useState({...validateInputs});
+  const [savePassword, setSavePassword] = useState({
+    password: '',
+    passwordRepeat: '',
+    token: ''
+  });
 
-  const actionButton = () => {
-    if (validCode) return history.push("/recover-password?save-new-password");
+  const onChange = (e) => {
+    setEmail(e.target.value);
+  }
 
-    return (
-      codeVerification === "code34" &&
-      history.push("/recover-password?valid-code")
-    );
-  };
+  const validate = () => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (error === '') {
+      setError('*Campo es obligatorio');
+    } else if (!emailRegex.test(email)) {
+      setError('*Correo no valido');
+    }else {
+      setError('');
+    }
+    return Object.values(error).some( x => x);
+  }
 
-  const validateText = () => {
-    if (validCode) return "Ingresa la nueva contraseña que deseas establecer.";
+  const onSubmit = () => {
+    if (!validate()) {
+      axios.get(`${urlRequest}/resetPassword/${email}`)
+      .then(function (response) {
+        if (response.status === 200) {
+          Swal.fire({
+            title: '¡Envio exitoso!',
+            text: 'Se ha enviado un correo a tu email, por favor verifica',
+            icon: 'success',
+            confirmButtonText: "Continuar", 
+            confirmButtonColor: 'rgb(157 160 223)',
+          }).then(resultado => {
+              history.push('/');
+          });
+        } else {
+          Swal.fire({
+            title: '¡Error!',
+            text: 'Se ha generado un error al enviar el correo',
+            icon: 'error',
+            confirmButtonText: "Continuar", 
+            confirmButtonColor: 'rgb(157 160 223)',
+          });
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    }
+  }
+  
+  const onChangeSave = (e) => {
+    setSavePassword({...savePassword, [e.target.name]: e.target.value});
+  }
 
-    if (search)
-      return "Ingresa el codigo de verificacion que enviamos a tu correo electronico para cambiar tu contraseña.";
+  const validateSave = () => {
+    const contrasenaRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,}$/;
+    const errors = {...validateInputs};
 
-    return "Ingresa tu correo electrónico para buscar tu cuenta.";
-  };
+    Object.keys(errors).forEach((e) => {
+      errors[e] = !savePassword[e] ? '*Campo es obligatorio' : '';
+    });
+    errors['password'] = !contrasenaRegex.test(savePassword.password) ? '*La contraseña no es valida' : '';
+    errors['passwordRepeat'] = savePassword.password !== savePassword.passwordRepeat ? '*La contraseña coincide' : '';
+    setErrorsInputs(errors);
+    return Object.values(errors).some( x => x);
+  }
 
-  const validateButtonText = () => {
-    if (validCode) return "GUARDAR";
-    if (search) return "VERIFICAR";
-    return "Enviar";
-  };
-
+  const onSubmitSave = () => {
+    if (!validateSave()) {
+      axios.post(`${urlRequest}/savePassword`, savePassword)
+      .then(function (response) {
+        if (response.status === 201) {
+          Swal.fire({
+            title: '¡Su contraseña se ha actualizado exitosamente!',
+            text: 'Ya se actualizo la contraseña, vuelve a intentar iniciar sesion',
+            icon: 'success',
+            confirmButtonText: "Continuar", 
+            confirmButtonColor: 'rgb(157 160 223)',
+          }).then(resultado => {
+              history.push('/');
+          });
+        } else {
+          Swal.fire({
+            title: '¡Error!',
+            text: 'Se ha generado un error al actualizar tu contraseña',
+            icon: 'error',
+            confirmButtonText: "Continuar", 
+            confirmButtonColor: 'rgb(157 160 223)',
+          });
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    }
+  }
 
   return (
     <Container className="full-width">
       <Row className="h-100-vh align-items-center">
-        <Col className="background-red col-height">
+        <Col className="background-red">
           <img src={loginImg} alt="Imagen de recuperar contraseña" className="image-size" />
         </Col>
         <Col className="col-height">
-
         <Card className="panel-white">
         <Card.Body>
         <Card.Title className="panel-white-title">Recupera tu cuenta!</Card.Title>
-      
-
-            <p className="recover-password__text">{validateText()}</p>
-
-            {validCode && (
-              <>
-                <div className="flex-inputs">
-                  <label className="label-input">Contraseña nueva:</label>
+          {step === 1 && (
+            <>
+            <p className="recover-password__text">Ingresa tu correo electrónico para buscar tu cuenta.</p>
+              <div className="flex-inputs last-input-marginRegister">
+                  <img src={emailu} alt="Imagen ingreso" className="input-icon" />
                   <input
                     className="input"
                     type="text"
-                    placeholder="Ingrese su contraseña nueva"
+                    placeholder="Ingrese su correo electronico"
+                    name="email"
+                    value={email}
+                    onChange={(e) => onChange(e)}
                   />
-                </div>
-
-                <div className="flex-inputs last-input-margin">
-                  <label className="label-input">Verificar contraseña:</label>
+                  {error && <span className="text-validate">{error}</span>}
+              </div>
+              <Container>
+                <Row>
+                  <Col lg={5} className="mt-4 mr-2 ml-4">
+                    <Button type="submit" variant="CANCELAR" style={{width:"165px"}} className="button-red1 last-input-marginRegister" onClick={() => history.push('/')}>Cancelar</Button>
+                  </Col>
+                  <Col lg={5}  className="mt-4 ml-2">
+                    <Button type="submit" variant="ENVIAR" style={{width:"165px"}} className="button-red1 last-input-marginRegister" onClick={onSubmit}>Enviar</Button>
+                  </Col>
+                </Row>
+              </Container>
+            </>
+          )}
+          {step === 2 && (
+            <>
+            <p className="recover-password__text">Ingresa tu contraseña nueva</p>
+            <div className="flex-inputs last-input-marginRegister">
+                  <img src={passwordu} alt="Imagen ingreso" className="input-icon" />
                   <input
                     className="input"
-                    type="text"
-                    placeholder="Ingrse de nuevo la contraseña nueva"
+                    type="password"
+                    placeholder="Ingrese su contraseña"
+                    name="password"
+                    value={savePassword.password}
+                    onChange={(e) => onChangeSave(e)}
                   />
+                  {errorsInputs.password && <span className="text-validate">{errorsInputs.password}</span>}
                 </div>
-              </>
-            )}
 
-            {!validCode && !saveInfo && (
-              <div className="flex-inputs">
-                <img src={email} alt="Imagen ingreso" className="input-icon" />
-                <input
-                  className="input"
-                  type="text"
-                  placeholder={`Ingrese su correo`}
-                  onChange={(e) => {
-                    handleChange(e);
-                  }}
-                  maxLength={6}
-                />
-              </div>
-            )}
-
-            {/* <Button  className="button-red last-input-margin" href="/login">Cancelar</Button> */}
-            <Button className="botonp" href='/'>Cancelar</Button>
-
-            {saveInfo && (
-              <div className="box-green">
-                <p>
-                  Tu contraseña se ha modificado correctamente
-
-                  <a href="/login" className="link-green">
-                    haga click aquí para iniciar sesión
-                  </a>
-                  .
-                </p>
-              </div>
-            )}
-
-            {(!search || validCode) && !saveInfo && (
-              <Button
-                className="botonp recover-password__button-margin"
-                onClick={() => {
-                  actionButton();
-                }}
-              >
-                {validateButtonText()}
-              </Button>
-            )}
-
-            {!search && (
-              <p className="login__without-account">
-                ¿Quieres volver a &nbsp;
-                <a className="login__without-account--link" href="/">
-                  iniciar sesión
-                </a>
-                ?
-              </p>
-            )}
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
-    </Container>
-  );
+                <div className="flex-inputs last-input-marginRegister">
+                  <img src={repeat} alt="Imagen ingreso" className="input-icon" />
+                  <input
+                    className="input"
+                    type="password"
+                    placeholder="Ingrese nuevamente su contraseña"
+                    name="passwordRepeat"
+                    value={savePassword.passwordRepeat}
+                    onChange={(e) => onChangeSave(e)}
+                  />
+                  {errorsInputs.passwordRepeat && <span className="text-validate">{errorsInputs.passwordRepeat}</span>}
+                </div>
+                <div className="mt-4">
+                  <Button type="submit" variant="ENVIAR" style={{width:"165px"}} className="button-red1 last-input-marginRegister" onClick={onSubmitSave}>Enviar</Button> 
+                </div>
+            </>
+          )}
+          </Card.Body>
+        </Card>
+      </Col>
+    </Row>
+  </Container>
+);
 }
 
 export default RecoverPassword;

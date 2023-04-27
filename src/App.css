@@ -85,12 +85,13 @@ body {
 
 .panel-white {
   width: 556px;
-  height: 636px;
+  /* height: 636px; */
   margin: auto;
   font-family: 'Inter', sans-serif;
 }
 
 .panel-white-title {
+  padding: 20px 0px;
   font-size: 40px;
   font-weight: 700;
   line-height: 75.27px;

@@ -39,7 +39,7 @@ export const Routes = [
         title: 'Perfil',
         icon: Profile,
         alt: 'icon-profile',
-        url: 'product',
+        url: '/profile-clients',
     },
     {
         title: 'Mapa',
