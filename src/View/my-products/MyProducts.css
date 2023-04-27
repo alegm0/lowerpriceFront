@@ -1,5 +1,5 @@
 :root {
-    --input-background: #D9D9D9;
+    --input-background: #ffffff;
     --background-button-purple: #9DA0DF;
 }
 
@@ -9,12 +9,54 @@
 }
 
 .title-marks-my-products {
-    font-size: 30px;
+    font-size: 45px;
     font-weight: 700;
-    padding: 0;
+    padding-top: 60px;
+    padding-left: 100px;
     margin: 0;
-    font-family: 'Inter',serif;
+    font-family: 'Inter', serif;
     line-height: 36px;
+    color: #9DA0DF;
+    text-align: initial;
+
+
+
+
+}
+
+.paragraph {
+    font-family: 'Inter', serif;
+    color: white;
+    font-size: 25px;
+    Line-height: 30.26px;
+    padding-left: 100px;
+    text-align: initial;
+    padding-top: 50px;
+    font-weight: 600;
+
+}
+
+.borderRadiusCardHeaderMenu {
+    border-top-left-radius: 20px !important;
+    border-top-right-radius: 20px !important;
+    background: white;
+    border: none !important;
+    padding: 0px;
+}
+
+.styleTitleCardMenu {
+    font-size: 25px;
+    font-family: "OpenSansCondensed-bold";
+    text-align: center;
+    color: #9DA0DF;
+}
+
+.styleSubTitleCardMenu {
+    text-align: initial;
+    font-family: OpenSans-light;
+    font-size: 15px;
+    text-align: center;
+
 }
 
 .card-my-product {
@@ -30,12 +72,12 @@
     justify-content: center;
 }
 
-.card-header-my-product > img {
+.card-header-my-product>img {
     width: 60%;
     height: 132px;
 }
 
-.card-header-my-product > span {
+.card-header-my-product>span {
     margin-bottom: 39px !important;
     padding-top: 13px;
     width: 59px;
@@ -47,17 +89,21 @@
     border: none !important;
     box-shadow: none !important;
     outline: none;
-    
+
     background: var(--input-background);
     appearance: auto;
-    
+
 }
-.card-header-my-product > span::-webkit-inner-spin-button {
+
+.card-header-my-product>span::-webkit-inner-spin-button {
     padding-bottom: 10px;
 }
-.card-header-my-product > span::-webkit-inner-spin-button, .card-header-my-product > input[type=number]::-webkit-outer-spin-button {
-   background: var(--background-button-purple);
+
+.card-header-my-product>span::-webkit-inner-spin-button,
+.card-header-my-product>input[type=number]::-webkit-outer-spin-button {
+    background: var(--background-button-purple);
 }
+
 .card-footer-my-product {
     display: flex;
     align-items: center;
@@ -82,7 +128,8 @@
     border: none;
 }
 
-.button-more-my-product:hover, .button-more-my-product:focus {
+.button-more-my-product:hover,
+.button-more-my-product:focus {
     box-shadow: none;
     background: var(--color-font-button-purple);
     color: var(--background-button-purple);
@@ -102,6 +149,113 @@
     width: 34px;
 }
 
+.Undo-Button {
+    display: block;
+    background: none;
+    border: none;
+    padding-top: 50px;
+    padding-left: 30px;
+    width: 500px;
+
+
+    
+}
+
+.Undo-Button img {
+    display: block;
+    margin-right: 10px;
+    padding-top: 20px;
+    padding-left: 100px;
+}
+
+.top-Productos {
+    display: flex;
+
+
+}
+
+.title-Products {
+    font-size: 50px;
+    font-weight: 700;
+    padding-top: 70px;
+    padding-left: 15px;
+    margin: 0;
+    font-family: 'Inter', serif;
+    line-height: 36px;
+    color: #9DA0DF;
+    text-align: initial;
+
+}
+
+.description-Products {
+    padding-top: 20px;
+    display: flex;
+    margin-left: auto;
+
+
+}
+
+.paragraf-products {
+    color: #ffffff;
+    text-align: left;
+    width: 900px;
+    height: 117px;
+    left: 452px;
+    top: 118px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 25px;
+    line-height: 30px;
+
+
+}
+.second-Title {
+    
+    font-size: 15px;
+    color: #ffffff;
+    text-align: left;
+    padding-top: 0px;
+    
+
+}
+
+.buttoncrear-products {
+
+
+    margin: auto;
+    width: 8rem;
+    border-radius: 0rem;
+    border: 2px solid #9DA0DF;
+    font-weight: bold;
+    transition: 350ms;
+    align-content: center;
+
+    background: #9DA0DF;
+    width: 200px;
+    height: 50px;
+
+
+    margin-right: 0;
+
+}
+
+.inputSelectProducts{
+    font-size: 16px;
+    padding: 0.5rem 0.5rem 0.5rem 0.8rem;
+    border: 1px solid var(--azul-oscuro);
+    background-color: var(--blanco);
+    border-radius: 30px;
+    outline: none;
+    width: 540px;
+    height: 50px;
+    display:grid;
+    color: var(--azul-oscuro);
+}
+
+
+
 @media screen and (min-width:3.125rem) and (max-width:47.938rem) {
     .banner-my-product {
         height: 160px;
@@ -110,6 +264,8 @@
     .title-marks-my-products {
         font-size: 25px;
         line-height: 26px;
+        color: #9DA0DF;
+        position: absolute;
     }
 
     .card-my-product {
@@ -120,6 +276,7 @@
     .card-info-my-product {
         font-size: 20px;
     }
+
     .title-marks-my-products {
         width: 83%;
     }
