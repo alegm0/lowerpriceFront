@@ -69,7 +69,7 @@ function CheckComments() {
                     <Col lg={1}>
                         <img onClick={() => history.goBack()} src={iconoAtras} alt="Icono de atras" style={{ width: "3rem", marginTop: "3rem", marginLeft: "-3rem" }} />
                     </Col>
-                    <Col lg={2}>
+                    <Col lg={11}>
                         <h1 className="title-Products">Comentarios</h1>
                     </Col>
                 </Row>
@@ -79,8 +79,11 @@ function CheckComments() {
                     </Col>
                 </Row>
                 <Row>
-                    <Col >
-                        <h1 className='subtitle'>Informacion del producto__________________________________________________________________</h1>
+                    <Col lg={5}>
+                        <h1 className='subtitle'>Informacion del producto</h1>
+                    </Col>
+                    <Col lg={7}>
+                        <hr style={{ borderColor: "white", marginTop: "32px" }}></hr>
                     </Col>
                 </Row>
 
@@ -152,8 +155,11 @@ function CheckComments() {
 
 
                 <Row>
-                    <Col >
-                        <h1 className='subtitle'>Comentarios_________________________________________________________________________</h1>
+                    <Col lg={2}>
+                        <h1 className='subtitle'>Comentarios</h1>
+                    </Col>
+                    <Col lg={10}>
+                        <hr style={{ borderColor: "white", marginTop: "32px" }}></hr>
                     </Col>
                 </Row>
                 <Row>
@@ -193,21 +199,21 @@ function CheckComments() {
                                 }}
                             >
 
-                                <Card style={{ width: "53rem", borderRadius: "10px" }}>
-                                    <Card.Header className="borderRadiusCardHeaderMenu" style={{marginBottom:"0px"}} >
+                                <Card style={{ width: "53rem", borderRadius: "0px" }}>
+                                    <Card.Header className="borderRadiusCardHeaderMenu" style={{ marginBottom: "0px" }} >
                                         <Card.Title className="styleTitleCardComments" >
                                             {event.title}
                                         </Card.Title>
 
                                     </Card.Header>
-                                    <Card.Body style={{ paddingTop: "0px" , paddingBottom: "15px"}}>
+                                    <Card.Body style={{ paddingTop: "0px", paddingBottom: "15px" }}>
 
                                         <Card.Text className="styleSubTitleCardComments">
                                             {event.fecha}
                                         </Card.Text>
 
                                     </Card.Body>
-                                    <Card.Body style={{ paddingTop: "0px" , paddingBottom: "1px"}}>
+                                    <Card.Body style={{ paddingTop: "0px", paddingBottom: "1px" }}>
 
                                         <Card.Text className="styleSubTitleCardComments">
                                             {event.name}
@@ -215,8 +221,8 @@ function CheckComments() {
 
                                     </Card.Body>
                                     <Card.Body style={{ paddingTop: "20px" }}>
-                                        
-                                    <Card.Text className="styleSubTitleCardComments">
+
+                                        <Card.Text className="styleSubTitleCardComments">
                                             {event.text}
                                         </Card.Text>
 

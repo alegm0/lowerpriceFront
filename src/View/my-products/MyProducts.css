@@ -216,11 +216,8 @@
 .paragraf-products {
     color: #ffffff;
     text-align: left;
-    width: 900px;
-    height: 117px;
     left: 452px;
     top: 118px;
-
     font-family: 'Inter';
     font-style: normal;
     font-weight: 500;
@@ -278,6 +275,15 @@
     margin-right: 0;
     margin-top: 90px;
     margin-left: 35%;
+    text-align: center;
+
+
+
+    border: none !important;
+    width: 254px;
+    height: 62px;
+    padding-top: 15px;
+
 
 }
 
@@ -308,8 +314,8 @@ color: #ffffff;
     align-content: center;
 
     background: #9DA0DF;
-    width: 200px;
-    height: 50px;
+    width: 300px;
+    height: 80px;
 
 
     margin-right: 0;
@@ -339,6 +345,8 @@ color: #ffffff;
     height: 50px;
     flex: 1;
     text-align: left;
+    width: 100% !important;
+    border-radius: 15px !important;
     
     
   }

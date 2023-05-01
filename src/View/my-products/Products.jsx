@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import back from "../../assets/img/back.png";
+import React from 'react';
 import setImg from "../../assets/img/setProduct.svg";
 import seeImg from "../../assets/img/seeProduct.svg";
 import deleteImg from "../../assets/img/deleteProduct.svg";
@@ -7,6 +6,7 @@ import referencia from "../../assets/img/referencia.png";
 import { useHistory } from 'react-router';
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import iconoAtras from '../../assets/img/icono-atras.svg';
+
 function Products() {
     const history = useHistory();
 
@@ -18,8 +18,6 @@ function Products() {
             url1: "/my-products",
             url2: "/my-products",
             url3: "/my-products",
-
-
 
         },
         {
@@ -69,30 +67,28 @@ function Products() {
 
     return (
         <div className="body-view">
-            <div className='top-Productos'>
-                {/* <Button className='Undo-Button' href='/my-products'
-             
-                >
-                    <img src={back} />
-                </Button> */}
-
-
-                <img onClick={() => history.goBack()} src={iconoAtras} alt="Icono de atras"  className='Undo-Button' style={{width:"100px"}}/>
-                <h1 className="title-Products">Productos</h1>
-            </div>
-            <Container style={{
-
-                marginLeft: "100px",
-                marginRight: "0px"
-            }}>
-                <Row>
-                    <Col className='description-Products'>
+            <Container>
+            <Row>
+                <Col lg={1} md={2} sm={2}>
+                    <img onClick={() => history.goBack()} src={iconoAtras} alt="Icono de atras"  className='Undo-Button' style={{width:"80px"}}/>
+                </Col>
+                <Col lg={11} md={10} sm={10} className="mt-4">
+                    <h1 className="title-Products">Productos</h1>
+                </Col>
+            </Row>
+            </Container>
+            <div className='ml-5'>
+            <Container>
+                <Row className="mt-4">
+                    <Col lg={8} md={12} sm={12}>
                         <p className="paragraf-products">Si desea hacer una búsqueda más efectiva de sus productos, le permitirá hacer seleccionando a una categoría o una marca, o las dos en su defecto con el fin de tener una mejor búsqueda</p>
-                        <Button className='buttoncrear-products' href='/create-products'>Crear producto</Button>
+                    </Col>
+                    <Col lg={4} md={12} sm={12}>
+                    <Button className='buttoncrear-products' href='/create-products'>Crear producto</Button>
                     </Col>
                 </Row>
                 <Row>
-                    <Col>
+                    <Col lg={6}>
                         <h1 className="second-Title">Seleccione una categoria</h1>
                         <select className="inputSelectProducts">
                             <option value="option1">Seleccione la categoria</option>
@@ -105,7 +101,7 @@ function Products() {
                             {/* onChange={handleInputChange} */}
                         </select>
                     </Col>
-                    <Col>
+                    <Col lg={6}>
                         <h1 className="second-Title">Seleccione una marca</h1>
                         <select className="inputSelectProducts">
                             <option value="option1">Seleccione la marca</option>
@@ -121,7 +117,6 @@ function Products() {
                     </Col>
                 </Row>
                 <Row>
-
                     {informationCards.map((event, index) => {
                         return (
                             // <Col lg={4} className="mt-4 d-flex">
@@ -173,12 +168,9 @@ function Products() {
                             </Col>
                         );
                     })}
-
-
                 </Row>
-
-
             </Container>
+            </div>
 
         </div>
 

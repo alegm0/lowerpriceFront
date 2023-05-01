@@ -85,12 +85,13 @@ body {
 
 .panel-white {
   width: 556px;
-  height: 636px;
+  /* height: 636px; */
   margin: auto;
   font-family: 'Inter', sans-serif;
 }
 
 .panel-white-title {
+  padding: 20px 0px;
   font-size: 40px;
   font-weight: 700;
   line-height: 75.27px;
@@ -353,9 +354,10 @@ a:hover {
 }
 
 .textarea-product::placeholder {
-  color: var(--second-red-color);
+  
   margin-top: 2%;
 }
+
 
 .button-red {
   background-color: var(--lila);
@@ -573,7 +575,8 @@ a:hover {
   padding: 0.5rem 0.5rem 0.5rem 0.8rem;
   border: 1px solid var(--azul-oscuro);
   background-color: var(--blanco);
-  border-radius: 30px;
+  border-radius: 15px !important;
+  margin-left: 15PX;
 }
 
 .subtitle-product {

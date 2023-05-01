@@ -1,0 +1,39 @@
+.title {
+    text-align: initial;
+    color: #9DA0DF;
+    font-weight: bold;
+    font-size: 40px;
+    margin: 20px 0;
+}
+
+.subtitle {
+    text-align: initial;
+    color: #ffff;
+    font-weight: 600;
+    font-size: 25px;
+}
+
+.subdivision{
+    text-align: initial;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+.title-inputs {
+    text-align: initial;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.inputs-class {
+    border-radius: 15px !important;
+    width: 100% !important;
+}
+
+.textCard {
+    font-weight: bold;
+    font-size: 29px;
+}

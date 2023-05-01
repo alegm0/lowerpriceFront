@@ -26,6 +26,8 @@ import State from "./context/state";
 
 /* STYLES */
 import "./App.css";
+import Profile from "./View/profile/Profile";
+import ProfileCompany from "./View/profile/ProfileCompany";
 
 function App() {
   const { pathname } = window.location;
@@ -39,7 +41,7 @@ function App() {
             pathname !== "/register" && <NavbarVertical />}
           <Switch>
             <Route exact path="/" component={Login} />
-            <Route exact path="/recover-password" component={RecoverPassword} />
+            <Route exact path="/recover-password/" component={RecoverPassword} />
             <Route exact path="/register" component={Register} />
             <Route path="/home" component={Home} />
             <PrivateRoute
@@ -113,6 +115,18 @@ function App() {
               exact
               path="/checkComments"
               component={CheckComments}
+            />
+            <PrivateRoute
+              isAuthenticated={true}
+              exact
+              path="/profile-company"
+              component={ProfileCompany}
+            />
+            <PrivateRoute
+              isAuthenticated={true}
+              exact
+              path="/profile-clients"
+              component={Profile}
             />
           </Switch>
         </Router>

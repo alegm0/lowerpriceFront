@@ -22,6 +22,7 @@ function SetDiscounts() {
 
 
     const [selectedDate, setSelectedDate] = useState(new Date());
+    const [selectedDateFinal, setSelectedDateFinal] = useState(new Date());
 
     const handleDateChange = (date) => {
         setSelectedDate(date);
@@ -58,9 +59,9 @@ function SetDiscounts() {
                         <h1 className="second-Title">Fecha final(*)</h1>
 
                         <DatePicker
+                            selected={selectedDateFinal}
                             className="inputDiscounts"
-                            value={selectedDate}
-                            onChange={handleDateChange}
+                            onChange={date => setSelectedDateFinal(date)}
 
                         />
 
@@ -69,9 +70,9 @@ function SetDiscounts() {
                     <Col>
                         <h1 className="second-Title">Fecha inicial(*)</h1>
                         <DatePicker
+                            selected={selectedDate}
                             className="inputDiscounts"
-                            value={selectedDate}
-                            onChange={handleDateChange}
+                            onChange={date => setSelectedDate(date)}
 
                         />
                         <h1 className="second-Title">Condiciones</h1>
@@ -93,6 +94,8 @@ function SetDiscounts() {
                 </Row>
                 <Row>
                 <Button className='buttonSave' href='/create-products'>Guardar</Button>
+
+          
                 </Row>
 
 
