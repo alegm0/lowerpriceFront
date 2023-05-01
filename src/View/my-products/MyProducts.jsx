@@ -27,13 +27,13 @@ function MyProducts() {
       img: DiscountImg,
       title: "Descuentos",
       text: "Si deseas conocer los diferentes descuentos que tiene algunos productos",
-      url: "/",
+      url: "/discounts",
     },
     {
       img: CommentsImg,
       title: "Comentarios",
       text: "Si deseas conocer o agregar un comentario ",
-      url: "/",
+      url: "/comments",
     },
     {
       img: ProductosImg,

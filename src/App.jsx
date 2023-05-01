@@ -14,7 +14,11 @@ import CreateBranding from "./View/create-branding/CreateBranding";
 import CreateProduct from "./View/create-product/CreateProduct";
 import Wishlist from "./View/wishlist/Wishlist";
 import MyProducts from "./View/my-products/MyProducts";
-import Products from "./View/my-products/Products"
+import Products from "./View/my-products/Products";
+import Discounts from "./View/my-products/Discounts";
+import SetDiscounts from "./View/my-products/SetDiscounts";
+import Comments from "./View/my-products/Comments";
+import CheckComments from "./View/my-products/CheckComments";
 // import CreateEditProduct from "./View/create-edit-product/CreateEditProduct";
 
 /* CONTEXT */
@@ -30,9 +34,9 @@ function App() {
     <div className="App">
       <State>
         <Router>
-        {pathname !== "/" &&
-          pathname !== "/recover-password" &&
-          pathname !== "/register" && <NavbarVertical />}
+          {pathname !== "/" &&
+            pathname !== "/recover-password" &&
+            pathname !== "/register" && <NavbarVertical />}
           <Switch>
             <Route exact path="/" component={Login} />
             <Route exact path="/recover-password" component={RecoverPassword} />
@@ -85,6 +89,30 @@ function App() {
               exact
               path="/products"
               component={Products}
+            />
+            <PrivateRoute
+              isAuthenticated={true}
+              exact
+              path="/discounts"
+              component={Discounts}
+            />
+            <PrivateRoute
+              isAuthenticated={true}
+              exact
+              path="/setDiscounts"
+              component={SetDiscounts}
+            />
+            <PrivateRoute
+              isAuthenticated={true}
+              exact
+              path="/comments"
+              component={Comments}
+            />
+            <PrivateRoute
+              isAuthenticated={true}
+              exact
+              path="/checkComments"
+              component={CheckComments}
             />
           </Switch>
         </Router>
