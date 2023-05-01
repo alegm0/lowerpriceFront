@@ -14,7 +14,8 @@ import CreateBranding from "./View/create-branding/CreateBranding";
 import CreateProduct from "./View/create-product/CreateProduct";
 import Wishlist from "./View/wishlist/Wishlist";
 import MyProducts from "./View/my-products/MyProducts";
-import CreateEditProduct from "./View/create-edit-product/CreateEditProduct";
+import Products from "./View/my-products/Products"
+// import CreateEditProduct from "./View/create-edit-product/CreateEditProduct";
 
 /* CONTEXT */
 import State from "./context/state";
@@ -80,6 +81,12 @@ function App() {
               exact
               path="/wishlist"
               component={Wishlist}
+            />
+            <PrivateRoute
+              isAuthenticated={true}
+              exact
+              path="/products"
+              component={Products}
             />
             <PrivateRoute
               isAuthenticated={true}
