@@ -255,6 +255,13 @@
     margin-right: 0;
 
 }
+.calificacion{
+    color: #9DA0DF;
+    font-size: 50px;
+    padding-top: 10px;
+    padding-bottom: 15px;
+
+}
 
 .buttonSave {
 

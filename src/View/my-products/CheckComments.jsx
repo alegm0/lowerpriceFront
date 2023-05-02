@@ -16,8 +16,8 @@ import 'react-datepicker/dist/react-datepicker.css'
 import { FaStar } from "react-icons/fa"
 
 const colors = {
-    orange: "#000000",
-    grey: "#FFFFFF"
+   negro: "#000000",
+   blanco: "#FFFFFF"
 
 };
 function CheckComments() {
@@ -41,7 +41,7 @@ function CheckComments() {
         {
 
             title: "Excelente",
-            img: DiscountImg,
+            rate: "5",
             fecha: "20/02/2022",
             name: "Pepito Perez",
             text: "¡Aprovecha nuestra promoción de 2x1 en shampoo! Compra un shampoo y obtén otro gratis. Solo tienes que agregar dos unidades de shampoo a tu carrito y el descuento se aplicará automáticamente en el checkout. ¡No te pierdas esta oportunidad de ahorrar en tu cuidado capilar!",
@@ -51,7 +51,7 @@ function CheckComments() {
         {
 
             title: "Pesimo",
-            img: DiscountImg,
+            rate: "1",
             fecha: "20/02/2022",
             name: "Pepito Perez",
             text: "¡Aprovecha nuestra promoción de 2x1 en shampoo! Compra un shampoo y obtén otro gratis. Solo tienes que agregar dos unidades de shampoo a tu carrito y el descuento se aplicará automáticamente en el checkout. ¡No te pierdas esta oportunidad de ahorrar en tu cuidado capilar!",
@@ -163,19 +163,20 @@ function CheckComments() {
                     </Col>
                 </Row>
                 <Row>
-                    <Col >
-                        <h1>4.7</h1>
+                    <Col lg={2}>
+                        <h1 className="calificacion">3.7</h1>
                     </Col>
-                    <Col style={styles.stars}>
+                    <Col style={styles.stars} lg={10}>
                         {stars.map((_, index) => {
                             return (
                                 <FaStar
                                     key={index}
-                                    size={24}
+                                    size={70}
                                     onClick={() => handleClick(index + 1)}
                                     onMouseOver={() => handleMouseOver(index + 1)}
                                     onMouseLeave={handleMouseLeave}
-                                    color={(hoverValue || currentValue) > index ? colors.orange : colors.grey}
+                                    color={(4 || 5) > index ? colors.negro : colors.blanco}
+                                    // color={(hoverValue || currentValue) > index ? colors.negro : colors.blanco}
                                     style={{
                                         marginRight: 10,
                                         cursor: "pointer"
@@ -199,11 +200,39 @@ function CheckComments() {
                                 }}
                             >
 
-                                <Card style={{ width: "53rem", borderRadius: "0px" }}>
-                                    <Card.Header className="borderRadiusCardHeaderMenu" style={{ marginBottom: "0px" }} >
-                                        <Card.Title className="styleTitleCardComments" >
-                                            {event.title}
-                                        </Card.Title>
+                                <Card style={{ width: "56rem", borderRadius: "0px" }}>
+                                    <Card.Header className="borderRadiusCardHeaderMenu" style={{ marginBottom: "0px", display: "flex" }} >
+                                      
+                                            
+                                            <Card.Title className="styleTitleCardComments" >
+                                              
+                                                {event.title}
+                                                
+                                            </Card.Title>
+                                            
+
+                                            <Card.ImgOverlay style={{ paddingTop:"0px", paddingLeft:"850px", alignItems: "end" }}>
+
+                                                    {stars.map((_, index) => {
+                                                        return (
+                                                            <FaStar
+                                                                key={index}
+                                                                size={30}
+                                                                onClick={() => handleClick(index + 1)}
+                                                                onMouseOver={() => handleMouseOver(index + 1)}
+                                                                onMouseLeave={handleMouseLeave}
+                                                                color={(event.rate || 5) > index ? colors.negro : colors.blanco}
+                                                                // color={(hoverValue || currentValue) > index ? colors.negro : colors.blanco}
+                                                                style={{
+                                                                    marginRight: 10,
+                                                                    cursor: "pointer"
+                                                                }} />
+                                                        )
+                                                    })}
+                                            
+
+                                            </Card.ImgOverlay>
+                                       
 
                                     </Card.Header>
                                     <Card.Body style={{ paddingTop: "0px", paddingBottom: "15px" }}>
@@ -236,7 +265,7 @@ function CheckComments() {
 
 
             </Container>
-        </div>
+        </div >
 
     )
 }

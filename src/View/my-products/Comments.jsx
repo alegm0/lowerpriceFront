@@ -119,7 +119,7 @@ function Comments() {
                 />
 
                 <Row>
-                    <Button className='buttonSave' href='/create-products'>Guardar</Button>
+                    <Button className='buttonSave' href='/CheckComments'>Guardar</Button>
                 </Row>
 
 

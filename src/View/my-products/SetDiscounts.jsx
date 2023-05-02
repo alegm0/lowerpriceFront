@@ -93,7 +93,7 @@ function SetDiscounts() {
                     </Col>
                 </Row>
                 <Row>
-                <Button className='buttonSave' href='/create-products'>Guardar</Button>
+                <Button className='buttonSave' href='/discounts'>Guardar</Button>
 
           
                 </Row>
