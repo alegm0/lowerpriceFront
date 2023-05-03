@@ -12,8 +12,55 @@ import deleteImg from "../../assets/img/deleteProduct.svg";
 import referencia from "../../assets/img/referencia.png";
 
 function Discounts() {
-    
+
     const history = useHistory();
+    const [fechaInicial, setFechaInicial] = useState([]);
+    const [fechaFinal, setFechaFinal] = useState([]);
+    const [valor, setValor] = useState();
+    const [desciption, setDescription] = useState([]);
+
+
+
+    // const [discounts, setDiscounts] = useState([]);
+    // useEffect(() => {
+    //     axios.get(`${urlRequest}/discount-promotions`)
+    //         .then(response => {
+    //             setDiscounts(response.data);
+    //         })
+    //         .catch(error => {
+    //             console.log(error);
+    //         });
+    // }, []);
+
+    const [discounts, setDiscounts] = useState([]);
+
+    useEffect(() => {
+
+
+
+        axios.get(`${urlRequest}/discount-promotions`)
+            .then(response => {
+                const data = response.data;
+                const newDiscounts = data.map(discount => ({
+                    title: `${discount.value}%`,
+                    url1: "/my-products",
+                    url2: "/my-products",
+                    fecha: `${discount.fechaInicial} - ${discount.fechaFinal}`,
+                    descripcion: discount.condiciones
+                }));
+                setDiscounts(newDiscounts);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+
+
+    }, []);
+
+
+
+
+
 
     const informationCards = [
         {
@@ -60,6 +107,50 @@ function Discounts() {
         },
     ];
 
+    const getFechaInicial = () => {
+        axios.get(`${urlRequest}/discount-promotions/`)
+            .then(function (response) {
+                console.log(response.data);
+                setFechaInicial(response.data);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    };
+    const getFechaFinal = () => {
+        axios.get(`${urlRequest}/discount-promotions/`)
+            .then(function (response) {
+                console.log(response.data);
+                setFechaFinal(response.data);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    };
+    const getValor = () => {
+        axios.get(`${urlRequest}/discount-promotions/`)
+            .then(function (response) {
+                console.log(response.data);
+                setValor(response.data);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    };
+
+    const getDescription = () => {
+        axios.get(`${urlRequest}/discount-promotions/`)
+            .then(function (response) {
+                console.log(response.data);
+                setDescription(response.data);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    };
+
+
+
 
 
 
@@ -84,7 +175,9 @@ function Discounts() {
 
                 <Row>
 
-                    {informationCards.map((event, index) => {
+                    {/* {informationCards.map((event, index) => { */}
+                    {discounts.map((discount, index) => {
+                    
                         return (
                             // <Col lg={4} className="mt-4 d-flex">
                             <Col lg={4} className="d-flex flex-column  align-items-center"
@@ -95,36 +188,37 @@ function Discounts() {
                                 }}
                             >
                                 <Card style={{ width: "18rem", borderRadius: "20px" }}>
-                                    <Card.Header className="borderRadiusCardHeaderMenu mb-0" 
-                                    style={{
+                                    <Card.Header className="borderRadiusCardHeaderMenu mb-0"
+                                        style={{
 
-                                        display: "flex"
+                                            display: "flex"
 
-                                    }}>
+                                        }}>
                                         <Card.Title
                                             variant="top"
                                             className="mt-4 mb-1 ml-20"
                                             style={{
-                                                marginRight:"120px",
-                                                marginLeft:"35px",
-                                                
+                                                marginRight: "120px",
+                                                marginLeft: "35px",
+
                                                 fontWeight: "700",
                                                 fontSize: "30px",
                                                 lineHeight: "36px",
                                                 display: "flex"
 
                                             }}
-                                        > {event.title} </Card.Title>
+                                        // > {event.title} </Card.Title>
+                                        > {discount.title} </Card.Title>
                                         <Card.Link
                                             className="ml-10 mt-3 mb-2"
-                                            href={event.url1}
+                                            href={"/my-products"}
                                             style={{ textAlign: "initial" }}
                                         >
                                             <img src={setImg} />
                                         </Card.Link>
                                         <Card.Link
-                                        className="ml-10 mt-3 mb-2"
-                                            href={event.url2}
+                                            className="ml-10 mt-3 mb-2"
+                                            href={"/my-products"}
                                             style={{ textAlign: "initial" }}
                                         >
                                             <img src={deleteImg} />
@@ -134,18 +228,19 @@ function Discounts() {
                                     </Card.Header>
                                     <Card.Body>
                                         <Card.Title className="styleTitleCardMenu mb-0"
-                                            style={{ textAlign: "center", fontSize: "16px", color: "#000000" ,
-                                            fontFamily: 'Inter'
+                                            style={{
+                                                textAlign: "center", fontSize: "16px", color: "#000000",
+                                                fontFamily: 'Inter'
                                             }}>
 
-                                            {event.fecha}
+                                            {discount.fecha}
                                         </Card.Title>
                                     </Card.Body>
                                     <Card.Body style={{ paddingTop: "0px" }}>
                                         <Card.Text
 
                                             style={{ textAlign: "center", fontSize: "10px" }}
-                                        > {event.descripcion}</Card.Text>
+                                        > {discount.descripcion}</Card.Text>
 
 
                                     </Card.Body>

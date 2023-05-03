@@ -84,9 +84,9 @@ function Comments() {
 
                         <h1 className="second-Title">Fecha inicial(*)</h1>
                         <DatePicker
+                            selected={selectedDate}
                             className="inputDiscounts"
-                            value={selectedDate}
-                            onChange={handleDateChange}
+                            onChange={date => setSelectedDate(date)}
 
                         />
 
@@ -119,7 +119,7 @@ function Comments() {
                 />
 
                 <Row>
-                    <Button className='buttonSave' href='/create-products'>Guardar</Button>
+                    <Button className='buttonSave' href='/CheckComments'>Guardar</Button>
                 </Row>
 
 

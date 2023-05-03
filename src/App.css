@@ -354,9 +354,10 @@ a:hover {
 }
 
 .textarea-product::placeholder {
-  color: var(--second-red-color);
+  
   margin-top: 2%;
 }
+
 
 .button-red {
   background-color: var(--lila);
@@ -574,7 +575,8 @@ a:hover {
   padding: 0.5rem 0.5rem 0.5rem 0.8rem;
   border: 1px solid var(--azul-oscuro);
   background-color: var(--blanco);
-  border-radius: 30px;
+  border-radius: 15px !important;
+  margin-left: 15PX;
 }
 
 .subtitle-product {
