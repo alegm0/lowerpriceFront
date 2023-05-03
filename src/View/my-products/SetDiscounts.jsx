@@ -74,20 +74,20 @@ function SetDiscounts() {
 
     //aaaaaaaaa
     const onSubmit = () => {
-        // if (!validate()) {
-        axios.post(`${urlRequest}/discount-promotions`, discounts)
-            .then(function (response) {
-                if (response.status === 201) {
-                    history.push('/discounts');
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        if (!validate()) {
+            axios.post(`${urlRequest}/discount-promotions`, discounts)
+                .then(function (response) {
+                    if (response.status === 201) {
+                        history.push('/discounts');
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
 
-        // } else {
-        //     setErrorsInputs("Error ejecutamiento");
-        // }
+        } else {
+          
+        }
     };
 
 
@@ -112,6 +112,7 @@ function SetDiscounts() {
 
                 <Row>
                     <Col>
+                    <div className="form-group">
                         <h1 className="second-Title">Valor(*)</h1>
                         <input
                             className="inputDiscounts"
@@ -123,8 +124,9 @@ function SetDiscounts() {
                             onChange={(e) => onChange(e)}
 
                         />
-                        {errorsInputs.name && <span className="text-validate">{errorsInputs.value}</span>}
-
+                        {errorsInputs.value && <span className="text-validate">{errorsInputs.value}</span>}
+                        </div>
+                        <div className="form-group">
                         <h1 className="second-Title">Fecha final(*)</h1>
 
                         <DatePicker
@@ -137,8 +139,8 @@ function SetDiscounts() {
                             onChange={handleSelectedDateFinalChange}
 
                         />
-                        {errorsInputs.name && <span className="text-validate">{errorsInputs.finish_date}</span>}
-
+                        {errorsInputs.finish_date && <span className="text-validate">{errorsInputs.finish_date}</span>}
+                        </div>
                     </Col>
 
                     <Col>
@@ -155,7 +157,7 @@ function SetDiscounts() {
 
 
                         />
-                        {errorsInputs.name && <span className="text-validate">{errorsInputs.start_date}</span>}
+                        {errorsInputs.start_date && <span className="text-validate">{errorsInputs.start_date}</span>}
                         <h1 className="second-Title">Condiciones</h1>
                         <input
                             className="inputDiscounts"
@@ -174,7 +176,7 @@ function SetDiscounts() {
                             onChange={(e) => onChange(e)}
 
                         />
-                        {errorsInputs.name && <span className="text-validate">{errorsInputs.conditions}</span>}
+                        {errorsInputs.conditions && <span className="text-validate">{errorsInputs.conditions}</span>}
 
                     </Col>
                 </Row>
