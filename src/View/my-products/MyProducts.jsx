@@ -61,7 +61,7 @@ function MyProducts() {
   }
 
   const getListMark = () => {
-    axios.get(`${urlRequest}/mark`, [])
+    axios.get(`${urlRequest}/brand`, [])
       .then(function (response) {
         setListMark(response.data.data);
       })
