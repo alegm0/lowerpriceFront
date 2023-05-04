@@ -3,262 +3,110 @@ import axios from "axios";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import { useHistory } from "react-router";
 import { urlRequest } from "../../urlRequest";
-import Swal from "sweetalert2";
-import { useLocation } from "react-router-dom";
 import iconoAtras from '../../assets/img/icono-atras.svg';
 import setImg from "../../assets/img/setProduct.svg";
-import seeImg from "../../assets/img/seeProduct.svg";
 import deleteImg from "../../assets/img/deleteProduct.svg";
-import referencia from "../../assets/img/referencia.png";
 
 function Discounts() {
 
     const history = useHistory();
-    const [fechaInicial, setFechaInicial] = useState([]);
-    const [fechaFinal, setFechaFinal] = useState([]);
-    const [valor, setValor] = useState();
-    const [desciption, setDescription] = useState([]);
-
-
-
-    // const [discounts, setDiscounts] = useState([]);
-    // useEffect(() => {
-    //     axios.get(`${urlRequest}/discount-promotions`)
-    //         .then(response => {
-    //             setDiscounts(response.data);
-    //         })
-    //         .catch(error => {
-    //             console.log(error);
-    //         });
-    // }, []);
 
     const [discounts, setDiscounts] = useState([]);
 
     useEffect(() => {
-
-
-
-        axios.get(`${urlRequest}/discount-promotions`)
-            .then(response => {
-                const data = response.data;
-                const newDiscounts = data.map(discount => ({
-                    title: `${discount.value}%`,
-                    url1: "/my-products",
-                    url2: "/my-products",
-                    fecha: `${discount.fechaInicial} - ${discount.fechaFinal}`,
-                    descripcion: discount.condiciones
-                }));
-                setDiscounts(newDiscounts);
-            })
-            .catch(error => {
-                console.log(error);
-            });
-
-
+        getListDiscounts();
     }, []);
 
-
-
-
-
-
-    const informationCards = [
-        {
-            title: "19%",
-            url1: "/my-products",
-            url2: "/my-products",
-            fecha: "20/02/2022 - 20/02/2023",
-            descripcion: "¡Aprovecha nuestra promoción de 2x1 en shampoo! Compra un shampoo y obtén otro gratis. Solo tienes que agregar dos unidades de shampoo a tu carrito y el descuento se aplicará automáticamente en el checkout. ¡No te pierdas esta oportunidad de ahorrar en tu cuidado capilar!"
-        },
-        {
-            title: "19%",
-            url1: "/my-products",
-            url2: "/my-products",
-            fecha: "20/02/2022 - 20/02/2023",
-            descripcion: "¡Aprovecha nuestra promoción de 2x1 en shampoo! Compra un shampoo y obtén otro gratis. Solo tienes que agregar dos unidades de shampoo a tu carrito y el descuento se aplicará automáticamente en el checkout. ¡No te pierdas esta oportunidad de ahorrar en tu cuidado capilar!"
-        },
-        {
-            title: "19%",
-            url1: "/my-products",
-            url2: "/my-products",
-            fecha: "20/02/2022 - 20/02/2023",
-            descripcion: "¡Aprovecha nuestra promoción de 2x1 en shampoo! Compra un shampoo y obtén otro gratis. Solo tienes que agregar dos unidades de shampoo a tu carrito y el descuento se aplicará automáticamente en el checkout. ¡No te pierdas esta oportunidad de ahorrar en tu cuidado capilar!"
-        },
-        {
-            title: "19%",
-            url1: "/my-products",
-            url2: "/my-products",
-            fecha: "20/02/2022 - 20/02/2023",
-            descripcion: "¡Aprovecha nuestra promoción de 2x1 en shampoo! Compra un shampoo y obtén otro gratis. Solo tienes que agregar dos unidades de shampoo a tu carrito y el descuento se aplicará automáticamente en el checkout. ¡No te pierdas esta oportunidad de ahorrar en tu cuidado capilar!"
-        },
-        {
-            title: "19%",
-            url1: "/my-products",
-            url2: "/my-products",
-            fecha: "20/02/2022 - 20/02/2023",
-            descripcion: "¡Aprovecha nuestra promoción de 2x1 en shampoo! Compra un shampoo y obtén otro gratis. Solo tienes que agregar dos unidades de shampoo a tu carrito y el descuento se aplicará automáticamente en el checkout. ¡No te pierdas esta oportunidad de ahorrar en tu cuidado capilar!"
-        },
-        {
-            title: "19%",
-            url1: "/my-products",
-            url2: "/my-products",
-            fecha: "20/02/2022 - 20/02/2023",
-            descripcion: "¡Aprovecha nuestra promoción de 2x1 en shampoo! Compra un shampoo y obtén otro gratis. Solo tienes que agregar dos unidades de shampoo a tu carrito y el descuento se aplicará automáticamente en el checkout. ¡No te pierdas esta oportunidad de ahorrar en tu cuidado capilar!"
-        },
-    ];
-
-    const getFechaInicial = () => {
-        axios.get(`${urlRequest}/discount-promotions/`)
-            .then(function (response) {
-                console.log(response.data);
-                setFechaInicial(response.data);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    };
-    const getFechaFinal = () => {
-        axios.get(`${urlRequest}/discount-promotions/`)
-            .then(function (response) {
-                console.log(response.data);
-                setFechaFinal(response.data);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    };
-    const getValor = () => {
-        axios.get(`${urlRequest}/discount-promotions/`)
-            .then(function (response) {
-                console.log(response.data);
-                setValor(response.data);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    };
-
-    const getDescription = () => {
-        axios.get(`${urlRequest}/discount-promotions/`)
-            .then(function (response) {
-                console.log(response.data);
-                setDescription(response.data);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    };
-
-
-
-
-
+    const getListDiscounts = () => {
+        axios.get(`${urlRequest}/discount-promotions`, [])
+        .then(function (response) {
+            setDiscounts(response.data.data);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    } 
 
     return (
         <div className="body-view">
             <Container>
                 <Row>
-                    <Col lg={1}>
+                    <Col lg={1} className="pt-3">
                         <img onClick={() => history.goBack()} src={iconoAtras} alt="Icono de atras" style={{ width: "3rem", marginTop: "3rem", marginLeft: "-3rem" }} />
                     </Col>
-                    <Col lg={2}>
+                    <Col lg={11}>
                         <h1 className="title-Products">Descuentos</h1>
                     </Col>
                 </Row>
                 <Row>
-                    <Col className='description-Products'>
+                    <Col lg={9} className='description-Products'>
                         <p className="paragraf-products">A continuación se mostrará los diferentes descuentos, con su respectiva fecha de vigencia y su descripción o condición para poder participar de ella</p>
-                        <Button className='buttoncrear-discounts' href='/setDiscounts'>Crear descuento</Button>
+                    </Col>
+                    <Col lg={3}>
+                        <Button className="button-purple-home mb-3" href='/setDiscounts' style={{paddingTop:"6%", fontSize:"24px"}}>Crear descuento</Button>
                     </Col>
                 </Row>
 
 
                 <Row>
-
-                    {/* {informationCards.map((event, index) => { */}
-                    {discounts.map((discount, index) => {
-                    
+                    {discounts.map((discount) => {
                         return (
-                            // <Col lg={4} className="mt-4 d-flex">
                             <Col lg={4} className="d-flex flex-column  align-items-center"
                                 style={{
                                     display: "flex",
                                     paddingTop: "40px",
                                     paddingBottom: "10px"
-                                }}
-                            >
+                                }}>
                                 <Card style={{ width: "18rem", borderRadius: "20px" }}>
                                     <Card.Header className="borderRadiusCardHeaderMenu mb-0"
-                                        style={{
-
-                                            display: "flex"
-
-                                        }}>
+                                        style={{display: "flex"}}>
                                         <Card.Title
                                             variant="top"
                                             className="mt-4 mb-1 ml-20"
                                             style={{
                                                 marginRight: "120px",
                                                 marginLeft: "35px",
-
                                                 fontWeight: "700",
                                                 fontSize: "30px",
                                                 lineHeight: "36px",
-                                                display: "flex"
-
+                                                display: "flex",
+                                                width:"8%"
                                             }}
-                                        // > {event.title} </Card.Title>
-                                        > {discount.title} </Card.Title>
+                                        > {discount.value}% </Card.Title>
                                         <Card.Link
                                             className="ml-10 mt-3 mb-2"
                                             href={"/my-products"}
-                                            style={{ textAlign: "initial" }}
-                                        >
-                                            <img src={setImg} />
+                                            style={{ textAlign: "initial" }}>
+                                            <img src={setImg} alt='Imagen edit'/>
                                         </Card.Link>
                                         <Card.Link
                                             className="ml-10 mt-3 mb-2"
                                             href={"/my-products"}
-                                            style={{ textAlign: "initial" }}
-                                        >
-                                            <img src={deleteImg} />
+                                            style={{ textAlign: "initial" }}>
+                                            <img src={deleteImg} alt='Imagen delete' />
                                         </Card.Link>
-
-
                                     </Card.Header>
                                     <Card.Body>
                                         <Card.Title className="styleTitleCardMenu mb-0"
                                             style={{
                                                 textAlign: "center", fontSize: "16px", color: "#000000",
                                                 fontFamily: 'Inter'
-                                            }}>
-
-                                            {discount.fecha}
+                                            }}> {discount.start_date} -{discount.finish_date}
                                         </Card.Title>
                                     </Card.Body>
                                     <Card.Body style={{ paddingTop: "0px" }}>
                                         <Card.Text
 
                                             style={{ textAlign: "center", fontSize: "10px" }}
-                                        > {discount.descripcion}</Card.Text>
-
-
+                                        > {discount.conditions}</Card.Text>
                                     </Card.Body>
                                 </Card>
                             </Col>
                         );
                     })}
-
-
                 </Row>
-
-
-
             </Container>
-
-
         </div >
-
     );
 }
 export default Discounts;

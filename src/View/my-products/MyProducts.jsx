@@ -98,26 +98,14 @@ function MyProducts() {
 
   return (
     <div className="body-view">
-      {/* <div className="banner-my-product">
-        <h1 className="title-marks-my-products">Menu</h1>
-        <Carousel list={listMark} />
-      </div> */}
       <h1 className="title-marks-my-products">Menu</h1>
       <p className="paragraph">A continuación se mostrará las diferentes elecciones, que usted podra tomar, con el fin de que conozca todas las opciones con respecto a los productos</p>
-
       <Container>
         <Row>
 
           {informationCards.map((event, index) => {
             return (
-              // <Col lg={4} className="mt-4 d-flex">
-              <Col className="d-flex flex-column  align-items-center"
-                            style={{
-                display: "inline",
-                paddingBottom: "80px"
-                              }}
-              >
-
+              <Col className="d-flex flex-column  align-items-center" style={{ display: "inline", paddingBottom: "80px"}}>
                 <Card style={{ width: "18rem", borderRadius: "20px" }}>
                   <Card.Header className="borderRadiusCardHeaderMenu">
                     <Card.Img
@@ -150,37 +138,6 @@ function MyProducts() {
               </Col>
             );
           })}
-
-
-
-
-          {listProducts.length > 0 &&
-            listProducts.map((product, index) => (
-              <Col lg={4} md={4} sm={2} key={index}>
-                <Card className="card-my-product">
-                  <div className="card-header-my-product">
-                    <Card.Img src={Example}></Card.Img>
-                    <span>{product.quantity}</span>
-                  </div>
-                  <Card.Body className="card-footer-my-product">
-                    <div className="card-info-my-product">
-                      <span>{product.name}</span>
-                      <span>{product.unit_cost}</span>
-                    </div>
-                    <div>
-                      <div>
-                        <img src={iconEdit} className="button-edit-product" onClick={() => history.push("/create-product", { id: product.id })} />
-                      </div>
-                      <div>
-                        <Card.Img src={iconDelete} className="button-delete-product" onClick={() => deleteProduct(product.id)}></Card.Img>
-                      </div>
-                    </div>
-                  </Card.Body>
-                </Card>
-              </Col>
-            ))}
-
-
         </Row>
       </Container>
     </div>

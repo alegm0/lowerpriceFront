@@ -70,7 +70,7 @@ function CheckComments() {
                         <img onClick={() => history.goBack()} src={iconoAtras} alt="Icono de atras" style={{ width: "3rem", marginTop: "3rem", marginLeft: "-3rem" }} />
                     </Col>
                     <Col lg={11}>
-                        <h1 className="title-Products">Comentarios</h1>
+                        <p className="title-Products">Comentarios</p>
                     </Col>
                 </Row>
                 <Row>
@@ -80,26 +80,24 @@ function CheckComments() {
                 </Row>
                 <Row>
                     <Col lg={5}>
-                        <h1 className='subtitle'>Informacion del producto</h1>
+                        <p className='subtitle'>Informacion del producto</p>
                     </Col>
                     <Col lg={7}>
                         <hr style={{ borderColor: "white", marginTop: "32px" }}></hr>
                     </Col>
                 </Row>
-
-
-
                 <Row>
-                    <Col>
-                        <h1 className="second-Title">Nombre del producto(*)</h1>
+                    <Col lg={6}>
+                        <p className="title-inputs mt-4 ml-2">Nombre del producto(*)</p>
                         <input
                             className="inputDiscounts"
                             type="text"
                             placeholder="Ingrese el producto"
                             name="email"
-
                         />
-                        <h1 className="second-Title">Marca del producto(*)</h1>
+                    </Col>
+                    <Col lg={6}>
+                        <p className="title-inputs mt-4 ml-2">Marca del producto(*)</p>
                         <input
                             className="inputDiscounts"
                             type="text"
@@ -108,55 +106,51 @@ function CheckComments() {
 
                         />
 
-
                     </Col>
-
-                    <Col>
-
-                        <h1 className="second-Title">Costo del producto(*)</h1>
-                        <input
-                            className="inputDiscounts"
-                            type="text"
-                            placeholder="Ingrese su nombre"
-                            name="email"
-
-                        />
-
-
-                        <h1 className="second-Title">Categoria del producto(*)</h1>
-                        <input
-                            className="inputDiscounts"
-                            type="text"
-                            placeholder="Ingrese su nombre"
-                            name="email"
-
-                        />
-
-
-                    </Col>
-
                 </Row>
-                <h1 className="second-Title">Descripcion del producto</h1>
-                <input
-                    className="inputDiscounts"
-                    type="text"
-                    placeholder="Ingrese una descripcion del comentario"
-                    name="email"
-                    style={{
-                        height:
-                            "80px",
-                        width: "1000px",
-                        textAlign: "start",
-                        position: "relative",
-                        marginBottom: "30px"
-                    }}
-
-                />
-
-
+                <Row>
+                    <Col lg={6}>
+                        <p className="title-inputs mt-4 ml-2">Costo del producto(*)</p>
+                        <input
+                            className="inputDiscounts"
+                            type="text"
+                            placeholder="Ingrese su nombre"
+                            name="email"
+                        />
+                    </Col>
+                    <Col lg={6}>
+                        <p className="title-inputs mt-4 ml-2">Categoria del producto(*)</p>
+                        <input
+                            className="inputDiscounts"
+                            type="text"
+                            placeholder="Ingrese su nombre"
+                            name="email"
+                        />
+                    </Col>
+                </Row>
+                <Row>
+                    <Col lg={12}>
+                    <p className="title-inputs mt-4 ml-2">Descripcion del comentario</p>
+                    <textarea
+                        name="text"
+                        cols="80"
+                        rows="5"
+                        placeholder="Ingrese una descripcion"
+                        className="textarea-product"
+                        style={{
+                            height: "80%",
+                            width: "100%",
+                            textAlign: "start",
+                            position: "relative",
+                            marginBottom: "30px",
+                            borderRadius: "15px !important"
+                        }}
+                    />
+                    </Col>
+                </Row>
                 <Row>
                     <Col lg={2}>
-                        <h1 className='subtitle'>Comentarios</h1>
+                        <p className='subtitle'>Comentarios</p>
                     </Col>
                     <Col lg={10}>
                         <hr style={{ borderColor: "white", marginTop: "32px" }}></hr>
@@ -164,7 +158,7 @@ function CheckComments() {
                 </Row>
                 <Row>
                     <Col lg={2}>
-                        <h1 className="calificacion">3.7</h1>
+                        <p className="calificacion">3.7</p>
                     </Col>
                     <Col style={styles.stars} lg={10}>
                         {stars.map((_, index) => {
@@ -176,7 +170,6 @@ function CheckComments() {
                                     onMouseOver={() => handleMouseOver(index + 1)}
                                     onMouseLeave={handleMouseLeave}
                                     color={(4 || 5) > index ? colors.negro : colors.blanco}
-                                    // color={(hoverValue || currentValue) > index ? colors.negro : colors.blanco}
                                     style={{
                                         marginRight: 10,
                                         cursor: "pointer"
@@ -187,12 +180,8 @@ function CheckComments() {
 
                 </Row>
                 <Row>
-
-
-
                     {informationCards.map((event, index) => {
                         return (
-                            // <Col lg={4} className="mt-4 d-flex">
                             <Col className="d-block block-column  align-items-left"
                                 style={{
                                     display: "none",

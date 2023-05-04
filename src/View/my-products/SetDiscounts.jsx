@@ -1,16 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import moment from 'moment';
-import { Button, Card, Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import { useHistory } from "react-router";
 import { urlRequest } from "../../urlRequest";
-import Swal from "sweetalert2";
-import { useLocation } from "react-router-dom";
 import iconoAtras from '../../assets/img/icono-atras.svg';
-import setImg from "../../assets/img/setProduct.svg";
-import seeImg from "../../assets/img/seeProduct.svg";
-import deleteImg from "../../assets/img/deleteProduct.svg";
-import referencia from "../../assets/img/referencia.png";
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
@@ -19,18 +13,13 @@ function SetDiscounts() {
     const FORMAT = "dd-MM-yyyy"
 
     const validateInputs = {
-
         start_date: false,
         finish_date: false,
-        value: false,
-        conditions: false
+        value: false
     }
-
-
     const history = useHistory();
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [selectedDateFinal, setSelectedDateFinal] = useState(new Date());
-
     const [errorsInputs, setErrorsInputs] = useState({ ...validateInputs });
     const [discounts, setDiscounts] = useState({
         start_date: moment(selectedDate).format('YYYY-MM-DD'),
@@ -38,25 +27,19 @@ function SetDiscounts() {
         value: '',
         conditions: ''
     });
-    const handleSelectedDateChange = (date) => {
-        setSelectedDate(date);
-        setDiscounts({ ...discounts, start_date: moment(date).format('YYYY-MM-DD') });
+
+    const handleSelectedDateChange = (e, name) => {
+        if (name === 'start_date') {
+            setSelectedDate(e);
+        }else {
+            setSelectedDateFinal(e);
+        }
+        setDiscounts({ ...discounts, [name]: moment(e).format('YYYY-MM-DD') });
     };
 
-    const handleSelectedDateFinalChange = (date) => {
-        setSelectedDateFinal(date);
-        setDiscounts({ ...discounts, finish_date: moment(date).format('YYYY-MM-DD') });
-    };
     const onChange = (e) => {
         setDiscounts({ ...discounts, [e.target.name]: e.target.value });
     }
-
-
-
-
-
-
-
 
     const validate = () => {
 
@@ -130,14 +113,12 @@ function SetDiscounts() {
                         <h1 className="second-Title">Fecha final(*)</h1>
 
                         <DatePicker
-
+                            name="finish_date"
                             selected={selectedDateFinal}
                             className="inputDiscounts"
                             dateFormat={FORMAT}
                             value={discounts.finish_date}
-
-                            onChange={handleSelectedDateFinalChange}
-
+                            onChange={(e) => handleSelectedDateChange(e, 'finish_date')}
                         />
                         {errorsInputs.finish_date && <span className="text-validate">{errorsInputs.finish_date}</span>}
                         </div>
@@ -146,16 +127,12 @@ function SetDiscounts() {
                     <Col>
                         <h1 className="second-Title">Fecha inicial(*)</h1>
                         <DatePicker
-
                             selected={selectedDate}
                             className="inputDiscounts"
-                            onChange={handleSelectedDateChange}
-
-                            // onChange={date => setSelectedDate(date)}
+                            onChange={(e) => handleSelectedDateChange(e, 'start_date')}
+                            name="start_date"
                             dateFormat={FORMAT}
                             value={discounts.start_date}
-
-
                         />
                         {errorsInputs.start_date && <span className="text-validate">{errorsInputs.start_date}</span>}
                         <h1 className="second-Title">Condiciones</h1>

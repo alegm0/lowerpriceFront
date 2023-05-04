@@ -19,7 +19,6 @@ import Discounts from "./View/my-products/Discounts";
 import SetDiscounts from "./View/my-products/SetDiscounts";
 import Comments from "./View/my-products/Comments";
 import CheckComments from "./View/my-products/CheckComments";
-// import CreateEditProduct from "./View/create-edit-product/CreateEditProduct";
 
 /* CONTEXT */
 import State from "./context/state";
