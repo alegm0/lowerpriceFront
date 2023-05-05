@@ -3,13 +3,9 @@ import axios from "axios";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import { useHistory } from "react-router";
 import { urlRequest } from "../../urlRequest";
-import Swal from "sweetalert2";
-import { useLocation } from "react-router-dom";
 import iconoAtras from '../../assets/img/icono-atras.svg';
 import setImg from "../../assets/img/setProduct.svg";
-import seeImg from "../../assets/img/seeProduct.svg";
 import deleteImg from "../../assets/img/deleteProduct.svg";
-import referencia from "../../assets/img/referencia.png";
 
 function Discounts() {
 

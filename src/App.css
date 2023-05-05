@@ -544,7 +544,7 @@ a:hover {
 }
 
 .text-validate {
-  color: #006ef5;
+  color: var(--background-button-purple);
   text-align: initial;
   font-size: 13px;
 }

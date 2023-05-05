@@ -1,16 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import moment from 'moment';
-import { Button, Card, Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import { useHistory } from "react-router";
 import { urlRequest } from "../../urlRequest";
-import Swal from "sweetalert2";
-import { useLocation } from "react-router-dom";
 import iconoAtras from '../../assets/img/icono-atras.svg';
-import setImg from "../../assets/img/setProduct.svg";
-import seeImg from "../../assets/img/seeProduct.svg";
-import deleteImg from "../../assets/img/deleteProduct.svg";
-import referencia from "../../assets/img/referencia.png";
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
@@ -38,9 +32,14 @@ function SetDiscounts() {
         product_id: '1'
 
     });
-    const handleSelectedDateChange = (date) => {
-        setSelectedDate(date);
-        setDiscounts({ ...discounts, start_date: moment(date).format('YYYY-MM-DD') });
+
+    const handleSelectedDateChange = (e, name) => {
+        if (name === 'start_date') {
+            setSelectedDate(e);
+        }else {
+            setSelectedDateFinal(e);
+        }
+        setDiscounts({ ...discounts, [name]: moment(e).format('YYYY-MM-DD') });
     };
     const handleSelectedDateFinalChange = (date) => {
         setSelectedDateFinal(date);

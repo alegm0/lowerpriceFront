@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import setImg from "../../assets/img/setProduct.svg";
 import seeImg from "../../assets/img/seeProduct.svg";
 import deleteImg from "../../assets/img/deleteProduct.svg";
@@ -6,65 +6,54 @@ import referencia from "../../assets/img/referencia.png";
 import { useHistory } from 'react-router';
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import iconoAtras from '../../assets/img/icono-atras.svg';
+import axios from 'axios';
+import { urlRequest } from '../../urlRequest';
+import Swal from 'sweetalert2';
 
 function Products() {
     const history = useHistory();
 
+    const [informationCards, setInformationCards] = useState([]);
 
-    const informationCards = [
-        {
-            img: referencia,
-            title: "Producto",
-            url1: "/my-products",
-            url2: "/my-products",
-            url3: "/my-products",
-
-        },
-        {
-            img: referencia,
-            title: "Producto",
-            url1: "/my-products",
-            url2: "/my-products",
-            url3: "/my-products",
-
-        },
-        {
-            img: referencia,
-            title: "Producto",
-            url1: "/my-products",
-            url2: "/my-products",
-            url3: "/my-products",
-
-        },
-        {
-            img: referencia,
-            title: "Producto",
-            url1: "/my-products",
-            url2: "/my-products",
-            url3: "/my-products",
-
-
-
-        },
-        {
-            img: referencia,
-            title: "Producto",
-            url1: "/my-products",
-            url2: "/my-products",
-            url3: "/my-products",
-
-        },
-        {
-            img: referencia,
-            title: "Producto",
-            url1: "/my-products",
-            url2: "/my-products",
-            url3: "/my-products",
-
-        },
-    ];
-
-
+    useEffect(() => {
+        getListProducts();
+      }, []);
+    
+    const getListProducts = () => {
+        axios.get(`${urlRequest}/product/list`, [])
+          .then(function (response) {
+            setInformationCards(response.data.data);
+        })
+          .catch(function (error) {
+            console.log(error);
+        });
+    }
+    const deleteProduct = (id) => {
+        axios.delete(`${urlRequest}/product/${id}`, [])
+          .then(function (response) {
+            if (response.status === 201) {
+              getListProducts();
+              Swal.fire({
+                title: '¡Eliminacion exitosa!',
+                text: 'Se ha eliminado un producto.',
+                icon: 'success',
+                confirmButtonText: 'Continuar',
+                confirmButtonColor: 'rgb(157 160 223)',
+              })
+            } else {
+              Swal.fire({
+                title: '¡Error!',
+                text: 'Se ha generado un error al eliminar un producto.',
+                icon: 'error',
+                confirmButtonText: 'Continuar',
+                confirmButtonColor: 'rgb(157 160 223)',
+              });
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
     return (
         <div className="body-view">
             <Container>
@@ -119,7 +108,6 @@ function Products() {
                 <Row>
                     {informationCards.map((event, index) => {
                         return (
-                            // <Col lg={4} className="mt-4 d-flex">
                             <Col lg={4} className="d-flex flex-column  align-items-center"
                                 style={{
                                     display: "inline",
@@ -132,7 +120,7 @@ function Products() {
                                         <Card.Img
                                             variant="top"
                                             className="mt-3 mb-3 styleImgCardHomeIn"
-                                            src={event.img}
+                                            src={referencia}
                                             style={{
                                                 width:"256px"
                                             }}
@@ -140,27 +128,23 @@ function Products() {
                                     </Card.Header>
                                     <Card.Body>
                                         <Card.Title className="styleTitleCardMenu" >
-                                            {event.title}
+                                            {event.name}
                                         </Card.Title>
                                     </Card.Body>
                                     <Card.Body style={{ paddingTop: "0px" }}>
-                                        <Card.Link
-                                            href={event.url1}
+                                        <Card.Link  href={event.url1} style={{ textAlign: "initial" }}>
+                                           <img src={setImg} alt="Edit" onClick={() => history.push("/create-products", { id: event.id })}/>
+                                        </Card.Link> 
+                                        <Card.Link onClick={() => deleteProduct(event.id)}
                                             style={{ textAlign: "initial" }}
                                         >
-                                           <img src={setImg} />
+                                          <img src={deleteImg} alt="delete" />
                                         </Card.Link> 
                                         <Card.Link
-                                            href={event.url2}
+                                            onClick={() => history.push("/checkComments", { id: event.id })}
                                             style={{ textAlign: "initial" }}
                                         >
-                                          <img src={deleteImg} />
-                                        </Card.Link> 
-                                        <Card.Link
-                                            href={event.url3}
-                                            style={{ textAlign: "initial" }}
-                                        >
-                                          <img src={seeImg} />
+                                          <img src={seeImg}  alt="show"/>
                                         </Card.Link> 
             
                                     </Card.Body>
