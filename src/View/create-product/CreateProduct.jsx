@@ -99,16 +99,19 @@ function CreateProduct() {
   const getProduct = (id) => {
     axios.get(`${urlRequest}/product/${id}`, products)
       .then(function (response) {
+
         setProducts({
           unit_cost: response.data.data.unit_cost,
           name: response.data.data.name,
           description: response.data.data.description,
-          category_id: 1,
+          category: response.data.data.category,
+          brand: response.data.data.brand,
           user_id: 1
         });
       })
       .catch(function (error) {
         console.log(error);
+     
       });
   }
   const validate = () => {
@@ -187,11 +190,11 @@ function CreateProduct() {
     <div className="body-view">
       <Container>
         <Row>
-          <Col lg={1}>
+          <Col lg={1} className="mt-3">
             <img onClick={() => history.goBack()} src={iconoAtras} alt="Icono de atras" style={{ width: "3rem", marginTop: "3rem", marginLeft: "-3rem" }} />
           </Col>
           <Col lg={11}>
-            <h1 className="title-Products">Productos</h1>
+            <p className="title-Products">Productos</p>
           </Col>
         </Row>
         <Row>
@@ -200,18 +203,16 @@ function CreateProduct() {
           </Col>
         </Row>
         <Row>
-          <Col lg={5}>
-            <h1 className='subtitle'>Informacion del producto</h1>
+          <Col lg={4}>
+            <p className='subtitle'>Informacion del producto</p>
           </Col>
-          <Col lg={7}>
+          <Col lg={8}>
             <hr style={{ borderColor: "white", marginTop: "32px" }}></hr>
           </Col>
         </Row>
         <Row>
           <Col>
-
-
-            <h1 className="second-Title">Nombre del producto(*)</h1>
+            <p className="title-inputs mt-4 ml-2">Nombre del producto(*)</p>
             <input
               className="inputDiscounts"
               name="name"
@@ -223,7 +224,7 @@ function CreateProduct() {
             {errorsInputs.name && <span className="text-validate">*Campo requrido</span>}
 
             <div className="third flex-inputs">
-              <h1 className="second-Title">Marca del producto(*)</h1>
+              <p className="title-inputs mt-4 ml-2">Marca del producto(*)</p>
               <select className="inputDiscounts" name="id" onChange={(e) => onChangeMulti(e, 'brand')} value={products.brand.id}>
                 <option value="option1">Seleccione la marca</option>
                 {brand.map(({ id, name }, index) => (
@@ -236,7 +237,7 @@ function CreateProduct() {
           </Col>
           <Col>
 
-            <h1 className="second-Title">Costo del producto(*)</h1>
+            <p className="title-inputs mt-4 ml-2">Costo del producto(*)</p>
             <input
               className="inputDiscounts"
               name="unit_cost"
@@ -247,7 +248,7 @@ function CreateProduct() {
             />
             {errorsInputs.unit_cost && <span className="text-validate">*Campo requrido</span>}
             <div className="third flex-inputs">
-              <h1 className="second-Title">Categoria del producto(*)</h1>
+              <p className="title-inputs mt-4 ml-2">Categoria del producto(*)</p>
               <select className="inputDiscounts" name="id" onChange={(e) => onChangeMulti(e, 'category')} value={products.category.id}>
                 <option value="option1">Seleccione la categoria</option>
                 {category.map(({ id, name }) => (
@@ -264,7 +265,7 @@ function CreateProduct() {
         <Row>
 
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <h1 className="second-Title mt-4 ml-2">Descripcion del producto</h1>
+            <p className="title-inputs mt-4 ml-3">Descripcion del producto</p>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <textarea
                 name="description"
@@ -288,10 +289,10 @@ function CreateProduct() {
         </Row>
 
         <Row>
-          <Col lg={5}>
-            <h1 className='subtitle'>Informacion de la categoria</h1>
+          <Col lg={4}>
+            <p className='subtitle'>Informacion de la categoria</p>
           </Col>
-          <Col lg={7}>
+          <Col lg={8}>
             <hr style={{ borderColor: "white", marginTop: "32px" }}></hr>
           </Col>
         </Row>
@@ -299,7 +300,7 @@ function CreateProduct() {
           <Col>
             <div className="first flex-inputs">
 
-              <h1 className="second-Title">Nombre de la categoria(*)</h1>
+              <p className="title-inputs mt-4 ml-2">Nombre de la categoria(*)</p>
               <input
                 className="inputDiscounts"
                 name="name"
@@ -313,9 +314,8 @@ function CreateProduct() {
             </div>
           </Col>
           <Col>
-
             <div style={{ display: "flex", flexDirection: "column" }}>
-              <h1 className="second-Title">Descripcion de la categoria</h1>
+              <p className="title-inputs mt-4 ml-2">Descripcion de la categoria</p>
               <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <textarea
                   name="description"
@@ -332,18 +332,17 @@ function CreateProduct() {
           </Col>
         </Row>
         <Row>
-          <Col lg={5}>
-            <h1 className='subtitle'>Informacion de la marca</h1>
+          <Col lg={4}>
+            <p className='subtitle'>Informacion de la marca</p>
           </Col>
-          <Col lg={7}>
+          <Col lg={8}>
             <hr style={{ borderColor: "white", marginTop: "32px" }}></hr>
           </Col>
         </Row>
-
         <Row>
           <Col>
             <div className="first flex-inputs">
-              <h1 className="second-Title">Nombre de la marca(*)</h1>
+              <p className="title-inputs mt-4 ml-2">Nombre de la marca(*)</p>
               <input
                 className="inputDiscounts"
                 name="name"
@@ -354,14 +353,10 @@ function CreateProduct() {
               />
               {errorsInputs.brand.name && <span className="text-validate">*Campo requrido</span>}
             </div>
-
-
           </Col>
           <Col>
-
-
             <div style={{ display: "flex", flexDirection: "column" }}>
-              <h1 className="second-Title">Descripcion de la marca</h1>
+              <p className="title-inputs mt-4 ml-2">Descripcion de la marca</p>
               <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <textarea
                   name="description"
@@ -383,7 +378,7 @@ function CreateProduct() {
           {products.category.id === "0" && (
             <>
               <div className="first flex-inputs">
-                <h1 className="second-Title">Ingrese el nombre de la categoria(*)</h1>
+                <p className="title-inputs mt-4 ml-2">Ingrese el nombre de la categoria(*)</p>
                 <input
                   className="input"
                   name="name"
