@@ -146,7 +146,7 @@ function ProfileCompany() {
                   confirmButtonText: "Continuar", 
                   confirmButtonColor: 'rgb(157 160 223)',
                 }).then(resultado => {
-                    history.push('/my-products');
+                    history.push('/profile-company');
                 });
               } else {
                 Swal.fire({
@@ -214,7 +214,7 @@ function ProfileCompany() {
                     <p className="title-inputs mt-4 ml-2">Telefono</p>
                     <input
                         className="input inputs-class"
-                        name="phonr"
+                        name="phone"
                         type="text"
                         placeholder="Ingrese su telefono"
                         value={information.phone}
@@ -359,7 +359,7 @@ function ProfileCompany() {
                 </div>
                 </Col>
                 <Col lg={6} md={6} sm={12}>
-                <Button className="button-purple-home" onClick={() => onSubmitPaymentMethod()}>
+                <Button className="button-purple-home mt-5" onClick={() => onSubmitPaymentMethod()}>
                     Guardar
                 </Button>
                 </Col>

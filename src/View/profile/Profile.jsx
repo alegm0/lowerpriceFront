@@ -238,7 +238,7 @@ function Profile() {
                   confirmButtonText: "Continuar", 
                   confirmButtonColor: 'rgb(157 160 223)',
                 }).then(resultado => {
-                    history.push('/my-products');
+                    history.push('/profile-clients');
                 });
               } else {
                 Swal.fire({
@@ -269,7 +269,7 @@ function Profile() {
                   confirmButtonText: "Continuar", 
                   confirmButtonColor: 'rgb(157 160 223)',
                 }).then(resultado => {
-                    history.push('/my-products');
+                    history.push('/profile-clients');
                 });
               } else {
                 Swal.fire({
@@ -311,6 +311,7 @@ function Profile() {
             axios.put(`${urlRequest}/user/address/update/${address.id}`, address).then((response) => {
                 if (response.status === 201) {
                     setAddress({...defaultAddress});
+                    getInformation();
                     Swal.fire({
                       title: '¡Actualizacion exitosa!',
                       text: 'Se ha actualizado tu informacion.',
