@@ -7,6 +7,8 @@ import { urlRequest } from "../../urlRequest";
 import iconoAtras from '../../assets/img/icono-atras.svg';
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+import Swal from "sweetalert2";
+import { useLocation } from "react-router-dom";
 
 function SetDiscounts() {
     const history = useHistory();
@@ -16,7 +18,7 @@ function SetDiscounts() {
         start_date: false,
         finish_date: false,
         value: false,
-        conditions: false
+        
 
     }
     const [submit, setSubmit] = useState(false);
@@ -33,14 +35,21 @@ function SetDiscounts() {
 
     });
 
-    const handleSelectedDateChange = (e, name) => {
-        if (name === 'start_date') {
-            setSelectedDate(e);
-        }else {
-            setSelectedDateFinal(e);
-        }
-        setDiscounts({ ...discounts, [name]: moment(e).format('YYYY-MM-DD') });
+    // const handleSelectedDateChange = (e, name) => {
+    //     // if (name === 'start_date') {
+    //     //     setSelectedDate(e);
+    //     // }else {
+    //     //     setSelectedDateFinal(e);
+    //     // }
+    //     // setDiscounts({ ...discounts, [name]: moment(e).format('YYYY-MM-DD') });
+
+    // };
+
+    const handleSelectedDateChange = (date) => {
+        setSelectedDate(date);
+        setDiscounts({ ...discounts, start_date: moment(date).format('YYYY-MM-DD') });
     };
+
     const handleSelectedDateFinalChange = (date) => {
         setSelectedDateFinal(date);
         setDiscounts({ ...discounts, finish_date: moment(date).format('YYYY-MM-DD') });
@@ -102,9 +111,15 @@ function SetDiscounts() {
         const errors = { ...validateInputs };
         Object.keys(errors).forEach((e) => {
             errors[e] = !discounts[e] ? '*Campo es obligatorio' : '';
+            if (e === 'value' && (discounts[e] < 0 || discounts[e] > 100)) {
+                errors[e] = '*Descuento debe ser entre 0 y 100';
+              
+            }
         });
+
         setErrorsInputs(errors);
         return Object.values(errors).some(x => x);
+
     }
 
     const onSubmit = () => {
@@ -209,7 +224,7 @@ function SetDiscounts() {
                         />
                         {errorsInputs.start_date && <span className="text-validate">{errorsInputs.start_date}</span>}
                         <h1 className="second-Title">Condiciones</h1>
-                        <input
+                        <textarea
                             className="inputDiscounts"
                             type="text"
                             placeholder="Ingrese las condiciones"
@@ -226,9 +241,10 @@ function SetDiscounts() {
                         type="submit"
                         className='buttonSave'
                         onClick={onSubmit}
+                        style={{ Align: "center"}}
                     >Guardar
                     </Button>
-                </Row> 
+                </Row>
             </Container>
         </div>
 

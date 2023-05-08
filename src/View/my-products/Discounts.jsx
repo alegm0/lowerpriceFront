@@ -6,7 +6,7 @@ import { urlRequest } from "../../urlRequest";
 import iconoAtras from '../../assets/img/icono-atras.svg';
 import setImg from "../../assets/img/setProduct.svg";
 import deleteImg from "../../assets/img/deleteProduct.svg";
-
+import Swal from "sweetalert2";
 function Discounts() {
 
     const history = useHistory();
@@ -74,8 +74,8 @@ function Discounts() {
                     <Col lg={9} md={8} sm={12} className='description-Products'>
                         <p className="paragraf-products">A continuación se mostrará los diferentes descuentos, con su respectiva fecha de vigencia y su descripción o condición para poder participar de ella</p>
                     </Col>
-                    <Col lg={3} md={4} sm={11}>
-                        <Button className="button-purple-home mb-3" href='/setDiscounts' style={{ paddingTop: "6%", fontSize: "24px" }}>Crear descuento</Button>
+                    <Col lg={3} md={4} sm={12}>
+                        <Button className="button-purple-home mb-3" href='/setDiscounts' style={{ paddingTop: "auto", fontSize: "24px",height:"auto", width:"auto"}}>Crear descuento</Button>
                     </Col>
                 </Row>
 
@@ -89,14 +89,14 @@ function Discounts() {
                                     paddingTop: "40px",
                                     paddingBottom: "10px"
                                 }}>
-                                <Card style={{ width: "18rem", borderRadius: "20px" }}>
-                                    <Card.Header className="borderRadiusCardHeaderMenu mb-0"
+                                <Card style={{ width: "18rem", borderRadius: "20px" }} className="col-lg-12 col-md-12 col-sm-12"> 
+                                    <Card.Header className="borderRadiusCardHeaderMenu mb-0 "
                                         style={{ display: "flex" }}>
                                         <Card.Title
                                             variant="top"
                                             className="mt-4 mb-1 ml-20"
                                             style={{
-                                                marginRight: "120px",
+                                                marginRight: "35%",
                                                 marginLeft: "35px",
                                                 fontWeight: "700",
                                                 fontSize: "30px",

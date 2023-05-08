@@ -67,7 +67,7 @@ function CreateProduct() {
   }
 
   const getBrand = () => {
-    axios.get(`${urlRequest}/category/list`)
+    axios.get(`${urlRequest}/brand/list`)
       .then(function (response) {
         console.log(response.data);
         setBrand(response.data);
@@ -118,7 +118,7 @@ function CreateProduct() {
     const errors = { ...validateInputs };
     Object.keys(errors).forEach((e) => {
       if (['category', 'brand'].includes(e)) {
-        errors[e].name = !products[e].id ? 'campo obligatirio' : '';
+        errors[e].name = !products[e].id ? 'campo obligatorio' : '';
         return;
       }
       errors[e] = !products[e] ? '*Campo es obligatorio' : '';
@@ -221,7 +221,7 @@ function CreateProduct() {
               placeholder="Ingrese su nombre"
               onChange={(e) => onChange(e)}
             />
-            {errorsInputs.name && <span className="text-validate">*Campo requrido</span>}
+            {errorsInputs.name && <span className="text-validate">*Campo requerido</span>}
 
             <div className="third flex-inputs">
               <p className="title-inputs mt-4 ml-2">Marca del producto(*)</p>
@@ -233,7 +233,7 @@ function CreateProduct() {
                 <option value="">Otros</option>
               </select>
             </div>
-            {errorsInputs.unit_cost && <span className="text-validate">*Campo requrido</span>}
+            {errorsInputs.unit_cost && <span className="text-validate">*Campo requerido</span>}
           </Col>
           <Col>
 
@@ -246,7 +246,7 @@ function CreateProduct() {
               placeholder="Ingrese un costo unitario"
               onChange={(e) => onChange(e)}
             />
-            {errorsInputs.unit_cost && <span className="text-validate">*Campo requrido</span>}
+            {errorsInputs.unit_cost && <span className="text-validate">*Campo requerido</span>}
             <div className="third flex-inputs">
               <p className="title-inputs mt-4 ml-2">Categoria del producto(*)</p>
               <select className="inputDiscounts" name="id" onChange={(e) => onChangeMulti(e, 'category')} value={products.category.id}>
@@ -257,7 +257,7 @@ function CreateProduct() {
                 <option value="0">Otros</option>
               </select>
             </div>
-            {errorsInputs.unit_cost && <span className="text-validate">*Campo requrido</span>}
+            {errorsInputs.unit_cost && <span className="text-validate">*Campo requerido</span>}
           </Col>
 
 
@@ -269,15 +269,15 @@ function CreateProduct() {
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <textarea
                 name="description"
-                cols="80"
+                cols="100"
                 rows="5"
                 onChange={(e) => onChange(e)}
                 value={products.description}
-                placeholder="Ingrese unadescripcion"
+                placeholder="Ingrese una descripcion"
                 className="textarea-product"
                 style={{
                   height: "80px",
-                  width: "1105px",
+                  width: "100%",
                   textAlign: "start",
                   position: "relative",
                   marginBottom: "30px",
@@ -371,9 +371,15 @@ function CreateProduct() {
               </div>
             </div>
           </Col>
+          
+          <Col lg={12} className="content-product content-body-home mt-5">
+            <Button className="button-purple-home" onClick={(e) => (onSubmit(e))} style={{ marginBottom: "50px" }}>
+              Guardar
+            </Button>
+          </Col>
         </Row>
 
-        <Row>
+        {/* <Row>
 
           {products.category.id === "0" && (
             <>
@@ -453,7 +459,7 @@ function CreateProduct() {
               Guardar
             </Button>
           </Col>
-        </Row>
+        </Row> */}
       </Container>
     </div >
   );

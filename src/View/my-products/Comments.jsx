@@ -11,6 +11,7 @@ import Swal from "sweetalert2";
 
 function Comments() {
   const history = useHistory();
+  const minDate = moment().subtract(0, 'days').toDate();
   const [informationProduct, setInformationProduct] = useState([]);
   const [submit, setSubmit] = useState(false);
 
@@ -26,7 +27,7 @@ function Comments() {
 
   const [informationComments, setInformationComments] = useState({
     name_user: "",
-    assessment: 0,
+    assessment: "",
     start_date: moment(new Date()).format("YYYY-MM-DD"),
     title: "",
     text: "",
@@ -61,21 +62,27 @@ function Comments() {
   const onChange = (e) => {
     setInformationComments({
       ...informationComments,
-      [e.target.name]:  e.target.value,
+      [e.target.name]: e.target.value,
     });
   };
 
   const onChangeDate = (e) => {
     setInformationComments({
-        ...informationComments,
-        start_date:  moment(e).format('YYYY-MM-DD')
+      ...informationComments,
+      start_date: moment(e).format('YYYY-MM-DD')
     });
   }
   const validate = () => {
+    const nameRegex = /^[a-zA-Z]*$/;
     const errors = { ...validateInputsComments };
+
     Object.keys(errors).forEach((e) => {
       errors[e] = !informationComments[e] ? "*Campo es obligatorio" : "";
     });
+    if (informationComments.name_user && !nameRegex.test(informationComments.name_user)) {
+      errors['name_user'] = '*Digite un nombre válido';
+    }
+
     setErrorsInputs(errors);
     return Object.values(errors).some((x) =>
       typeof x === "string" ? !!x : !!x.name
@@ -152,7 +159,7 @@ function Comments() {
                 <option value={id}>{name}</option>
               ))}
             </select>
-            {errorsInputs.product_id && <span className="text-validate">*Campo requerido</span>}
+            {errorsInputs.product_id && <span className="text-validate">{errorsInputs.product_id}</span>}
           </Col>
           <Col lg={6}>
             <p className="title-inputs mt-4 ml-2">Nombre de usuario(*)</p>
@@ -164,23 +171,25 @@ function Comments() {
               value={informationComments.name_user}
               onChange={(e) => onChange(e)}
             />
-            {errorsInputs.name_user && <span className="text-validate">*Campo requerido</span>}
+            {errorsInputs.name_user && <span className="text-validate">{errorsInputs.name_user}</span>}
           </Col>
           <Col lg={6}>.
             <p className="title-inputs ml-2">Valoracion(*)</p>
-            <input
-              className="inputDiscounts"
-              type="number"
-              placeholder="Ingrese su valoracion"
-              name="assessment"
-              value={informationComments.assessment}
-              onChange={(e) => onChange(e)}
-            />
+            <select className="input inputs-class" name="assessment" value={informationComments.assessment}
+              onChange={(e) => onChange(e)}>
+              <option value="option1">Seleccione valoracion</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
             {errorsInputs.assessment && <span className="text-validate">*Campo requerido</span>}
           </Col>
           <Col>
             <p className="title-inputs mt-4 ml-2">Fecha inicial(*)</p>
             <DatePicker
+              minDate={minDate}
               name="start_date"
               className="inputDiscounts"
               value={informationComments.start_date}
@@ -204,7 +213,7 @@ function Comments() {
             <p className="title-inputs mt-4 ml-2">Numero de contacto (*)</p>
             <input
               className="inputDiscounts"
-              type="text"
+              type="number"
               placeholder="Numero de contacto"
               name="contact_information"
               value={informationComments.contact_information}
