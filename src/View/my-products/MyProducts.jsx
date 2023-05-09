@@ -1,28 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Card, Col, Container, Row } from 'react-bootstrap';
-import { useHistory } from 'react-router';
-import Swal from 'sweetalert2';
+import { Card, Col, Container, Row } from 'react-bootstrap';
 import axios from 'axios';
-import Example from '../../assets/img/example.png';
-import iconEdit from '../../assets/img/navbar/icono-editar.svg';
-import iconDelete from '../../assets/img/navbar/icono-eliminar.svg';
-import Carousel from '../../Components/carousel/Carousel';
 import { urlRequest } from '../../urlRequest';
 import './MyProducts.css';
-import { Link } from 'react-router-dom';
-
-
 
 import DiscountImg from '../../assets/img/navbar/discount.svg';
 import CommentsImg from '../../assets/img/navbar/comentarios.svg';
 import ProductosImg from '../../assets/img/navbar/productos.svg';
 
 function MyProducts() {
-  const history = useHistory();
-  const [listProducts, setListProducts] = useState([]);
-  const [listMark, setListMark] = useState([]);
-
-  const informationCards = [
+  const dataInit = [
     {
       img: DiscountImg,
       title: "Descuentos",
@@ -42,60 +29,19 @@ function MyProducts() {
       url: "/products",
     },
   ];
-
-
+  const [informationCard, setInformationCard] = useState(dataInit);
 
   useEffect(() => {
-    getListProducts();
-    getListMark();
-  }, []);
-
-  const getListProducts = () => {
-    axios.get(`${urlRequest}/product/list`, [])
-      .then(function (response) {
-        setListProducts(response.data.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
-
-  const getListMark = () => {
-    axios.get(`${urlRequest}/brand`, [])
-      .then(function (response) {
-        setListMark(response.data.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
-  const deleteProduct = (id) => {
-    axios.delete(`${urlRequest}/product/delete/${id}`, [])
-      .then(function (response) {
-        if (response.status === 201) {
-          getListProducts();
-          Swal.fire({
-            title: '¡Eliminacion exitosa!',
-            text: 'Se ha eliminado un producto.',
-            icon: 'success',
-            confirmButtonText: 'Continuar',
-            confirmButtonColor: 'rgb(157 160 223)',
-          })
-        } else {
-          Swal.fire({
-            title: '¡Error!',
-            text: 'Se ha generado un error al eliminar un producto.',
-            icon: 'error',
-            confirmButtonText: 'Continuar',
-            confirmButtonColor: 'rgb(157 160 223)',
-          });
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
-
+    if (localStorage.getItem('role') === '2' ) {
+      const newItems = [...informationCard]; // Copia del array original
+      newItems.splice(informationCard, 2); // Elimina el elemento del array
+      setInformationCard(newItems); 
+    } else {
+      const newItems = [...informationCard]; // Copia del array original
+      newItems.splice(informationCard, 1); // Elimina el elemento del array
+      setInformationCard(newItems); 
+    }
+}, []);
   return (
     <div className="body-view">
       <Container>
@@ -110,7 +56,7 @@ function MyProducts() {
           </Col>
         </Row>
         <Row>
-          {informationCards.map((event, index) => {
+          {informationCard.map((event, index) => {
             return (
               <Col className="d-flex flex-column  align-items-center" style={{ display: "inline", paddingBottom: "80px" }}>
                 <Card style={{ width: "18rem", borderRadius: "20px" }}>

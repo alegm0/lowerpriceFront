@@ -30,6 +30,8 @@ import ProfileCompany from "./View/profile/ProfileCompany";
 
 function App() {
   const { pathname } = window.location;
+  const accessToken = localStorage.getItem('access_token');
+  const isLoggedIn = accessToken ? true : false;
 
   return (
     <div className="App">
@@ -42,87 +44,92 @@ function App() {
             <Route exact path="/" component={Login} />
             <Route exact path="/recover-password/" component={RecoverPassword} />
             <Route exact path="/register" component={Register} />
-            <Route path="/home" component={Home} />
+            <PrivateRoute 
+              isAuthenticated={isLoggedIn} 
+              exact 
+              path="/home" 
+              component={Home} 
+            />
             <PrivateRoute
-              isAuthenticated={true}
+              isAuthenticated={isLoggedIn}
               exact
               path="/shopping-list"
               component={ShoppingList}
             />
             <PrivateRoute
-              isAuthenticated={true}
+              isAuthenticated={isLoggedIn}
               exact
               path="/my-products"
               component={MyProducts}
             />
             <PrivateRoute
-              isAuthenticated={true}
+              isAuthenticated={isLoggedIn}
               exact
               path="/create-products"
               component={CreateProduct}
             />
             <PrivateRoute
-              isAuthenticated={true}
+              isAuthenticated={isLoggedIn}
               exact
               path="/create-shopping-list"
               component={CreateShoppingList}
             />
             <PrivateRoute
-              isAuthenticated={true}
+              isAuthenticated={isLoggedIn}
               exact
               path="/create-branding"
               component={CreateBranding}
             />
             <PrivateRoute
-              isAuthenticated={true}
+              isAuthenticated={isLoggedIn}
               exact
               path="/create-product"
               component={CreateProduct}
             />
             <PrivateRoute
-              isAuthenticated={true}
+              isAuthenticated={isLoggedIn}
               exact
               path="/wishlist"
               component={Wishlist}
             />
             <PrivateRoute
-              isAuthenticated={true}
+              isAuthenticated={isLoggedIn}
               exact
               path="/products"
               component={Products}
             />
             <PrivateRoute
-              isAuthenticated={true}
+              isAuthenticated={isLoggedIn}
               exact
               path="/discounts"
               component={Discounts}
             />
             <PrivateRoute
-              isAuthenticated={true}
+              isAuthenticated={isLoggedIn}
               exact
               path="/setDiscounts"
               component={SetDiscounts}
             />
             <PrivateRoute
-              isAuthenticated={true}
+              isAuthenticated={isLoggedIn}
               exact
               path="/comments"
               component={Comments}
             />
             <PrivateRoute
-              isAuthenticated={true}
+              isAuthenticated={isLoggedIn}
               exact
               path="/checkComments"
               component={CheckComments}
             />
             <PrivateRoute
-              isAuthenticated={true}
+              isAuthenticated={isLoggedIn}
               exact
               path="/profile-company"
               component={ProfileCompany}
             />
             <PrivateRoute
-              isAuthenticated={true}
+              isAuthenticated={isLoggedIn}
               exact
               path="/profile-clients"
               component={Profile}
