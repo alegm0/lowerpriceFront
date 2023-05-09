@@ -46,6 +46,8 @@ function Register() {
     Object.keys(errors).forEach((e) => {
       errors[e] = !register[e] ? '*Campo es obligatorio' : '';
     });
+
+    
     errors['email'] = !emailRegex.test(register.email) ? '*Correo no valido' : '';
     errors['password'] = !contrasenaRegex.test(register.password) ? '*La contraseña no es valida' : '';
     errors['passwordRepeat'] = register.password !== register.passwordRepeat ? '*La contraseña coincide' : '';

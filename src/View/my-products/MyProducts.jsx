@@ -98,14 +98,21 @@ function MyProducts() {
 
   return (
     <div className="body-view">
-      <h1 className="title-marks-my-products">Menu</h1>
-      <p className="paragraph">A continuación se mostrará las diferentes elecciones, que usted podra tomar, con el fin de que conozca todas las opciones con respecto a los productos</p>
       <Container>
+        <Row >
+          <Col lg={11} md={11} sm={11}>
+            <h1 className="title-marks-my-products" style={{ position: "initial",paddingLeft:"0px" }}>Menú</h1>
+          </Col>
+        </Row>
+        <Row lg={11} md={1} sm={1}>
+          <Col>
+            <p className="paragraph2">A continuación se mostrará las diferentes elecciones, que usted podra tomar, con el fin de que conozca todas las opciones con respecto a los productos</p>
+          </Col>
+        </Row>
         <Row>
-
           {informationCards.map((event, index) => {
             return (
-              <Col className="d-flex flex-column  align-items-center" style={{ display: "inline", paddingBottom: "80px"}}>
+              <Col className="d-flex flex-column  align-items-center" style={{ display: "inline", paddingBottom: "80px" }}>
                 <Card style={{ width: "18rem", borderRadius: "20px" }}>
                   <Card.Header className="borderRadiusCardHeaderMenu">
                     <Card.Img
@@ -129,7 +136,7 @@ function MyProducts() {
                   <Card.Body style={{ paddingTop: "0px" }}>
                     <Card.Link
                       href={event.url}
-                      style={{ textAlign: "initial", textDecoration: "underline", color: "#137EBA", fontSize: "16px" }}
+                      style={{ textAlign: "center", textDecoration: "underline", color: "#137EBA", fontSize: "16px" }}
                     >
                       Ingresa aqui
                     </Card.Link>
