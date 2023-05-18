@@ -8,6 +8,7 @@ import check from "../../assets/img/check.svg";
 import uncheck from "../../assets/img/uncheck.svg";
 import "../../App.css";
 import deleteImg from "../../assets/img/deleteProduct.svg";
+import referencia from "../../assets/img/referencia.png";
 
 function ShoppingList() {
   const history = useHistory();
@@ -35,15 +36,15 @@ function ShoppingList() {
 
   const informationCards1 = [
     {
-      img: MySales,
-      name: "nombre del producto",
+      img: referencia,
+      name: "Producto",
       cantidad: "2",
       precio: "70000",
       fecha: "24/01/23"
 
     },
     {
-      img: MySales,
+      img: referencia,
       name: "nombre del producto",
       cantidad: "2",
       precio: "70000",
@@ -70,15 +71,16 @@ function ShoppingList() {
             <Button className="button-purple-home mb-3 mt-3" href='/setDiscounts' style={{ paddingTop: "auto", fontSize: "24px", height: "auto", width: "auto" }}>Generar reporte de gastos</Button>
           </Col>
         </Row>
-        <Row style={{ backgroundColor: '#FFFFFF',marginBottom:"3%" ,borderRadius: "20px", height:"80px"}}>
+        <Row style={{ backgroundColor: '#FFFFFF', marginBottom: "3%", borderRadius: "20px", height: "80px" }}>
           <Col style={{ display: "flex" }}>
-            <input type="checkbox" id="even" checked={true} style={{ backgroundColor: '#9DA0DF', width: "15%" }} >
-            </input>
+            {/* <input type="checkbox" id="even" checked={true} style={{ backgroundColor: '#9DA0DF', width: "15%" }} > */}
+            <input type="checkbox" id="myCheckbox" checked={true} className="custom-checkbox" ></input>
+            <label htmlFor="myCheckbox" className="checkbox-label"></label>
             <h1 style={{ paddingTop: "12px" }}>: 11</h1>
           </Col>
           <Col style={{ display: "flex" }}>
-            <input type="checkbox" id="even" checked={false} style={{ backgroundColor: '#9DA0DF', color: '#9DA0DF', width: "15%" }} >
-            </input>
+          <input type="checkbox" id="myCheckbox" checked={false} className="custom-checkbox" ></input>
+            <label htmlFor="myCheckbox" className="checkbox-label"></label>
             <h1 style={{ paddingTop: "12px" }}>: 11</h1>
           </Col>
 
@@ -94,7 +96,7 @@ function ShoppingList() {
               <Col lg={12} className="mt-1 d-flex" style={{ paddingLeft: "0px", paddingRight: "0px" }}>
                 <Card style={{ width: "100%", borderRadius: "20px", paddingLeft: "0px", paddingRight: "0px" }}>
                   <Card.Body style={{ display: "flex" }}>
-                    <input type="checkbox" id="even" checked={true} style={{ backgroundColor: '#9DA0DF', width: "5%" }} />
+                    <input type="checkbox" id="even" checked={true} style={{ marginRight:"25px", backgroundColor: '#9DA0DF', width: "5%" }} />
                     <Card.Img
                       variant="top"
                       className="mt-3 mb-3 styleImgCardHomeIn"
@@ -102,10 +104,11 @@ function ShoppingList() {
                       style={{
                         width:
                           "25%",
+                          marginRight: "4%",
                       }}
                     />
 
-                    <Col style={{ display: "block", marginTop:"3%" }}>
+                    <Col style={{ display: "block", marginTop: "3%" }}>
                       <Card.Title className="styleTitleCard">
                         {event.name}
                       </Card.Title>
@@ -117,9 +120,9 @@ function ShoppingList() {
                       </Card.Title>
                     </Col>
                     <Button className="button-purple-home mb-0 mt-5" >Ver producto</Button>
-                    <Col style={{ display: "block", marginTop:"3%" }}>
-                      <Card.Text className="styleTitleCard">
-                        Añadido el:
+                    <Col style={{ display: "block", marginTop: "3%" }}>
+                      <Card.Text className="styleTitleCard" style={{ textAlign: "center"}}>
+                        Añadido el:   
                         {event.fecha}
                       </Card.Text>
                       <Card.Link

@@ -202,6 +202,29 @@ h1 {
 }
 
 
+.custom-checkbox {
+  /* Ocultar el checkbox nativo */
+  display: none;
+}
+
+.checkbox-label {
+  /* Establecer el estilo del checkbox personalizado */
+  margin-top: 9px;
+  display: inline-block;
+  width: 15%;
+  height: 60px;
+  background-color: #ff0000; /* Color de fondo predeterminado */
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.custom-checkbox:checked + .checkbox-label {
+  /* Establecer el estilo cuando el checkbox está seleccionado */
+  background-color: #9DA0DF; /* Color de fondo cuando está seleccionado */
+}
+
+
+
 /* Fin de Estilos para HomeIn */
 
 @media (prefers-reduced-motion: no-preference) {
