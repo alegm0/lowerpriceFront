@@ -19,6 +19,7 @@ import Discounts from "./View/my-products/Discounts";
 import SetDiscounts from "./View/my-products/SetDiscounts";
 import Comments from "./View/my-products/Comments";
 import CheckComments from "./View/my-products/CheckComments";
+import Technical_support from "./View/support/technical-support";
 
 /* CONTEXT */
 import State from "./context/state";
@@ -30,6 +31,7 @@ import ProfileCompany from "./View/profile/ProfileCompany";
 
 function App() {
   const { pathname } = window.location;
+
 
   return (
     <div className="App">
@@ -127,10 +129,20 @@ function App() {
               path="/profile-clients"
               component={Profile}
             />
+            <PrivateRoute
+              isAuthenticated={true}
+              exact
+              path="/technical_support"
+              component={Technical_support}
+            />
           </Switch>
         </Router>
       </State>
+
     </div>
+
+
+
   );
 }
 

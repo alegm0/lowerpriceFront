@@ -6,6 +6,8 @@ import referencia from "../../assets/img/referencia.png";
 import { useHistory } from 'react-router';
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import iconoAtras from '../../assets/img/icono-atras.svg';
+import wishAdd from '../../assets/img/wishlistBlack.png';
+import wishRemove from '../../assets/img/navbar/wishlist-icon.svg';
 import axios from 'axios';
 import { urlRequest } from '../../urlRequest';
 import Swal from 'sweetalert2';
@@ -26,6 +28,7 @@ function Products() {
         const selectedId = event.target.value;
         setBrandFilter(selectedId);
     };
+
     useEffect(() => {
         getCategory();
         getBrand();
@@ -57,7 +60,14 @@ function Products() {
     const getListProducts = () => {
         axios.get(`${urlRequest}/product/list`, [])
             .then(function (response) {
-                setInformationCards(response.data.data);
+                const productsWithFavorites = response.data.data.map((product) => ({
+                    ...product,
+                    favorito: false, // Inicialmente, todos los productos no son favoritos
+                }));
+                setInformationCards(productsWithFavorites);
+
+
+                //  setInformationCards(response.data.data);
             })
             .catch(function (error) {
                 console.log(error);
@@ -91,7 +101,7 @@ function Products() {
     }
     const filteredProducts = informationCards.filter((product) => {
         console.log(categoryFilter, brandFilter)
-        console.log(product.category_id,product.brand_id)
+        console.log(product.category_id, product.brand_id)
         if (categoryFilter && brandFilter) {
             return product.category_id === categoryFilter && product.brand_id === brandFilter;
         } else if (categoryFilter) {
@@ -102,6 +112,40 @@ function Products() {
             return true;
         }
     });
+
+
+    // const toggleFavorite = (productId) => {
+    //     const updatedProducts = informationCards.map((product) => {
+    //         if (product.id === productId) {
+    //             return {
+    //                 ...product,
+    //                 favorito: !product.favorito, // Invierte el valor del favorito
+    //             };
+    //         }
+    //         return product;
+    //     });
+    //     setInformationCards(updatedProducts);
+    // };
+
+    const toggleFavorite = (productId) => {
+        setInformationCards((prevProducts) =>
+          prevProducts.map((product) =>
+            product.id === productId
+              ? { ...product, favorito: !product.favorito }
+              : product
+          )
+        );
+      };
+      const handleFavoriteClick = (productId) => {
+        toggleFavorite(productId);
+        Swal.fire({
+            title: '¡Agregado a la wishlist!',
+            text: 'Se ha agregado a la wishlist.',
+            icon: 'success',
+            confirmButtonText: 'Continuar',
+            confirmButtonColor: 'rgb(157 160 223)',
+        })
+      };
 
 
     return (
@@ -130,7 +174,7 @@ function Products() {
                     <Row>
                         <Col lg={6} md={6} sm={12}>
                             <h1 className="second-Title">Seleccione una categoria</h1>
-                            <select className="inputDiscounts" name="id" onChange={handleCategoryFilter}  value={category.id}>
+                            <select className="inputDiscounts" name="id" onChange={handleCategoryFilter} value={category.id}>
                                 <option value="option1">Seleccione la categoria</option>
                                 {category.map(({ id, name }) => (
                                     <option value={id}>{name}</option>
@@ -141,7 +185,7 @@ function Products() {
                         </Col>
                         <Col lg={6} md={6} sm={12} >
                             <h1 className="second-Title">Seleccione una marca</h1>
-                            <select className="inputDiscounts" name="id" onChange={handleBrandFilter}  value={brand.id}>
+                            <select className="inputDiscounts" name="id" onChange={handleBrandFilter} value={brand.id}>
                                 <option value="option1">Seleccione la marca</option>
                                 {brand.map(({ id, name }, index) => (
                                     <option value={id}>{name}</option>
@@ -182,19 +226,24 @@ function Products() {
                                             <Card.Title className="styleTitleCardMenu" >
                                                 {producto.name}
                                             </Card.Title>
+
+
                                         </Card.Body>
-                                        <Card.Body style={{ display: "flex", paddingTop: "0px", paddingoLeft: "0px", paddingRight: "0px" }}>
+                                        <Card.Body style={{ display: "flex", paddingTop: "0px", paddingoLeft: "0px" }}>
                                             <Card.Link href={event.url1} style={{ width: "25%" }}>
-                                                <img src={setImg} alt="Edit" onClick={() => history.push("/create-products", { id: event.id })} />
+                                                <img src={setImg} alt="Edit" onClick={() => history.push("/create-products", { id: producto.id })} />
                                             </Card.Link>
-                                            <Card.Link onClick={() => deleteProduct(event.id)} style={{ width: "25%" }}
+                                            <Card.Link onClick={() => deleteProduct(producto.id)} style={{ width: "25%" }}
                                             >
                                                 <img src={deleteImg} alt="delete" />
                                             </Card.Link>
                                             <Card.Link
-                                                onClick={() => history.push("/checkComments", { id: event.id })} style={{ width: "25%" }}
+                                                onClick={() => history.push("/checkComments", { id: producto.id })} style={{ width: "25%" }}
                                             >
                                                 <img src={seeImg} alt="show" />
+                                            </Card.Link  >
+                                            <Card.Link onClick={() => handleFavoriteClick(producto.id)} >
+                                                <img src={producto.isFavorite ? wishRemove : wishAdd} style={{ width: "85%" }} alt="wish" />
                                             </Card.Link>
 
                                         </Card.Body>

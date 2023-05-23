@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import MyProducts from "../../assets/img/products-mine.png";
@@ -7,12 +7,14 @@ import MySales from "../../assets/img/my-sales.png";
 import check from "../../assets/img/check.svg";
 import uncheck from "../../assets/img/uncheck.svg";
 import "../../App.css";
+import axios from 'axios';
+import { urlRequest } from '../../urlRequest';
 import deleteImg from "../../assets/img/deleteProduct.svg";
 import referencia from "../../assets/img/referencia.png";
 
 function ShoppingList() {
   const history = useHistory();
-  const informationCards = [
+  const informationCards= [
     {
       img: MyProducts,
       title: "Mis productos",
@@ -36,14 +38,17 @@ function ShoppingList() {
 
   const informationCards1 = [
     {
+      id:1,
       img: referencia,
       name: "Producto",
       cantidad: "2",
       precio: "70000",
       fecha: "24/01/23"
 
+
     },
     {
+      id:2,
       img: referencia,
       name: "nombre del producto",
       cantidad: "2",
@@ -54,6 +59,41 @@ function ShoppingList() {
     },
 
   ];
+
+  // const marcarProductoComprado = (id) => {
+  //   const productosActualizados = informationCards1.map((e) => {
+  //     if (informationCards1.id === id) {
+  //       return { ...informationCards1, comprado: !informationCards1.comprado };
+  //     }
+  //     return informationCards1;
+
+  //   });
+  //   setInformationCards1(productosActualizados);
+  // };
+
+  const [check, setCheck] = useState({});
+
+  const marcarProductoComprado = (id) => {
+    setCheck((prevCheck) => ({
+      ...prevCheck,
+      [id]: !prevCheck[id]
+    }));
+  };
+  const [favoriteProducts, setFavoriteProducts] = useState([]);
+  useEffect(() => {
+    // Aquí realizarías la llamada a la API para obtener los productos favoritos
+    axios
+      .get(`${urlRequest}/product/list`)
+      .then(function (response) {
+        const productsWithFavorites = response.data.data.filter(
+          (product) => product.isFavorite === true
+        );
+        setFavoriteProducts(productsWithFavorites);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <div className="body-view">
@@ -73,20 +113,16 @@ function ShoppingList() {
         </Row>
         <Row style={{ backgroundColor: '#FFFFFF', marginBottom: "3%", borderRadius: "20px", height: "80px" }}>
           <Col style={{ display: "flex" }}>
-            {/* <input type="checkbox" id="even" checked={true} style={{ backgroundColor: '#9DA0DF', width: "15%" }} > */}
-            <input type="checkbox" id="myCheckbox" checked={true} className="custom-checkbox" ></input>
-            <label htmlFor="myCheckbox" className="checkbox-label"></label>
-            <h1 style={{ paddingTop: "12px" }}>: 11</h1>
+          <input type="checkbox" id="even" checked={true} style={{ marginRight:"2px",marginLeft:"11px", backgroundColor: '#9DA0DF', width: "15%" }} />
+            <h1 style={{ paddingTop: "12px" }}>:{informationCards1.length}</h1>
           </Col>
           <Col style={{ display: "flex" }}>
-          <input type="checkbox" id="myCheckbox" checked={false} className="custom-checkbox" ></input>
-            <label htmlFor="myCheckbox" className="checkbox-label"></label>
-            <h1 style={{ paddingTop: "12px" }}>: 11</h1>
+          <input type="checkbox" id="even" checked={false} style={{ marginRight:"2px", backgroundColor: '#9DA0DF', width: "15%" }} />
+            <h1 style={{ paddingTop: "12px" }}>:{informationCards1.length}</h1>
           </Col>
 
           <Col>
-            <h1 style={{ paddingTop: "12px" }}>Favoritos: 2</h1>
-
+            <h1 style={{ paddingTop: "12px" }}>Favoritos: {informationCards1.length}</h1>
           </Col>
 
         </Row>
@@ -96,7 +132,7 @@ function ShoppingList() {
               <Col lg={12} className="mt-1 d-flex" style={{ paddingLeft: "0px", paddingRight: "0px" }}>
                 <Card style={{ width: "100%", borderRadius: "20px", paddingLeft: "0px", paddingRight: "0px" }}>
                   <Card.Body style={{ display: "flex" }}>
-                    <input type="checkbox" id="even" checked={true} style={{ marginRight:"25px", backgroundColor: '#9DA0DF', width: "5%" }} />
+                    <input type="checkbox" id="even"  onChange={marcarProductoComprado} style={{ marginRight:"25px", backgroundColor: '#9DA0DF', width: "5%" }} />
                     <Card.Img
                       variant="top"
                       className="mt-3 mb-3 styleImgCardHomeIn"
@@ -119,7 +155,7 @@ function ShoppingList() {
                         $ {event.precio}
                       </Card.Title>
                     </Col>
-                    <Button className="button-purple-home mb-0 mt-5" >Ver producto</Button>
+                    <Button className="button-purple-home mb-0 mt-5" href="/products" >Ver producto</Button>
                     <Col style={{ display: "block", marginTop: "3%" }}>
                       <Card.Text className="styleTitleCard" style={{ textAlign: "center"}}>
                         Añadido el:   
@@ -138,8 +174,6 @@ function ShoppingList() {
               </Col>
             );
           })}
-
-
         </Row>
       </Container>
     </div>
