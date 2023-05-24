@@ -1,7 +1,6 @@
 import React, { useState, useEffect} from "react";
 import { useHistory } from "react-router";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
-import iconEdit from '../../assets/img/navbar/icono-editar.svg';
 import iconDelete from '../../assets/img/navbar/icono-eliminar.svg';
 
 import "./Profile.css";

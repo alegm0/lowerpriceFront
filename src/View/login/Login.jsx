@@ -1,24 +1,19 @@
-// import React, { useState } from "react";
 import React, { useState, useEffect } from "react";
 import { gapi } from "gapi-script";
 import GoogleLogin from "react-google-login";
+import React, { useState } from "react";
 import axios from 'axios';
 import { urlRequest } from '../../urlRequest';
 import { useHistory } from "react-router";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import Button from "@restart/ui/esm/Button";
-//import loginImg from "../../assets/img/loginImg.svg";
 import loginImgI from "../../assets/img/loginIcon.png";
-//import logo from "../../assets/img/logo.svg";
 import userU from "../../assets/img/email.png";
 import passwordu from "../../assets/img/forgot.png";
-import Swal from 'sweetalert2';
-
-
+import jwt from 'jsonwebtoken';
 
 function Login() {
   const history = useHistory();
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState("");
@@ -76,10 +71,8 @@ function Login() {
       setError2("");
 
     }
-    setPassword(newPassword);;
-
+    setPassword(newPassword);
   };
-
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -91,14 +84,16 @@ function Login() {
     if (email && password && error === "" && error2 === "") {
       axios.post(`${urlRequest}/login`, data)
         .then(response => {
-          console.log(response);
           if (response.status === 200) {
+            localStorage.setItem('access_token',response.data.access_token);
+            const decoded = jwt.decode(response.data.access_token);
+            localStorage.setItem('role',decoded.sub);
             history.push('/home');
+            window.location.reload();
           }
 
         })
         .catch(error => {
-          console.log(error);
           setError2("Correo o contraseña incorrecta");
         });
 

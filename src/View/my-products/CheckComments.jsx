@@ -41,7 +41,9 @@ function CheckComments() {
       padding: 10,
     },
   };
+  // eslint-disable-next-line no-unused-vars
   const [currentValue, setCurrentValue] = useState(0);
+  // eslint-disable-next-line no-unused-vars
   const [hoverValue, setHoverValue] = useState(undefined);
   const [informationCards, setInformationCards] = useState({});
   const [informationProduct, setInformationProduct] = useState({});

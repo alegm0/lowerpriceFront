@@ -21,7 +21,7 @@ export const Routes = [
         title: 'Comparar',
         icon: Balanza,
         alt: 'icon-balanza',
-        url: 'product',
+        url: '/comparison-list',
     },
     {
         title: 'Lista deseos',
@@ -39,7 +39,7 @@ export const Routes = [
         title: 'Perfil',
         icon: Profile,
         alt: 'icon-profile',
-        url: '/profile-clients',
+        url: localStorage.getItem('role') === '1' ? '/profile-clients' : '/profile-company',
     },
     {
         title: 'Mapa',
