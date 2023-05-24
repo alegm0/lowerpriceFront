@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
-import axios from 'axios';
-import { urlRequest } from '../../urlRequest';
 import './MyProducts.css';
 
 import DiscountImg from '../../assets/img/navbar/discount.svg';
@@ -41,7 +39,9 @@ function MyProducts() {
       newItems.splice(informationCard, 1); // Elimina el elemento del array
       setInformationCard(newItems); 
     }
+// eslint-disable-next-line react-hooks/exhaustive-deps
 }, []);
+
   return (
     <div className="body-view">
       <Container>

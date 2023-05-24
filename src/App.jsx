@@ -19,6 +19,7 @@ import Discounts from "./View/my-products/Discounts";
 import SetDiscounts from "./View/my-products/SetDiscounts";
 import Comments from "./View/my-products/Comments";
 import CheckComments from "./View/my-products/CheckComments";
+import ComparisonList from "./View/comparison-list/ComparisonList";
 
 /* CONTEXT */
 import State from "./context/state";
@@ -89,7 +90,7 @@ function App() {
             <PrivateRoute
               isAuthenticated={isLoggedIn}
               exact
-              path="/wishlist"
+              path="/wish-list"
               component={Wishlist}
             />
             <PrivateRoute
@@ -133,6 +134,12 @@ function App() {
               exact
               path="/profile-clients"
               component={Profile}
+            />
+            <PrivateRoute
+              isAuthenticated={isLoggedIn}
+              exact
+              path="/comparison-list"
+              component={ComparisonList}
             />
           </Switch>
         </Router>

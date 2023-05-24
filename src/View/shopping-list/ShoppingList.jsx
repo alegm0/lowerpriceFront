@@ -1,95 +1,74 @@
 import React from "react";
-import { useHistory } from "react-router";
 import { Card, Col, Container, Row } from "react-bootstrap";
-import MyProducts from "../../assets/img/products-mine.png";
-import AddProducts from "../../assets/img/add-product.png";
-import MySales from "../../assets/img/my-sales.png";
+import list from "../../assets/img/icono-lista.png";
+import report from "../../assets/img/icono-reporte.png";
 
 import "../../App.css";
 
 function ShoppingList() {
-    const history = useHistory();
   const informationCards = [
     {
-      img: MyProducts,
-      title: "Mis productos",
-      text: "Aqui podras consultar tus productos publicados",
-      url: "/my-products",
+      img: list,
+      title: "Lista de deseos",
+      text: "Aqui podras añadir productos para crear tu lista de deseos",
+      url: "/wish-list",
     },
     {
-      img: AddProducts,
-      title: "Añadir productos",
-      text: "Aqui podras añadir productos y publicarlos para la venta",
-      url: "/create-product",
-    },
-    {
-      img: MySales,
-      title: "Mis ventas",
-      text: "Aqui podras consultar tu historial de ventas realizadas",
-      url: "#",
+      img: report,
+      title: "Reportes",
+      text: "Aqui podras consultar tu historial de lista de deseos",
+      url: "/report-list",
     },
   ];
 
   return (
-    <div className="pt-5 ml-5" style={{ height: "91vh" }}>
-      <Container className="margin-top-for-all">
-        <Row>
-          <Col lg={12}>
-            <h1 className="titleHomeIn ">Opciones</h1>
-          </Col>
-          {informationCards.map((event, index) => {
-            return (
-              <Col lg={4} className="mt-4 d-flex">
-                <Card style={{ width: "18rem", borderRadius: "20px" }}>
-                  <Card.Header className="borderRadiusCardHeader">
-                    <Card.Img
-                      variant="top"
-                      className="mt-3 mb-3 styleImgCardHomeIn"
-                      src={event.img}
-                      style={{
-                        width:
-                          index === 1 ? "6.2rem" : index === 2 ? "9.8rem" : "",
-                      }}
-                    />
-                  </Card.Header>
-                  <Card.Body>
-                    <Card.Title className="styleTitleCard">
-                      {event.title}
-                    </Card.Title>
-                    <Card.Text className="styleSubTitleCard">
-                      {event.text}
-                    </Card.Text>
-                  </Card.Body>
-                  <Card.Body>
-                    <Card.Link
-                      href={event.url}
-                      style={{ textAlign: "initial" }}
-                    >
-                      Comienza aqui
-                    </Card.Link>
-                  </Card.Body>
-                </Card>
-              </Col>
-            );
-          })}
-        </Row>
-      </Container>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          width: "40%",
-          margin: "auto",
-        }}
-      >
-        <button
-          className="button-red btn-finish"
-          onClick={() => history.goBack()}
-        >
-          ATRÁS
-        </button>
-      </div>
-    </div>
+    <div className="body-view">
+    <Container>
+      <Row >
+        <Col lg={11} md={11} sm={11}>
+          <h1 className="title-marks-my-products" style={{ position: "initial",paddingLeft:"0px" }}>Menú</h1>
+        </Col>
+      </Row>
+      <Row lg={11} md={1} sm={1}>
+        <Col>
+          <p className="paragraph2">A continuación se mostrará las diferentes elecciones, que usted podra tomar, con el fin de que conozca todas las opciones con respecto a la lista de deseos</p>
+        </Col>
+      </Row>
+      <Row>
+        {informationCards.map((event) => {
+          return (
+            <Col className="d-flex flex-column  align-items-center" style={{ display: "inline", paddingBottom: "80px" }}>
+              <Card style={{ width: "18rem", borderRadius: "20px" }}>
+                <Card.Header className="borderRadiusCardHeaderMenu">
+                  <Card.Img
+                    variant="top"
+                    className="mt-3 mb-3 styleImgCardHomeIn"
+                    src={event.img}
+                  />
+                </Card.Header>
+                <Card.Body>
+                  <Card.Title className="styleTitleCardMenu" >
+                    {event.title}
+                  </Card.Title>
+                  <Card.Text className="styleSubTitleCardMenu">
+                    {event.text}
+                  </Card.Text>
+                </Card.Body>
+                <Card.Body style={{ paddingTop: "0px" }}>
+                  <Card.Link
+                    href={event.url}
+                    style={{ textAlign: "center", textDecoration: "underline", color: "#137EBA", fontSize: "16px" }}
+                  >
+                    Ingresa aqui
+                  </Card.Link>
+                </Card.Body>
+              </Card>
+            </Col>
+          );
+        })}
+      </Row>
+    </Container>
+  </div>
   );
 }
 

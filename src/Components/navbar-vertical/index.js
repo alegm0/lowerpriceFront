@@ -21,7 +21,7 @@ export const Routes = [
         title: 'Comparar',
         icon: Balanza,
         alt: 'icon-balanza',
-        url: '/product',
+        url: '/comparison-list',
     },
     {
         title: 'Lista deseos',
