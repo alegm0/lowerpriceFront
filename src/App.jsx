@@ -19,6 +19,7 @@ import Discounts from "./View/my-products/Discounts";
 import SetDiscounts from "./View/my-products/SetDiscounts";
 import Comments from "./View/my-products/Comments";
 import CheckComments from "./View/my-products/CheckComments";
+import Technical_support from "./View/support/technical-support";
 import ComparisonList from "./View/comparison-list/ComparisonList";
 
 /* CONTEXT */
@@ -33,6 +34,7 @@ function App() {
   const { pathname } = window.location;
   const accessToken = localStorage.getItem('access_token');
   const isLoggedIn = accessToken ? true : false;
+
 
   return (
     <div className="App">
@@ -138,13 +140,24 @@ function App() {
             <PrivateRoute
               isAuthenticated={isLoggedIn}
               exact
+              path="/technical_support"
+              component={Technical_support}
+             />
+            <PrivateRoute
+              isAuthenticated={isLoggedIn}
+              exact
               path="/comparison-list"
               component={ComparisonList}
+              />
             />
           </Switch>
         </Router>
       </State>
+
     </div>
+
+
+
   );
 }
 
