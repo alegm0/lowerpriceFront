@@ -1,24 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { useHistory } from "react-router";
-import { Button, Card, Col, Container, Row } from "react-bootstrap";
-import MyProducts from "../../assets/img/products-mine.png";
-import AddProducts from "../../assets/img/add-product.png";
-import MySales from "../../assets/img/my-sales.png";
-import check from "../../assets/img/check.svg";
-import uncheck from "../../assets/img/uncheck.svg";
 import React from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import list from "../../assets/img/icono-lista.png";
 import report from "../../assets/img/icono-reporte.png";
 
 import "../../App.css";
-import axios from 'axios';
-import { urlRequest } from '../../urlRequest';
-import deleteImg from "../../assets/img/deleteProduct.svg";
-import referencia from "../../assets/img/referencia.png";
 
 function ShoppingList() {
-  const history = useHistory();
   const informationCards = [
     {
       img: list,
@@ -33,55 +20,6 @@ function ShoppingList() {
       url: "/report-list",
     },
   ];
-
-
-  const informationCards1 = [
-    {
-      id:1,
-      img: referencia,
-      name: "Producto",
-      cantidad: "2",
-      precio: "70000",
-      fecha: "24/01/23"
-
-
-    },
-    {
-      id:2,
-      img: referencia,
-      name: "nombre del producto",
-      cantidad: "2",
-      precio: "70000",
-      fecha: "24/01/23"
-
-
-    },
-
-  ];
-
-  const [check, setCheck] = useState({});
-
-  const marcarProductoComprado = (id) => {
-    setCheck((prevCheck) => ({
-      ...prevCheck,
-      [id]: !prevCheck[id]
-    }));
-  };
-  const [favoriteProducts, setFavoriteProducts] = useState([]);
-  useEffect(() => {
-    // Aquí realizarías la llamada a la API para obtener los productos favoritos
-    axios
-      .get(`${urlRequest}/product/list`)
-      .then(function (response) {
-        const productsWithFavorites = response.data.data.filter(
-          (product) => product.isFavorite === true
-        );
-        setFavoriteProducts(productsWithFavorites);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }, []);
 
   return (
     <div className="body-view">
