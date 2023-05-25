@@ -70,14 +70,15 @@
     width: 60px;
     height: 60px;
     text-decoration: none !important;
+    margin-right: 20px;
 }
 
 .link-red-social-navbar:first-child {
-    margin-right: 34px;
+    margin-right: 20px;
 }
 
 .link-red-social-navbar:last-child {
-    margin-left: 34px;
+    margin-left: 1px;
 }
 
 .link-navbar:hover {

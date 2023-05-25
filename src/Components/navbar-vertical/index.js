@@ -7,7 +7,7 @@ import Map from '../../assets/img/navbar/map-icon.svg';
 import Facebook from '../../assets/img/navbar/facebook-icon.svg';
 import Instagram from '../../assets/img/navbar/instagram-icon.svg';
 import Twitter from '../../assets/img/navbar/twitter-icon.svg';
-
+import support from '../../assets/img/soporte.png';
 export { default } from './NavbarVertical';
 
 export const Routes = [
@@ -66,8 +66,8 @@ export const RedSocials = [
         link: 'https://twitter.com'
     },
     {
-        icon: Twitter,
-        alt: 'icon-twitter',
+        icon: support,
+        alt: 'icon-support',
         link: '/technical_support'
     }
 ];
