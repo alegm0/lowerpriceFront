@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { gapi } from "gapi-script";
+import GoogleLogin from "react-google-login";
 import axios from 'axios';
 import { urlRequest } from '../../urlRequest';
 import { useHistory } from "react-router";
@@ -28,6 +30,37 @@ function Login() {
     setEmail(newEmail);
   };
 
+  const clientID = "240204035171-nola6klc59kianch63n8vpq88k42kv1j.apps.googleusercontent.com";
+  const [user, setUser] = useState({});
+
+  const onSuccess = (response) => {
+    console.log(response)
+    setUser(response.profileObj);
+    document.getElementsByClassName("btn").hidden = true;
+    const data1 = {
+      email: user.email,
+      password: user.googleId,
+    };
+    //axios.post(`${urlRequest}/login`, data1)
+    // history.push('/home');
+    // window.location.reload();
+  }
+  const onFailure = () => {
+    console.log("Something went wrong");
+  }
+
+
+
+  //iniciar servicio de google
+  useEffect(() => {
+    const start = () => {
+      gapi.auth2.init({
+        clientId: clientID,
+      })
+    }
+    gapi.load("client:auth2", start)
+
+  }, [])
 
   const handlePasswordChange = (e) => {
     const newPassword = e.target.value;
@@ -110,6 +143,15 @@ function Login() {
                 >
                   INICIAR SESIÓN
                 </Button>
+                <p style={{ marginTop: "10px", marginBottom: "10px" }}>ó</p>
+                <GoogleLogin
+                  clientId={clientID}
+                  onSuccess={onSuccess}
+                  onFailure={onFailure}
+                  buttonText="Continue  with Google"
+                  cookiePolicy={"single_host_origin"}
+
+                />
                 <div>
                   <a
                     href="/recover-password"

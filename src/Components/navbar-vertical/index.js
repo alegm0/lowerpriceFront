@@ -46,7 +46,7 @@ export const Routes = [
         icon: Map,
         alt: 'icon-map',
         url: 'product',
-    },
+    }
 ];
 
 export const RedSocials = [
@@ -65,4 +65,9 @@ export const RedSocials = [
         alt: 'icon-twitter',
         link: 'https://twitter.com'
     },
+    {
+        icon: Twitter,
+        alt: 'icon-twitter',
+        link: '/technical_support'
+    }
 ];

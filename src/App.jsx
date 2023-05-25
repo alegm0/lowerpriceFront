@@ -20,6 +20,7 @@ import SetDiscounts from "./View/my-products/SetDiscounts";
 import Comments from "./View/my-products/Comments";
 import CheckComments from "./View/my-products/CheckComments";
 import ComparisonList from "./View/comparison-list/ComparisonList";
+import Technical_support from "./View/support/technical-support";
 
 /* CONTEXT */
 import State from "./context/state";
@@ -136,11 +137,17 @@ function App() {
               component={Profile}
             />
             <PrivateRoute
-              isAuthenticated={isLoggedIn}
+              isAuthenticated={true}
               exact
               path="/comparison-list"
               component={ComparisonList}
             />
+             <PrivateRoute
+              isAuthenticated={true}
+              exact
+              path="/technical_support"
+              component={Technical_support}
+             />
           </Switch>
         </Router>
       </State>
