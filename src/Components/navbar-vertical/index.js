@@ -46,7 +46,7 @@ export const Routes = [
         title: 'Mapa',
         icon: Map,
         alt: 'icon-map',
-        url: 'product',
+        url: '/maps',
     },
     {
         title: 'cerrar sesion',

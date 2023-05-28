@@ -17,7 +17,7 @@ function HomeIn() {
             </p>
           </Col>
           <Col lg={12} className="content-home content-body-home">
-              <Button className="button-purple-home">
+              <Button className="button-purple-home" href="/comparison-list">
                   Explorar ahora!
               </Button>
               <img src={ImgHome} alt='Imagen Home' className="logo-body-home"/>

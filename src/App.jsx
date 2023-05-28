@@ -21,6 +21,7 @@ import Comments from "./View/my-products/Comments";
 import CheckComments from "./View/my-products/CheckComments";
 import ComparisonList from "./View/comparison-list/ComparisonList";
 import Technical_support from "./View/support/technical-support";
+import Maps from "./View/maps/Maps";
 
 /* CONTEXT */
 import State from "./context/state";
@@ -46,11 +47,11 @@ function App() {
             <Route exact path="/" component={Login} />
             <Route exact path="/recover-password/" component={RecoverPassword} />
             <Route exact path="/register" component={Register} />
-            <PrivateRoute 
-              isAuthenticated={isLoggedIn} 
-              exact 
-              path="/home" 
-              component={Home} 
+            <PrivateRoute
+              isAuthenticated={isLoggedIn}
+              exact
+              path="/home"
+              component={Home}
             />
             <PrivateRoute
               isAuthenticated={isLoggedIn}
@@ -147,7 +148,14 @@ function App() {
               exact
               path="/technical_support"
               component={Technical_support}
-             />
+            />
+
+            <PrivateRoute
+              isAuthenticated={isLoggedIn}
+              exact
+              path="/maps"
+              component={Maps}
+            />
           </Switch>
         </Router>
       </State>
