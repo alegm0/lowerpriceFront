@@ -17,8 +17,9 @@ function Discounts() {
   }, []);
 
   const getListDiscounts = () => {
+    const id = localStorage.getItem('id');
     axios
-      .get(`${urlRequest}/discount-promotions`, [])
+      .get(`${urlRequest}/discount-promotions/${id}`, [])
       .then(function (response) {
         setDiscounts(response.data.data);
       })

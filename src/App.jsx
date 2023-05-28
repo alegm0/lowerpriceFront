@@ -137,13 +137,13 @@ function App() {
               component={Profile}
             />
             <PrivateRoute
-              isAuthenticated={true}
+              isAuthenticated={isLoggedIn}
               exact
               path="/comparison-list"
               component={ComparisonList}
             />
              <PrivateRoute
-              isAuthenticated={true}
+              isAuthenticated={isLoggedIn}
               exact
               path="/technical_support"
               component={Technical_support}

@@ -17,6 +17,7 @@ function Products() {
     const [informationCards, setInformationCards] = useState([]);
     const [brand, setBrand] = useState([]);
     const [category, setCategory] = useState([]);
+    const id = localStorage.getItem('id');
 
     const handleCategoryFilter = (event) => {
         const selectedId = event.target.value;
@@ -55,7 +56,7 @@ function Products() {
     }, []);
 
     const getListProducts = () => {
-        axios.get(`${urlRequest}/product/list`, [])
+        axios.get(`${urlRequest}/product/list/${id}`, [])
             .then(function (response) {
                 setInformationCards(response.data.data);
             })
@@ -127,7 +128,7 @@ function Products() {
 
                         </Col>
                     </Row>
-                    <Row>
+                    {/* <Row>
                         <Col lg={6} md={6} sm={12}>
                             <h1 className="second-Title">Seleccione una categoria</h1>
                             <select className="inputDiscounts" name="id" onChange={handleCategoryFilter}  value={category.id}>
@@ -152,7 +153,7 @@ function Products() {
                             <p>El id marca es: {brandFilter}</p>
 
                         </Col>
-                    </Row>
+                    </Row> */}
                     <Row lg={3} md={2} sm={1}>
                         {filteredProducts.length === 0 ? (
                             <p>No se encontraron productos</p>
@@ -185,14 +186,14 @@ function Products() {
                                         </Card.Body>
                                         <Card.Body style={{ display: "flex", paddingTop: "0px", paddingoLeft: "0px", paddingRight: "0px" }}>
                                             <Card.Link href={event.url1} style={{ width: "25%" }}>
-                                                <img src={setImg} alt="Edit" onClick={() => history.push("/create-products", { id: event.id })} />
+                                                <img src={setImg} alt="Edit" onClick={() => history.push("/create-products", { id: producto.id })} />
                                             </Card.Link>
-                                            <Card.Link onClick={() => deleteProduct(event.id)} style={{ width: "25%" }}
+                                            <Card.Link onClick={() => deleteProduct(producto.id)} style={{ width: "25%" }}
                                             >
                                                 <img src={deleteImg} alt="delete" />
                                             </Card.Link>
                                             <Card.Link
-                                                onClick={() => history.push("/checkComments", { id: event.id })} style={{ width: "25%" }}
+                                                onClick={() => history.push("/checkComments", { id: producto.id })} style={{ width: "25%" }}
                                             >
                                                 <img src={seeImg} alt="show" />
                                             </Card.Link>

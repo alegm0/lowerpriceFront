@@ -4,6 +4,7 @@ import Wishlist from '../../assets/img/navbar/wishlist-icon.svg';
 import Market from '../../assets/img/navbar/market-icon.svg';
 import Profile from '../../assets/img/navbar/profile-icon.svg';
 import Map from '../../assets/img/navbar/map-icon.svg';
+import Salir from '../../assets/img/navbar/Salir.svg';
 import Facebook from '../../assets/img/navbar/facebook-icon.svg';
 import Instagram from '../../assets/img/navbar/instagram-icon.svg';
 import Twitter from '../../assets/img/navbar/twitter-icon.svg';
@@ -46,6 +47,12 @@ export const Routes = [
         icon: Map,
         alt: 'icon-map',
         url: 'product',
+    },
+    {
+        title: 'cerrar sesion',
+        icon: Salir,
+        alt: 'icono-salir',
+        url: '',
     }
 ];
 

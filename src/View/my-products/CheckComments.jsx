@@ -61,11 +61,7 @@ function CheckComments() {
     setHoverValue(undefined);
   };
 
-  // useEffect(() => {
-  //   if (state?.id) getProduct(state.id);
-  //   getCommentByProduct(state.id);
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [state]);
+
   useEffect(() => {
     if (state?.id) {
       getProduct(state.id);
@@ -77,10 +73,6 @@ function CheckComments() {
     axios
       .get(`${urlRequest}/product/${id}`)
       .then(function (response) {
-        // setInformationProduct({
-        //   name: response.data.data.name,
-        //   brand_name: response.data.data.brand.name
-        // });
         setInformationProduct(response.data.data);
       })
       .catch(function (error) {

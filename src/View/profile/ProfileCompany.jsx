@@ -30,13 +30,12 @@ function ProfileCompany() {
         getCity();
     }, []);
 
-
     //Data Information profile person
     const [information, setInformation] = useState({
         name: '',
         email: '',
         phone: 0,
-        website: '', 
+        website: '',
         size_company: '',
         is_active: true,
         address_description: '',

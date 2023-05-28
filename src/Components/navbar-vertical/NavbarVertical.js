@@ -3,8 +3,18 @@ import { Link } from 'react-router-dom';
 import { RedSocials, Routes } from '.';
 import LogoNavbar from '../../assets/img/navbar/logo-session.svg';
 import './NavbarVertical.css';
+import axios from 'axios';
+import { urlRequest } from '../../urlRequest';
 
 function NavbarVertical () {
+    const logout = () => {
+        try {
+          // El cierre de sesión fue exitoso, realiza cualquier otra acción necesaria
+        } catch (error) {
+          // Maneja el error en caso de que ocurra
+          console.error('Error al cerrar sesión:', error);
+        }
+      };
     return (
         <div className="navbar-vertical">
             <div className="content-logo-navbar">
@@ -16,7 +26,12 @@ function NavbarVertical () {
                 {Routes.map(({icon, alt, title, url}, index) => (
                     <div className="link-navbar" key={index}>
                         <img src={icon} alt={alt} className="link-navbar-icon"/>
-                        <Link to={url} className="m-auto link-navbar-title">{title}</Link>
+                        {title === 'cerrar sesion' ?
+                            <Link to={logout} className="m-auto link-navbar-title">{title}</Link>
+                        :
+                            <Link to={url} className="m-auto link-navbar-title">{title}</Link> 
+                        }
+                        
                     </div>
                 ))}
             </div>

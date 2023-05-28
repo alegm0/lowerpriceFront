@@ -12,24 +12,25 @@ function CreateProduct() {
   const validateInputs = {
     unit_cost: false,
     name: false,
-    description: false,
     category: {
       name: false
     },
     brand: {
+      id: false,
       name: false
     }
   }
   const [errorsInputs, setErrorsInputs] = useState({ ...validateInputs });
   const [submit, setSubmit] = useState(false);
   const [category, setCategory] = useState([]);
-
+  const id = localStorage.getItem('id');
   const [brand, setBrand] = useState([]);
 
   const [products, setProducts] = useState({
     unit_cost: false,
     name: '',
     description: '',
+    creator_id: parseInt(id),
     category: {
       id: null,
       name: '',
@@ -96,6 +97,50 @@ function CreateProduct() {
     });
   }
 
+  const onChangeBrand = (e) => {
+    if (e.target.value !== '0' && e.target.value !== '') {
+      const name = brand.filter(item => item.id === parseInt(e.target.value))[0];
+      setProducts({
+        ...products,
+        'brand': {
+          ...products['brand'],
+          'id': e.target.value,
+          'name': name.name
+        }
+      });
+    }else {
+      setProducts({
+        ...products,
+        'brand': {
+          ...products['brand'],
+          [e.target.name]: e.target.value
+        }
+      });
+    }
+  }
+
+  const onChangeCategory = (e) => {
+    if (e.target.value !== '0' && e.target.value !== '') {
+      const name = category.filter(item => item.id === parseInt(e.target.value))[0];
+      setProducts({
+        ...products,
+        'category': {
+          ...products['category'],
+          'id': e.target.value,
+          'name': name.name
+        }
+      });
+    }else {
+      setProducts({
+        ...products,
+        'category': {
+          ...products['category'],
+          [e.target.name]: e.target.value
+        }
+      });
+    }
+  }
+
   const getProduct = (id) => {
     axios.get(`${urlRequest}/product/${id}`, products)
       .then(function (response) {
@@ -106,7 +151,8 @@ function CreateProduct() {
           description: response.data.data.description,
           category: response.data.data.category,
           brand: response.data.data.brand,
-          user_id: 1
+          user_id: 1,
+          creator_id:  response.data.data.creator_id,
         });
       })
       .catch(function (error) {
@@ -118,7 +164,8 @@ function CreateProduct() {
     const errors = { ...validateInputs };
     Object.keys(errors).forEach((e) => {
       if (['category', 'brand'].includes(e)) {
-        errors[e].name = !products[e].id ? 'campo obligatorio' : '';
+        errors[e].id = !products[e].id ? 'campo obligatorio' : '';
+        errors[e].name = products[e].id === '0' && !products[e].name ? 'campo obligatorio' : '';
         return;
       }
       errors[e] = !products[e] ? '*Campo es obligatorio' : '';
@@ -130,8 +177,15 @@ function CreateProduct() {
   const onSubmit = () => {
     setSubmit(true);
     if (!validate()) {
+      let data = {...products};
+      if (products.brand.id === '0'){
+        data.brand.id = null;
+      }
+      if (products.category.id === '0') {
+       data.category.id = null
+      }
       if (state?.id) {
-        axios.put(`${urlRequest}/product/update/${state.id}`, products)
+        axios.put(`${urlRequest}/product/update/${state.id}`, data)
           .then(function (response) {
             if (response.status === 201) {
               Swal.fire({
@@ -157,7 +211,7 @@ function CreateProduct() {
             console.log(error);
           });
       } else {
-        axios.post(`${urlRequest}/product`, products)
+        axios.post(`${urlRequest}/product`, data)
           .then(function (response) {
             if (response.status === 201) {
               Swal.fire({
@@ -225,15 +279,15 @@ function CreateProduct() {
 
             <div className="third flex-inputs">
               <p className="title-inputs mt-4 ml-2">Marca del producto(*)</p>
-              <select className="inputDiscounts" name="id" onChange={(e) => onChangeMulti(e, 'brand')} value={products.brand.id}>
-                <option value="option1">Seleccione la marca</option>
+              <select className="inputDiscounts" name="id" onChange={(e) => onChangeBrand(e)} value={products.brand.id}>
+                <option value=''>Seleccione la marca</option>
                 {brand.map(({ id, name }, index) => (
                   <option value={id}>{name}</option>
                 ))}
-                <option value="">Otros</option>
+                <option value='0'>Otros</option>
               </select>
             </div>
-            {errorsInputs.unit_cost && <span className="text-validate">*Campo requerido</span>}
+            {errorsInputs.brand.id && <span className="text-validate">*Campo requerido</span>}
           </Col>
           <Col>
 
@@ -249,8 +303,8 @@ function CreateProduct() {
             {errorsInputs.unit_cost && <span className="text-validate">*Campo requerido</span>}
             <div className="third flex-inputs">
               <p className="title-inputs mt-4 ml-2">Categoria del producto(*)</p>
-              <select className="inputDiscounts" name="id" onChange={(e) => onChangeMulti(e, 'category')} value={products.category.id}>
-                <option value="option1">Seleccione la categoria</option>
+              <select className="inputDiscounts" name="id" onChange={(e) => onChangeCategory(e)} value={products.category.id}>
+                <option value="">Seleccione la categoria</option>
                 {category.map(({ id, name }) => (
                   <option value={id}>{name}</option>
                 ))}

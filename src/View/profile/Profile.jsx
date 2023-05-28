@@ -57,7 +57,7 @@ function Profile() {
         city_id: 0,
         department_id: 0,
         country_id: 0,
-        name: null,
+        name: '',
         postal_code: ''
     };
 
@@ -107,12 +107,12 @@ function Profile() {
     useEffect(() => {
         if (submitAddress) validateAddress();
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[address, submitAddress]);
+    },[submitAddress]);
 
     useEffect(() => {
         if (submitComplaints) validateComplaints();
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[complaints, submitComplaints]);
+    },[submitComplaints]);
 
     const getInformation = () => {
         axios.get(`${urlRequest}/user/1`)
@@ -240,6 +240,8 @@ function Profile() {
                 }).then(resultado => {
                     history.push('/profile-clients');
                 });
+                setAddress({...defaultAddress});
+                getInformation();
               } else {
                 Swal.fire({
                   title: '¡Error!',
@@ -292,6 +294,7 @@ function Profile() {
         if (!validateComplaints()) {
             axios.post(`${urlRequest}/complaints`, complaints).then((response) => {
                 if (response.status === 200) {
+                    //setErrorsInputsComplaints({...validateInputsComplaints});
                     Swal.fire({
                       title: '¡Actualizacion exitosa!',
                       text: 'Se ha actualizado tu informacion.',
@@ -311,6 +314,7 @@ function Profile() {
             axios.put(`${urlRequest}/user/address/update/${address.id}`, address).then((response) => {
                 if (response.status === 201) {
                     setAddress({...defaultAddress});
+                    setErrorsInputsAddress({...validateInputsAddress});
                     getInformation();
                     Swal.fire({
                       title: '¡Actualizacion exitosa!',

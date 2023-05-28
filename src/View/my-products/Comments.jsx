@@ -24,7 +24,7 @@ function Comments() {
     contact_information: false,
     product_id: false,
   };
-
+  const id = localStorage.getItem('id');
   const [informationComments, setInformationComments] = useState({
     name_user: "",
     assessment: "",
@@ -50,7 +50,7 @@ function Comments() {
 
   const getProduct = () => {
     axios
-      .get(`${urlRequest}/product/list`)
+      .get(`${urlRequest}/product/list/${id}`)
       .then(function (response) {
         setInformationProduct(response.data.data);
       })

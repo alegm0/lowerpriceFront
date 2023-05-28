@@ -17,18 +17,22 @@ function SetDiscounts() {
     start_date: false,
     finish_date: false,
     value: false,
+    product_id: false
   };
+  const id = localStorage.getItem('id');
   const [submit, setSubmit] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedDateFinal, setSelectedDateFinal] = useState(new Date());
   const minDate = moment().subtract(0, "days").toDate();
+  const [products, setProducts] = useState([]);
   const [errorsInputs, setErrorsInputs] = useState({ ...validateInputs });
   const [discounts, setDiscounts] = useState({
     start_date: moment(selectedDate).format("YYYY-MM-DD"),
     finish_date: moment(selectedDateFinal).format("YYYY-MM-DD"),
     value: "",
     conditions: "",
-    product_id: "1",
+    product_id: "",
+    company_id: id,
   });
 
   const handleSelectedDateChange = (date) => {
@@ -63,6 +67,20 @@ function SetDiscounts() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state]);
 
+  useEffect(() => {
+    getListProducts();
+}, []);
+
+const getListProducts = () => {
+    axios.get(`${urlRequest}/product/list/${id}`, [])
+        .then(function (response) {
+            setProducts(response.data.data);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
+
   const getDiscount = (id) => {
     axios
       .get(`${urlRequest}/discount-promotions/specific/${id}`, discounts)
@@ -74,11 +92,11 @@ function SetDiscounts() {
           finish_date: response.data.data.finish_date,
           conditions: response.data.data.conditions,
           product_id: response.data.data.product_id,
+          company_id: response.data.data.company_id,
         });
       })
       .catch(function (error) {
         console.log(error);
-        console.log("hey mor");
       });
   };
  
@@ -102,10 +120,10 @@ function SetDiscounts() {
         axios
           .put(`${urlRequest}/discount-promotions/${state.id}`, discounts)
           .then(function (response) {
-            if (response.status === 204) {
+            if (response.status === 200) {
               Swal.fire({
                 title: "¡Actualizacion exitosa!",
-                text: "Se ha actualizado un producto.",
+                text: "Se ha actualizado un descuento.",
                 icon: "success",
                 confirmButtonText: "Continuar",
                 confirmButtonColor: "rgb(157 160 223)",
@@ -129,8 +147,16 @@ function SetDiscounts() {
         axios
           .post(`${urlRequest}/discount-promotions`, discounts)
           .then(function (response) {
-            if (response.status === 204) {
-              history.push("/discounts");
+            if (response.status === 200) {
+              Swal.fire({
+                title: "Creacion exitosa!",
+                text: "Se ha creado un descuento.",
+                icon: "success",
+                confirmButtonText: "Continuar",
+                confirmButtonColor: "rgb(157 160 223)",
+              }).then((resultado) => {
+                history.push("/discounts");
+              });
             }
           })
           .catch(function (error) {
@@ -166,6 +192,24 @@ function SetDiscounts() {
         </Row>
         <Row>
           <Col lg={6} md={6} sm={6}>
+          
+            <div className="form-group">
+              <h1 className="second-Title">Seleccione un producto(*)</h1>
+              <select
+                className="input inputs-class"
+                name="product_id"
+                value={discounts.product_id}
+                onChange={(e) => onChange(e)}
+              >
+                <option value="option1">Seleccione el producto</option>
+                {products.map(({ id, name }) => (
+                  <option value={id}>{name}</option>
+                ))}
+              </select>
+              {errorsInputs.product_id && (
+                <span className="text-validate">{errorsInputs.product_id}</span>
+              )}
+            </div>
             <div className="form-group">
               <h1 className="second-Title">Valor(*)</h1>
               <input

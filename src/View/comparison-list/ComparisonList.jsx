@@ -9,7 +9,8 @@ import Swal from 'sweetalert2';
 function ComparisonList() {
     const history = useHistory();
     const [category, setCategory] = useState([]);
-    const [products, setProducts] = useState([]);
+    const [lisProductsApi, setLisProductsApi] = useState([]);
+    const [listProducts, setListProducts] = useState([]);
     const [searchProduct, setSearchProduct] = useState({
         name: ""
     });
@@ -17,7 +18,16 @@ function ComparisonList() {
 
     useEffect(() => {
         getCategory();
+        getListProductsCompanies();
     }, []);
+
+    const getListProductsCompanies = () => {
+        axios.get(`${urlRequest}/category/list`)
+        .then(function (response) {
+            setCategory(response.data);
+        }).catch(function (error) { });
+    }
+    
     const getCategory = () => {
         axios.get(`${urlRequest}/category/list`)
             .then(function (response) {
@@ -37,7 +47,7 @@ function ComparisonList() {
         });
         axios.get(`${urlApiRequest}/sites/MCO/search?category=${event.target.value}`)
         .then(function (response) {
-            setProducts(response.data.results);
+            setLisProductsApi(response.data.results);
         }).catch(function (error) { });
         setIsLoading(false);
         Swal.close();
@@ -58,10 +68,9 @@ function ComparisonList() {
                 Swal.showLoading();
             },
         });
-
         axios.get(`${urlApiRequest}/sites/MCO/search?q=${upperCaseText}`)
             .then(function (response) {
-                setProducts(response.data.results);
+                setLisProductsApi(response.data.results);
         }).catch(function (error) { });
         setSearchProduct({ name: '' });
         setIsLoading(false);
@@ -115,12 +124,12 @@ function ComparisonList() {
                         </Col>
                     </Row>
                     <Row>
-                        {products.length === 0 ? (
+                        {lisProductsApi.length === 0 ? (
                            <Col lg={12} className='mt-5'>
                                 <p style={{fontWeight:"bold", fontSize:"30px", color: "#9DA0DF"}}>No se encontraron productos</p>
                            </Col>
                         ) : (
-                            products.map((producto, event) => (
+                            lisProductsApi.map((producto, event) => (
 
                                 <Col lg={4} md={6} sm={11} className="d-flex flex-column  align-items-center"
                                     style={{

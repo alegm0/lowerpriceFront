@@ -85,12 +85,11 @@ function Login() {
         .then(response => {
           if (response.status === 200) {
             localStorage.setItem('access_token',response.data.access_token);
-            const decoded = jwt.decode(response.data.access_token);
-            localStorage.setItem('role',decoded.sub);
+            localStorage.setItem('role', response.data.role);
+            localStorage.setItem('id', response.data.id);
             history.push('/home');
             window.location.reload();
           }
-
         })
         .catch(error => {
           setError2("Correo o contraseña incorrecta");
