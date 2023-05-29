@@ -117,7 +117,7 @@ function Products() {
                     </Col>
                 </Row>
             </Container>
-            <div className='ml-5'>
+            <div className='respons'>
                 <Container>
                     <Row className="mt-4">
                         <Col lg={9} md={9} sm={11}>

@@ -30,7 +30,7 @@ function MyProducts() {
         {
           img: CommentsImg,
           title: "Comentarios",
-          text: "Si deseas conocer o agregar un comentario ",
+          text: "Si deseas conocer o agregar un comentario sobre un producto ",
           url: "/comments",
         },
         {
@@ -73,7 +73,7 @@ function MyProducts() {
                 className="d-flex flex-column  align-items-center"
                 style={{ display: "inline", paddingBottom: "80px" }}
               >
-                <Card style={{ width: "18rem", borderRadius: "20px" }}>
+                <Card className="CardO">
                   <Card.Header className="borderRadiusCardHeaderMenu">
                     <Card.Img
                       variant="top"
@@ -84,10 +84,10 @@ function MyProducts() {
                           index === 0
                             ? "6.2rem"
                             : index === 1
-                            ? "7.2rem"
-                            : index === 2
-                            ? "5.2rem"
-                            : "",
+                              ? "5.4rem"
+                              : index === 2
+                                ? "6.2rem"
+                                : "",
                       }}
                     />
                   </Card.Header>

@@ -94,15 +94,16 @@ function CheckComments() {
     <div className="body-view">
       <Container>
         <Row>
-          <Col lg={1}>
+          <Col lg={2} md={2} sm={1} className='undo'>
             <img
               onClick={() => history.goBack()}
               src={iconoAtras}
               alt="Icono de atras"
+              className='Undo-Button'
               style={{ width: "3rem", marginTop: "3rem", marginLeft: "-3rem" }}
             />
           </Col>
-          <Col lg={11}>
+          <Col lg={10} md={10} sm={10}>
             <p className="title-Products">Comentarios</p>
           </Col>
         </Row>
@@ -116,10 +117,10 @@ function CheckComments() {
           </Col>
         </Row>
         <Row>
-          <Col lg={5}>
+          <Col lg={4}>
             <p className="subtitle">Informacion del producto</p>
           </Col>
-          <Col lg={7}>
+          <Col lg={8}>
             <hr style={{ borderColor: "white", marginTop: "32px" }}></hr>
           </Col>
         </Row>
@@ -183,6 +184,7 @@ function CheckComments() {
                 position: "relative",
                 marginBottom: "30px",
                 borderRadius: "15px !important",
+                marginLeft: "0px"
               }}
               value={informationProduct.description}
               disabled
@@ -193,8 +195,8 @@ function CheckComments() {
           <Col lg={2} className="mt-5">
             <p className="subtitle">Comentarios</p>
           </Col>
-          <Col lg={10} className="mt-5">
-            <hr style={{ borderColor: "white", marginTop: "32px" }}></hr>
+          <Col lg={10} className="line">
+            <hr className="line"></hr>
           </Col>
         </Row>
         <Row>
@@ -206,7 +208,7 @@ function CheckComments() {
               return (
                 <FaStar
                   key={index}
-                  size={70}
+                  size={45}
                   onClick={() => handleClick(index + 1)}
                   onMouseOver={() => handleMouseOver(index + 1)}
                   onMouseLeave={handleMouseLeave}
@@ -215,9 +217,12 @@ function CheckComments() {
                       ? colors.negro
                       : colors.blanco
                   }
+                  
                   style={{
-                    marginRight: 10,
+
+                    marginRight: "10px",
                     cursor: "pointer",
+                    marginBottom:"40px"
                   }}
                 />
               );
@@ -250,19 +255,19 @@ function CheckComments() {
                       }}
                     >
                       {stars.map((_, index) => {
-                          return (
+                        return (
                           <FaStar
-                              key={index}
-                              size={30}
-                              onClick={() => handleClick(index + 1)}
-                              onMouseOver={() => handleMouseOver(index + 1)}
-                              onMouseLeave={handleMouseLeave}
-                              color={(event.assessment || 5) > index ? colors.negro : colors.blanco}
-                              style={{
-                                  marginRight: 10,
-                                  cursor: "pointer"
-                              }} />
-                          )
+                            key={index}
+                            size={30}
+                            onClick={() => handleClick(index + 1)}
+                            onMouseOver={() => handleMouseOver(index + 1)}
+                            onMouseLeave={handleMouseLeave}
+                            color={(event.assessment || 5) > index ? colors.negro : colors.blanco}
+                            style={{
+                              marginRight: 10,
+                              cursor: "pointer"
+                            }} />
+                        )
                       })}
                     </Card.ImgOverlay>
                   </Card.Header>

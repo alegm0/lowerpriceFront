@@ -23,16 +23,16 @@ function ComparisonList() {
 
     const getListProductsCompanies = () => {
         axios.get(`${urlRequest}/category/list`)
-        .then(function (response) {
-            setCategory(response.data);
-        }).catch(function (error) { });
+            .then(function (response) {
+                setCategory(response.data);
+            }).catch(function (error) { });
     }
-    
+
     const getCategory = () => {
         axios.get(`${urlRequest}/category/list`)
             .then(function (response) {
                 setCategory(response.data);
-        }).catch(function (error) { });
+            }).catch(function (error) { });
     }
 
     const getListProducts = (event) => {
@@ -46,16 +46,16 @@ function ComparisonList() {
             },
         });
         axios.get(`${urlApiRequest}/sites/MCO/search?category=${event.target.value}`)
-        .then(function (response) {
-            setLisProductsApi(response.data.results);
-        }).catch(function (error) { });
+            .then(function (response) {
+                setLisProductsApi(response.data.results);
+            }).catch(function (error) { });
         setIsLoading(false);
         Swal.close();
     }
 
     const onChange = (e) => {
         setSearchProduct({ ...searchProduct, [e.target.name]: e.target.value });
-    } 
+    }
     const getSpecificSearch = () => {
         const replacedText = searchProduct.name.replace(/\s/g, "%20");
         const upperCaseText = replacedText.toUpperCase();
@@ -71,7 +71,7 @@ function ComparisonList() {
         axios.get(`${urlApiRequest}/sites/MCO/search?q=${upperCaseText}`)
             .then(function (response) {
                 setLisProductsApi(response.data.results);
-        }).catch(function (error) { });
+            }).catch(function (error) { });
         setSearchProduct({ name: '' });
         setIsLoading(false);
         Swal.close();
@@ -81,25 +81,25 @@ function ComparisonList() {
         <div className="body-view">
             <Container>
                 <Row >
-                    <Col lg={1} md={2} sm={2} style={{ marginTop: "44px" }}>
-                     <img onClick={() => history.goBack()} src={iconoAtras} alt="Icono de atras" className='Undo-Button' style={{ width: "80px" }} />
+                    <Col lg={2} md={2} sm={2}  style={{ marginTop: "44px" }} className='undo'>
+                        <img onClick={() => history.goBack()} src={iconoAtras} alt="Icono de atras" className='Undo-Button' style={{ width: "80px" }} />
                     </Col>
-                    <Col lg={11} md={10} sm={10} className="mt-4">
-                        <h1 className="title-Products">Lista de comparaciones</h1>
+                    <Col lg={10} md={10} sm={7} className="mt-4">
+                        <h1 className="title-Products">Lista de comparación</h1>
                     </Col>
                 </Row>
-            </Container>
-            <div className='ml-5'>
-                <Container>
+
+                <div className='respons '>
+
                     <Row className="mt-4">
-                        <Col lg={12} md={9} sm={11}>
+                        <Col lg={12} md={12} sm={11}>
                             <p className="paragraf-products">Si desea hacer una búsqueda más efectiva de sus productos, le permitirá hacer seleccionando a una categoría o una busqueda especifica de los productos que desea comparar</p>
                         </Col>
                     </Row>
                     <Row>
                         <Col lg={6} md={6} sm={12}>
                             <h1 className="second-Title">Seleccione una categoria:</h1>
-                            <select className="inputDiscounts" name="identifier" onChange={(e) => getListProducts(e)}  value={category.identifier}>
+                            <select className="inputDiscounts" name="identifier" onChange={(e) => getListProducts(e)} value={category.identifier}>
                                 <option value="option1">Seleccione la categoria</option>
                                 {category.map(({ identifier, name }) => (
                                     <option value={identifier}>{name}</option>
@@ -118,16 +118,16 @@ function ComparisonList() {
                             />
                         </Col>
                         <Col lg={2} md={6} sm={12} className='mt-5'>
-                        <Button style={{width: "100%"}} className="button-purple-home" onClick={getSpecificSearch}>
-                            Buscar
-                        </Button>
+                            <Button style={{ width: "100%" }} className="button-purple-home" onClick={getSpecificSearch}>
+                                Buscar
+                            </Button>
                         </Col>
                     </Row>
                     <Row>
                         {lisProductsApi.length === 0 ? (
-                           <Col lg={12} className='mt-5'>
-                                <p style={{fontWeight:"bold", fontSize:"30px", color: "#9DA0DF"}}>No se encontraron productos</p>
-                           </Col>
+                            <Col lg={12} className='mt-5'>
+                                <p style={{ fontWeight: "bold", fontSize: "30px", color: "#9DA0DF" }}>No se encontraron productos</p>
+                            </Col>
                         ) : (
                             lisProductsApi.map((producto, event) => (
 
@@ -139,12 +139,12 @@ function ComparisonList() {
                                     }}
                                     key={producto.id}
                                 >
-                                    <Card style={{ width: "18rem", borderRadius: "20px" }} className="col-lg-12 col-md-12 col-sm-12">
+                                    <Card  className="CardO col-lg-12 col-md-12 col-sm-12">
                                         <Card.Header className="borderRadiusCardHeaderMenu">
-                                            <Card.Img  variant="top"className="mt-3 mb-3 styleImgCardHomeIn"src={producto.thumbnail} style={{width: "100%"}} />
+                                            <Card.Img variant="top" className="mt-3 mb-3 styleImgCardHomeIn" src={producto.thumbnail} style={{ width: "100%" }} />
                                         </Card.Header>
                                         <Card.Body>
-                                            <Card.Title className="styleTitleCardMenu" style={{fontSize: "16px"}} >
+                                            <Card.Title className="styleTitleCardMenu" style={{ fontSize: "16px" }} >
                                                 {producto.title}
                                             </Card.Title>
                                             <Card.Text> <p>$ {producto.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</p> </Card.Text>
@@ -161,8 +161,9 @@ function ComparisonList() {
                             ))
                         )}
                     </Row>
-                </Container>
-            </div>
+           
+        </div>
+         </Container>
         </div >
     );
 }

@@ -22,6 +22,7 @@ function HomeIn() {
               </Button>
               <img src={ImgHome} alt='Imagen Home' className="logo-body-home"/>
           </Col>
+     
         </Row>
       </Container>
     </div>

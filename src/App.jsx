@@ -48,110 +48,110 @@ function App() {
             <Route exact path="/recover-password/" component={RecoverPassword} />
             <Route exact path="/register" component={Register} />
             <PrivateRoute
-              isAuthenticated={isLoggedIn}
+              isAuthenticated={true}
               exact
               path="/home"
               component={Home}
             />
             <PrivateRoute
-              isAuthenticated={isLoggedIn}
+              isAuthenticated={true}
               exact
               path="/shopping-list"
               component={ShoppingList}
             />
             <PrivateRoute
-              isAuthenticated={isLoggedIn}
+              isAuthenticated={true}
               exact
               path="/my-products"
               component={MyProducts}
             />
             <PrivateRoute
-              isAuthenticated={isLoggedIn}
+              isAuthenticated={true}
               exact
               path="/create-products"
               component={CreateProduct}
             />
             <PrivateRoute
-              isAuthenticated={isLoggedIn}
+              isAuthenticated={true}
               exact
               path="/create-shopping-list"
               component={CreateShoppingList}
             />
             <PrivateRoute
-              isAuthenticated={isLoggedIn}
+              isAuthenticated={true}
               exact
               path="/create-branding"
               component={CreateBranding}
             />
             <PrivateRoute
-              isAuthenticated={isLoggedIn}
+              isAuthenticated={true}
               exact
               path="/create-product"
               component={CreateProduct}
             />
             <PrivateRoute
-              isAuthenticated={isLoggedIn}
+              isAuthenticated={true}
               exact
               path="/wish-list"
               component={Wishlist}
             />
             <PrivateRoute
-              isAuthenticated={isLoggedIn}
+              isAuthenticated={true}
               exact
               path="/products"
               component={Products}
             />
             <PrivateRoute
-              isAuthenticated={isLoggedIn}
+              isAuthenticated={true}
               exact
               path="/discounts"
               component={Discounts}
             />
             <PrivateRoute
-              isAuthenticated={isLoggedIn}
+              isAuthenticated={true}
               exact
               path="/setDiscounts"
               component={SetDiscounts}
             />
             <PrivateRoute
-              isAuthenticated={isLoggedIn}
+              isAuthenticated={true}
               exact
               path="/comments"
               component={Comments}
             />
             <PrivateRoute
-              isAuthenticated={isLoggedIn}
+              isAuthenticated={true}
               exact
               path="/checkComments"
               component={CheckComments}
             />
             <PrivateRoute
-              isAuthenticated={isLoggedIn}
+              isAuthenticated={true}
               exact
               path="/profile-company"
               component={ProfileCompany}
             />
             <PrivateRoute
-              isAuthenticated={isLoggedIn}
+              isAuthenticated={true}
               exact
               path="/profile-clients"
               component={Profile}
             />
             <PrivateRoute
-              isAuthenticated={isLoggedIn}
+              isAuthenticated={true}
               exact
               path="/comparison-list"
               component={ComparisonList}
             />
              <PrivateRoute
-              isAuthenticated={isLoggedIn}
+              isAuthenticated={true}
               exact
               path="/technical_support"
               component={Technical_support}
             />
 
             <PrivateRoute
-              isAuthenticated={isLoggedIn}
+              isAuthenticated={true}
               exact
               path="/maps"
               component={Maps}

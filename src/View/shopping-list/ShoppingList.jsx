@@ -38,7 +38,7 @@ function ShoppingList() {
         {informationCards.map((event) => {
           return (
             <Col className="d-flex flex-column  align-items-center" style={{ display: "inline", paddingBottom: "80px" }}>
-              <Card style={{ width: "18rem", borderRadius: "20px" }}>
+              <Card className="CardO">
                 <Card.Header className="borderRadiusCardHeaderMenu">
                   <Card.Img
                     variant="top"

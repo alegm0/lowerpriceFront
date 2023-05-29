@@ -82,11 +82,14 @@
   }
 
   .logo-body-home {
-    display: none;
+    /* display: none; */
+
+    width: 80%;
   }
 
   .content-body-home {
     justify-content: center;
+    display: block;
   }
 
   .button-purple-home, .button-create {

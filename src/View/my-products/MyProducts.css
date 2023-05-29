@@ -35,7 +35,8 @@
     font-weight: 600;
 
 }
-.paragraph2{
+
+.paragraph2 {
     font-family: 'Inter', serif;
     color: white;
     font-size: 25px;
@@ -66,22 +67,23 @@
     text-align: center;
 
 }
-.styleTitleCardComments{
+
+.styleTitleCardComments {
     font-size: 25px;
     font-family: "OpenSansCondensed-bold";
     text-align: initial;
     color: #9DA0DF;
     margin-left: 20px;
-    
+
 
 }
 
-.styleSubTitleCardComments{
+.styleSubTitleCardComments {
     text-align: initial;
     font-family: OpenSans-light;
     font-size: 15px;
     padding: 0 0 0 0;
-  
+
 
 }
 
@@ -184,7 +186,7 @@
     width: 500px;
 
 
-    
+
 }
 
 .Undo-Button img {
@@ -234,13 +236,14 @@
 
 
 }
+
 .second-Title {
-    
+
     font-size: 15px;
     color: #ffffff;
     text-align: left;
     padding-top: 0px;
-    
+
 
 }
 
@@ -263,7 +266,8 @@
     margin-right: 0;
 
 }
-.calificacion{
+
+.calificacion {
     color: #9DA0DF;
     font-size: 50px;
     padding-top: 10px;
@@ -291,23 +295,23 @@
     width: 254px;
     height: 62px;
     padding-top: 15px;
- margin-bottom: 10%;
- margin-top: 5%;
+    margin-bottom: 10%;
+    margin-top: 5%;
 
 
 }
 
-.subtitle{
+.subtitle {
 
 
-font-family: 'Inter';
-font-style: normal;
-font-weight: 700;
-font-size: 20px;
-padding-top: 0;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    padding-top: 0;
 
-text-align: start;
-color: #ffffff;
+    text-align: start;
+    color: #ffffff;
 
 }
 
@@ -332,7 +336,7 @@ color: #ffffff;
 
 }
 
-.inputSelectProducts{
+.inputSelectProducts {
     font-size: 16px;
     padding: 0.5rem 0.5rem 0.5rem 0.8rem;
     border: 1px solid var(--azul-oscuro);
@@ -341,9 +345,10 @@ color: #ffffff;
     outline: none;
     width: 100%;
     height: 50px;
-    display:grid;
+    display: grid;
     color: var(--azul-oscuro);
 }
+
 .inputDiscounts {
     font-size: 16px;
     padding: 0.5rem 0.5rem 0.5rem 0.8rem;
@@ -357,15 +362,29 @@ color: #ffffff;
     text-align: left;
     width: 100% !important;
     border-radius: 15px !important;
-    
-    
-  }
-  
-  .inputDiscounts {
+
+
+}
+
+.inputDiscounts {
     transition: 180ms box-shadow ease-in-out;
-  }
+}
 
+.respons {
+    padding-left: 0px;
+    margin-left: 60px;
+}
 
+.CardO {
+    width: 18rem;
+    border-radius: 20px;
+}
+
+.line{
+    border-color: #ffffff;
+    margin-top: 50px;
+   
+}
 
 @media screen and (min-width:3.125rem) and (max-width:47.938rem) {
     .banner-my-product {
@@ -390,5 +409,39 @@ color: #ffffff;
 
     .title-marks-my-products {
         width: 83%;
+    }
+
+    .title-Products {
+        font-size: 30px;
+
+        padding-left: 0px;
+    }
+
+    .Undo-Button {
+        padding-top: 0px;
+        margin-top: 0px;
+
+
+    }
+
+    .undo {
+        margin-top: 0px;
+        padding-left: 40px;
+
+    }
+
+    .respons {
+        padding-left: 0px;
+        margin-left: 0px;
+    }
+
+    .CardO {
+        width: 13rem;
+        border-radius: 20px;
+    }
+    .line{
+        border-color: #ffffff;
+        margin-top: 0px;
+       
     }
 }

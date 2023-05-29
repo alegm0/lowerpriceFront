@@ -25,10 +25,11 @@ function NavbarVertical () {
             <div className="content-link-navbar scroll-custom">
                 {Routes.map(({icon, alt, title, url}, index) => (
                     <div className="link-navbar" key={index}>
-                        <img src={icon} alt={alt} className="link-navbar-icon"/>
+                       <a href={url} className="link-red-social-navbar"><img src={icon} alt={alt} to={url} className="link-navbar-icon"/></a> 
                         {title === 'cerrar sesion' ?
                             <Link to={logout} className="m-auto link-navbar-title">{title}</Link>
                         :
+                        
                             <Link to={url} className="m-auto link-navbar-title">{title}</Link> 
                         }
                         

@@ -238,6 +238,7 @@ function Comments() {
                 position: "relative",
                 marginBottom: "30px",
                 borderRadius: "15px !important",
+                marginLeft:"0px"
               }}
               value={informationComments.text}
               onChange={(e) => onChange(e)}

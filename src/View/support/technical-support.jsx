@@ -110,7 +110,7 @@ function Technical_support() {
                                                 borderColor: "none",
 
 
-                                                height: "70px",
+                                                height: "100%",
                                             }}
                                             onClick={() => toggleAccordion(index)}
                                         >

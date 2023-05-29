@@ -244,10 +244,10 @@ function CreateProduct() {
     <div className="body-view">
       <Container>
         <Row>
-          <Col lg={1} className="mt-3">
+          <Col lg={2} md={2} sm={2}className="mt-3">
             <img onClick={() => history.goBack()} src={iconoAtras} alt="Icono de atras" style={{ width: "3rem", marginTop: "3rem", marginLeft: "-3rem" }} />
           </Col>
-          <Col lg={11}>
+          <Col lg={10} md={10} sm={7}>
             <p className="title-Products">Productos</p>
           </Col>
         </Row>
@@ -265,7 +265,7 @@ function CreateProduct() {
           </Col>
         </Row>
         <Row>
-          <Col>
+          <Col lg={6}>
             <p className="title-inputs mt-4 ml-2">Nombre del producto(*)</p>
             <input
               className="inputDiscounts"
@@ -289,7 +289,7 @@ function CreateProduct() {
             </div>
             {errorsInputs.brand.id && <span className="text-validate">*Campo requerido</span>}
           </Col>
-          <Col>
+          <Col lg={6}>
 
             <p className="title-inputs mt-4 ml-2">Costo del producto(*)</p>
             <input
@@ -342,7 +342,7 @@ function CreateProduct() {
           </div>
         </Row>
 
-        <Row>
+        <Row >
           <Col lg={4}>
             <p className='subtitle'>Informacion de la categoria</p>
           </Col>
@@ -350,8 +350,8 @@ function CreateProduct() {
             <hr style={{ borderColor: "white", marginTop: "32px" }}></hr>
           </Col>
         </Row>
-        <Row>
-          <Col>
+        <Row >
+          <Col lg={6}>
             <div className="first flex-inputs">
 
               <p className="title-inputs mt-4 ml-2">Nombre de la categoria(*)</p>
@@ -367,7 +367,7 @@ function CreateProduct() {
 
             </div>
           </Col>
-          <Col>
+          <Col lg={6}>
             <div style={{ display: "flex", flexDirection: "column" }}>
               <p className="title-inputs mt-4 ml-2">Descripcion de la categoria</p>
               <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -394,7 +394,7 @@ function CreateProduct() {
           </Col>
         </Row>
         <Row>
-          <Col>
+          <Col lg={6}>
             <div className="first flex-inputs">
               <p className="title-inputs mt-4 ml-2">Nombre de la marca(*)</p>
               <input
@@ -408,7 +408,7 @@ function CreateProduct() {
               {errorsInputs.brand.name && <span className="text-validate">*Campo requrido</span>}
             </div>
           </Col>
-          <Col>
+          <Col lg={6}>
             <div style={{ display: "flex", flexDirection: "column" }}>
               <p className="title-inputs mt-4 ml-2">Descripcion de la marca</p>
               <div style={{ display: "flex", justifyContent: "space-between" }}>
