@@ -8,9 +8,10 @@ import ProductosImg from "../../assets/img/navbar/productos.svg";
 
 function MyProducts() {
   const [informationCard, setInformationCard] = useState([]);
-
+  const [role] = useState(localStorage.getItem("role"));
+  
   useEffect(() => {
-    if (localStorage.getItem("role") === "2") {
+    if (role === "2") {
       setInformationCard([
         {
           img: DiscountImg,

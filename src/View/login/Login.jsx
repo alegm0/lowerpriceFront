@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { gapi } from "gapi-script";
-import GoogleLogin from "react-google-login";
+// import GoogleLogin from "react-google-login";
 import axios from 'axios';
 import { urlRequest } from '../../urlRequest';
 import { useHistory } from "react-router";
@@ -52,15 +52,15 @@ function Login() {
 
 
   //iniciar servicio de google
-  useEffect(() => {
-    const start = () => {
-      gapi.auth2.init({
-        clientId: clientID,
-      })
-    }
-    gapi.load("client:auth2", start)
+  // useEffect(() => {
+  //   const start = () => {
+  //     gapi.auth2.init({
+  //       clientId: clientID,
+  //     })
+  //   }
+  //   gapi.load("client:auth2", start)
 
-  }, [])
+  // }, [])
 
   const handlePasswordChange = (e) => {
     const newPassword = e.target.value;
@@ -109,7 +109,7 @@ function Login() {
           <Card className="panel-white">
             <Card.Body>
               <Card.Title className="panel-white-title">Iniciar Sesion</Card.Title>
-              <form onSubmit={handleSubmit}>
+              <form>
                 <div className="flex-inputs container-inputs-login">
                   <img src={userU} alt="Imagen ingreso" className="input-icon" />
                   <input
@@ -135,7 +135,7 @@ function Login() {
                   {error2 && <span className="text-validate">{error2}</span>}
                 </div>
                 <Button
-                  type="submit"
+                  type="button"
                   variant="INICIAR SESIÓN"
                   className="button-red"
                   onClick={handleSubmit}
@@ -143,14 +143,14 @@ function Login() {
                   INICIAR SESIÓN
                 </Button>
                 <p style={{ marginTop: "10px", marginBottom: "10px" }}>ó</p>
-                <GoogleLogin
+                {/* <GoogleLogin
                   clientId={clientID}
                   onSuccess={onSuccess}
                   onFailure={onFailure}
                   buttonText="Continue  with Google"
                   cookiePolicy={"single_host_origin"}
 
-                />
+                /> */}
                 <div>
                   <a
                     href="/recover-password"

@@ -19,7 +19,7 @@ function SetDiscounts() {
     value: false,
     product_id: false
   };
-  const id = localStorage.getItem('id');
+  const [id] = useState(localStorage.getItem("id"));
   const [submit, setSubmit] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedDateFinal, setSelectedDateFinal] = useState(new Date());
@@ -133,7 +133,7 @@ const getListProducts = () => {
             } else {
               Swal.fire({
                 title: "¡Error!",
-                text: "Se ha generado un error al actualizar un producto.",
+                text: "Se ha generado un error",
                 icon: "error",
                 confirmButtonText: "Continuar",
                 confirmButtonColor: "rgb(157 160 223)",

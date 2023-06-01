@@ -72,7 +72,7 @@ function RecoverPassword() {
         } else {
           Swal.fire({
             title: '¡Error!',
-            text: 'Se ha generado un error al enviar el correo',
+            text: 'Se ha generado un error',
             icon: 'error',
             confirmButtonText: "Continuar", 
             confirmButtonColor: 'rgb(157 160 223)',
@@ -119,7 +119,7 @@ function RecoverPassword() {
         } else {
           Swal.fire({
             title: '¡Error!',
-            text: 'Se ha generado un error al actualizar tu contraseña',
+            text: 'Se ha generado un error',
             icon: 'error',
             confirmButtonText: "Continuar", 
             confirmButtonColor: 'rgb(157 160 223)',

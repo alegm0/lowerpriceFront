@@ -10,7 +10,6 @@ import Instagram from '../../assets/img/navbar/instagram-icon.svg';
 import Twitter from '../../assets/img/navbar/twitter-icon.svg';
 import support from '../../assets/img/soporte.png';
 export { default } from './NavbarVertical';
-
 export const Routes = [
     {
         title: 'Inicio',
@@ -19,16 +18,16 @@ export const Routes = [
         url: '/home',
     },
     {
-        title: 'Comparar',
-        icon: Balanza,
-        alt: 'icon-balanza',
-        url: '/comparison-list',
-    },
-    {
         title: 'Lista deseos',
         icon: Wishlist,
         alt: 'icon-list',
         url: '/shopping-list',
+    },
+    {
+        title: 'Comparar',
+        icon: Balanza,
+        alt: 'icon-balanza',
+        url: '/comparison-list',
     },
     {
         title: 'Productos',
@@ -40,7 +39,8 @@ export const Routes = [
         title: 'Perfil',
         icon: Profile,
         alt: 'icon-profile',
-        url: localStorage.getItem('role') === '1' ? '/profile-clients' : '/profile-company',
+        url: '1' === '1' ? '/profile-clients' : '/profile-company',
+        //url: localStorage.getItem('role') === '1' ? '/profile-clients' : '/profile-company',
     },
     {
         title: 'Mapa',
@@ -49,7 +49,7 @@ export const Routes = [
         url: '/maps',
     },
     {
-        title: 'cerrar sesion',
+        title: 'Cerrar sesion',
         icon: Salir,
         alt: 'icono-salir',
         url: '',

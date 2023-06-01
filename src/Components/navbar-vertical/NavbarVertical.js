@@ -3,18 +3,28 @@ import { Link } from 'react-router-dom';
 import { RedSocials, Routes } from '.';
 import LogoNavbar from '../../assets/img/navbar/logo-session.svg';
 import './NavbarVertical.css';
-import axios from 'axios';
-import { urlRequest } from '../../urlRequest';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { useHistory } from 'react-router/cjs/react-router.min';
+import { logOut } from '../../util/localStorage';
 
 function NavbarVertical () {
-    const logout = () => {
-        try {
-          // El cierre de sesión fue exitoso, realiza cualquier otra acción necesaria
-        } catch (error) {
-          // Maneja el error en caso de que ocurra
-          console.error('Error al cerrar sesión:', error);
+    const history = useHistory();
+    const [role] = useState(localStorage.getItem("role"));;
+    const [menu, setMenu] = useState(Routes);
+
+    const logout = async () => {
+        logOut();
+    };
+
+    useEffect(() => {
+        if (role === '2') {
+            const newArray = [...Routes];
+            newArray.splice(1,1);
+            setMenu(newArray);
         }
-      };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
     return (
         <div className="navbar-vertical">
             <div className="content-logo-navbar">
@@ -23,7 +33,7 @@ function NavbarVertical () {
                 </div>
             </div>
             <div className="content-link-navbar scroll-custom">
-                {Routes.map(({icon, alt, title, url}, index) => (
+                {menu?.map(({icon, alt, title, url}, index) => (
                     <div className="link-navbar" key={index}>
                        <a href={url} className="link-red-social-navbar"><img src={icon} alt={alt} to={url} className="link-navbar-icon"/></a> 
                         {title === 'cerrar sesion' ?

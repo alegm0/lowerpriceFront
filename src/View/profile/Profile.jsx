@@ -245,7 +245,7 @@ function Profile() {
               } else {
                 Swal.fire({
                   title: '¡Error!',
-                  text: 'Se ha generado un error al crear un direccion.',
+                  text: 'Se ha generado un error',
                   icon: 'error',
                   confirmButtonText: "Continuar", 
                   confirmButtonColor: 'rgb(157 160 223)',

@@ -17,7 +17,7 @@ function Products() {
     const [informationCards, setInformationCards] = useState([]);
     const [brand, setBrand] = useState([]);
     const [category, setCategory] = useState([]);
-    const id = localStorage.getItem('id');
+    const [id] = useState(localStorage.getItem("id"));
 
     const handleCategoryFilter = (event) => {
         const selectedId = event.target.value;
@@ -79,7 +79,7 @@ function Products() {
                 } else {
                     Swal.fire({
                         title: '¡Error!',
-                        text: 'Se ha generado un error al eliminar un producto.',
+                        text: 'Se ha generado un error',
                         icon: 'error',
                         confirmButtonText: 'Continuar',
                         confirmButtonColor: 'rgb(157 160 223)',

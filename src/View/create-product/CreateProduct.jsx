@@ -23,17 +23,20 @@ function CreateProduct() {
   const [errorsInputs, setErrorsInputs] = useState({ ...validateInputs });
   const [submit, setSubmit] = useState(false);
   const [category, setCategory] = useState([]);
-  const id = localStorage.getItem('id');
+  const [id] = useState(localStorage.getItem("id"));
+  const type = id === '2' ? 'COMPANY' : 'USER';
   const [brand, setBrand] = useState([]);
 
   const [products, setProducts] = useState({
     unit_cost: false,
     name: '',
     description: '',
+    type: type,
     creator_id: parseInt(id),
     category: {
       id: null,
       name: '',
+      identifier: '',
       description: ''
     },
     brand: {
@@ -92,7 +95,8 @@ function CreateProduct() {
       ...products,
       [fatherKey]: {
         ...products[fatherKey],
-        [e.target.name]: e.target.value
+        [e.target.name]: e.target.value,
+        'identifier': fatherKey === 'brand' ?? e.target.value,
       }
     });
   }
@@ -105,7 +109,7 @@ function CreateProduct() {
         'brand': {
           ...products['brand'],
           'id': e.target.value,
-          'name': name.name
+          'name': name.name,
         }
       });
     }else {
@@ -113,7 +117,8 @@ function CreateProduct() {
         ...products,
         'brand': {
           ...products['brand'],
-          [e.target.name]: e.target.value
+          [e.target.name]: e.target.value,
+          'identifier': e.target.value,
         }
       });
     }
@@ -127,7 +132,8 @@ function CreateProduct() {
         'category': {
           ...products['category'],
           'id': e.target.value,
-          'name': name.name
+          'name': name.name,
+          'identifier': name.name
         }
       });
     }else {
@@ -152,7 +158,8 @@ function CreateProduct() {
           category: response.data.data.category,
           brand: response.data.data.brand,
           user_id: 1,
-          creator_id:  response.data.data.creator_id,
+          creator_id: response.data.data.creator_id,
+          is_company: response.data.data.is_company,
         });
       })
       .catch(function (error) {
@@ -226,7 +233,7 @@ function CreateProduct() {
             } else {
               Swal.fire({
                 title: '¡Error!',
-                text: 'Se ha generado un error al crear un nuevo producto.',
+                text: 'Se ha generado un error',
                 icon: 'error',
                 confirmButtonText: "Continuar",
                 confirmButtonColor: 'rgb(157 160 223)',

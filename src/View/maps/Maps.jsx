@@ -24,8 +24,7 @@ function Maps(props) {
   const getAddress = () => {
     axios.get(`${urlRequest}/company/address`)
       .then(function (response) {
-        console.log(response);
-        setAddresses(response.data.data.address_description);
+        setAddresses(response.data.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -37,7 +36,8 @@ function Maps(props) {
     const newMarkers = [];
 
     addresses.forEach((address) => {
-      geocoder.geocode({ address }, (results, status) => {
+      geocoder.geocode( address.address_description , (results, status) => {
+        console.log(results);
         if (status === "OK") {
           const { lat, lng } = results[0].geometry.location;
           newMarkers.push({ lat: lat(), lng: lng() });

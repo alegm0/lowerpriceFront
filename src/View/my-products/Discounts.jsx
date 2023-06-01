@@ -11,13 +11,12 @@ function Discounts() {
   const history = useHistory();
 
   const [discounts, setDiscounts] = useState([]);
-
+  const [id] = useState(localStorage.getItem("id"));
   useEffect(() => {
     getListDiscounts();
   }, []);
 
   const getListDiscounts = () => {
-    const id = localStorage.getItem('id');
     axios
       .get(`${urlRequest}/discount-promotions/${id}`, [])
       .then(function (response) {
@@ -44,7 +43,7 @@ function Discounts() {
         } else {
           Swal.fire({
             title: "¡Error!",
-            text: "Se ha generado un error al eliminar un producto.",
+            text: "Se ha generado un error",
             icon: "error",
             confirmButtonText: "Continuar",
             confirmButtonColor: "rgb(157 160 223)",

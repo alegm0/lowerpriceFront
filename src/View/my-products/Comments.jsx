@@ -24,7 +24,7 @@ function Comments() {
     contact_information: false,
     product_id: false,
   };
-  const id = localStorage.getItem('id');
+  const [id] = useState(localStorage.getItem("id"));
   const [informationComments, setInformationComments] = useState({
     name_user: "",
     assessment: "",
@@ -108,7 +108,7 @@ function Comments() {
           } else {
             Swal.fire({
               title: "¡Error!",
-              text: "Se ha generado un error al crear un nuevo comentario.",
+              text: "Se ha generado un error",
               icon: "error",
               confirmButtonText: "Continuar",
               confirmButtonColor: "rgb(157 160 223)",
