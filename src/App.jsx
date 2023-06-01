@@ -47,7 +47,6 @@ function App() {
                 component={RecoverPassword}
               />
               <Route exact path="/register" component={Register} />
-              <Redirect to="/" />
             </>
           ) : (
             <>
@@ -166,7 +165,6 @@ function App() {
                 path="/maps"
                 component={Maps}
               />
-              <Redirect to="/home" />
             </>
           )}
         </Switch>
