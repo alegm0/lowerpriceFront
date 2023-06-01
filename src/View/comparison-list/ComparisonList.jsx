@@ -15,14 +15,15 @@ function ComparisonList() {
   const [searchProduct, setSearchProduct] = useState({
     name: "",
   });
-  const [isLoading, setIsLoading] = useState(false);
-  const [id] = useState(localStorage.getItem("id"));
-  const [role] = useState(localStorage.getItem("role"));
+  const [, setIsLoading] = useState(false);
+  const [id] = useState(localStorage.getItem("id") || '');
+  const [role] = useState(localStorage.getItem("role") || '');
   const type = role === "2" ? "COMPANY" : "USER";
 
   useEffect(() => {
     getCategory();
     getListProductsCompanies();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getListProductsCompanies = () => {

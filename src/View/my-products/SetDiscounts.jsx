@@ -1,14 +1,15 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
+import DatePicker from "react-datepicker";
 import axios from "axios";
 import moment from "moment";
+import Swal from "sweetalert2";
+import { useLocation } from "react-router-dom";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { useHistory } from "react-router";
 import { urlRequest } from "../../urlRequest";
 import iconoAtras from "../../assets/img/icono-atras.svg";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Swal from "sweetalert2";
-import { useLocation } from "react-router-dom";
 
 function SetDiscounts() {
   const history = useHistory();
@@ -19,7 +20,7 @@ function SetDiscounts() {
     value: false,
     product_id: false
   };
-  const [id] = useState(localStorage.getItem("id"));
+  const [id] = useState(localStorage.getItem("id") || '');
   const [submit, setSubmit] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedDateFinal, setSelectedDateFinal] = useState(new Date());
@@ -59,12 +60,10 @@ function SetDiscounts() {
 
   useEffect(() => {
     if (submit) validate();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [discounts, submit]);
 
   useEffect(() => {
     if (state?.id) getDiscount(state.id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state]);
 
   useEffect(() => {

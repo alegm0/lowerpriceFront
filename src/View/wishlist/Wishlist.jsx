@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
+import moment from "moment";
+import axios from "axios";
+import Swal from "sweetalert2";
 import "../../App.css";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import iconoAtras from "../../assets/img/icono-atras.svg";
@@ -7,12 +10,7 @@ import referencia from "../../assets/img/referencia.png";
 import iconEdit from "../../assets/img/navbar/icono-editar.svg";
 import iconSalirX from "../../assets/img/borrar-x.svg";
 import iconoChulo from "../../assets/img/chulo.png";
-import moment from "moment";
-import { useState } from "react";
-import { useEffect } from "react";
-import axios from "axios";
 import { urlRequest } from "../../urlRequest";
-import Swal from "sweetalert2";
 
 function Wishlist() {
   const history = useHistory();
@@ -26,11 +24,12 @@ function Wishlist() {
   });
 
   const [shoppingListProducts, setShoppingListProducts] = useState([]);
-  const [id] = useState(localStorage.getItem("id"));
+  const [id] = useState(localStorage.getItem("id") || '');
   const [isVerification, setIsVerification] = useState(false);
 
   useEffect(() => {
     getShoppingList();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Obtener la lista de deseo

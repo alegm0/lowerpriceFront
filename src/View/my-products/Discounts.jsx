@@ -11,9 +11,10 @@ function Discounts() {
   const history = useHistory();
 
   const [discounts, setDiscounts] = useState([]);
-  const [id] = useState(localStorage.getItem("id"));
+  const [id] = useState(localStorage.getItem("id") || '');
   useEffect(() => {
     getListDiscounts();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getListDiscounts = () => {

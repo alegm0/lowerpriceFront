@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { Accordion, Button, Card, Col, Container, Row } from "react-bootstrap";
 import { useHistory } from "react-router";
@@ -11,10 +12,11 @@ import referencia from "../../assets/img/referencia.png";
 function ReportList() {
   const history = useHistory();
   const [report, setReport] = useState();
-  const [id] = useState(localStorage.getItem("id"));
+  const [id] = useState(localStorage.getItem("id") || '');
 
   useEffect(() => {
     getShoppingList();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getShoppingList = () => {
@@ -188,6 +190,7 @@ function ReportList() {
                 </div>
               );
             }
+            return <></>
           })}
         </Row>
       </Container>

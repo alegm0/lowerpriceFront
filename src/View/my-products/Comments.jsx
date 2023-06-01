@@ -24,7 +24,7 @@ function Comments() {
     contact_information: false,
     product_id: false,
   };
-  const [id] = useState(localStorage.getItem("id"));
+  const [id] = useState(localStorage.getItem("id") || '');
   const [informationComments, setInformationComments] = useState({
     name_user: "",
     assessment: "",
@@ -41,6 +41,7 @@ function Comments() {
 
   useEffect(() => {
     getProduct();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

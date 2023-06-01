@@ -39,7 +39,7 @@ export const Routes = [
         title: 'Perfil',
         icon: Profile,
         alt: 'icon-profile',
-        url: '1' === '1' ? '/profile-clients' : '/profile-company',
+        url: '1' ? '/profile-clients' : '/profile-company',
         //url: localStorage.getItem('role') === '1' ? '/profile-clients' : '/profile-company',
     },
     {

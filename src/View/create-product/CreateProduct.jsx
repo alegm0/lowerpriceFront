@@ -23,7 +23,7 @@ function CreateProduct() {
   const [errorsInputs, setErrorsInputs] = useState({ ...validateInputs });
   const [submit, setSubmit] = useState(false);
   const [category, setCategory] = useState([]);
-  const [id] = useState(localStorage.getItem("id"));
+  const [id] = useState(localStorage.getItem("id") || '');
   const type = id === '2' ? 'COMPANY' : 'USER';
   const [brand, setBrand] = useState([]);
 

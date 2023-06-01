@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import setImg from "../../assets/img/setProduct.svg";
 import seeImg from "../../assets/img/seeProduct.svg";
@@ -17,7 +18,7 @@ function Products() {
     const [informationCards, setInformationCards] = useState([]);
     const [brand, setBrand] = useState([]);
     const [category, setCategory] = useState([]);
-    const [id] = useState(localStorage.getItem("id"));
+    const [id] = useState(localStorage.getItem("id") || '');
 
     const handleCategoryFilter = (event) => {
         const selectedId = event.target.value;
@@ -53,6 +54,7 @@ function Products() {
     };
     useEffect(() => {
         getListProducts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const getListProducts = () => {

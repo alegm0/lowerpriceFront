@@ -15,9 +15,6 @@ const State = (props) => {
 	const login = async () => {
 		const response = await axios.get("https://reqres.in/api/users");
 		dispatch({ type: LOGIN, payload: response.data });
-
-		//response.status === 200 && 	
-		//localStorage.setItem('TOKEN', response.status);
 	};
 	/* USER CONTEXT ENDS HERE */
 

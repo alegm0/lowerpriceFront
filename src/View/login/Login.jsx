@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { gapi } from "gapi-script";
-// import GoogleLogin from "react-google-login";
+import GoogleLogin from "react-google-login";
 import axios from 'axios';
 import { urlRequest } from '../../urlRequest';
 import { useHistory } from "react-router";
@@ -9,7 +9,6 @@ import Button from "@restart/ui/esm/Button";
 import loginImgI from "../../assets/img/loginIcon.png";
 import userU from "../../assets/img/email.png";
 import passwordu from "../../assets/img/forgot.png";
-import jwt from 'jsonwebtoken';
 
 function Login() {
   const history = useHistory();
@@ -31,16 +30,16 @@ function Login() {
   };
 
   const clientID = "240204035171-nola6klc59kianch63n8vpq88k42kv1j.apps.googleusercontent.com";
-  const [user, setUser] = useState({});
+  const [, setUser] = useState({});
 
   const onSuccess = (response) => {
     console.log(response)
     setUser(response.profileObj);
     document.getElementsByClassName("btn").hidden = true;
-    const data1 = {
-      email: user.email,
-      password: user.googleId,
-    };
+    //const data1 = {
+    //  email: user.email,
+    //  password: user.googleId,
+    //};
     //axios.post(`${urlRequest}/login`, data1)
     // history.push('/home');
     // window.location.reload();
@@ -52,15 +51,15 @@ function Login() {
 
 
   //iniciar servicio de google
-  // useEffect(() => {
-  //   const start = () => {
-  //     gapi.auth2.init({
-  //       clientId: clientID,
-  //     })
-  //   }
-  //   gapi.load("client:auth2", start)
+  useEffect(() => {
+    const start = () => {
+      gapi.auth2.init({
+        clientId: clientID,
+      })
+    }
+    gapi.load("client:auth2", start)
 
-  // }, [])
+  }, [])
 
   const handlePasswordChange = (e) => {
     const newPassword = e.target.value;
@@ -143,14 +142,14 @@ function Login() {
                   INICIAR SESIÓN
                 </Button>
                 <p style={{ marginTop: "10px", marginBottom: "10px" }}>ó</p>
-                {/* <GoogleLogin
+                <GoogleLogin
                   clientId={clientID}
                   onSuccess={onSuccess}
                   onFailure={onFailure}
                   buttonText="Continue  with Google"
                   cookiePolicy={"single_host_origin"}
 
-                /> */}
+                />
                 <div>
                   <a
                     href="/recover-password"
