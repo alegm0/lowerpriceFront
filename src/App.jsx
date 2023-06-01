@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { PrivateRoute } from "react-private-public-route";
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import NavbarVertical from "./Components/navbar-vertical";
 
